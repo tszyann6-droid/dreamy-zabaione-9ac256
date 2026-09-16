@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#F2EDE3">
+<title>Study Vision</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  :root{
+    --bg:#F2EDE3;--card:#FFFCF7;--text:#3D362B;--text2:#938876;
+    --border:#E8DFCC;--soft:#F6F0E4;
+    --accent:#A68B5B;--accent-d:#8B7355;
+    --grad:linear-gradient(135deg,#C9AE7E 0%,#A68B5B 100%);
+    --shadow:0 1px 2px rgba(61,54,43,.04),0 6px 20px rgba(61,54,43,.06);
+    --ok:#8B9B6B;
+  }
+  html,body{font-family:-apple-system,BlinkMacSystemFont,"PingFang HK","Helvetica Neue",sans-serif;
+    background:var(--bg);color:var(--text);font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;overscroll-behavior-y:none;}
+  button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;border:none;background:none;outline:none;}
+  button{cursor:pointer;}
+  .app{max-width:860px;margin:0 auto;padding:0 16px calc(100px + env(safe-area-inset-bottom));}
+
+  /* 登入 */
+  #authScreen{position:fixed;inset:0;background:var(--bg);z-index:1000;
+    display:flex;align-items:center;justify-content:center;padding:24px;}
+  #authScreen.hide{display:none;}
+  .auth-box{width:100%;max-width:400px;background:var(--card);border-radius:24px;
+    padding:32px 24px;box-shadow:0 8px 40px rgba(61,54,43,.12);}
+  .auth-logo{font-size:32px;font-weight:800;text-align:center;margin-bottom:6px;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .auth-sub{text-align:center;font-size:13px;color:var(--text2);margin-bottom:26px;}
+  .auth-tabs{display:flex;gap:6px;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:20px;}
+  .auth-tab{flex:1;padding:10px;border-radius:10px;text-align:center;font-weight:700;
+    font-size:14px;color:var(--text2);transition:.15s;}
+  .auth-tab.active{background:var(--card);color:var(--accent-d);box-shadow:0 2px 6px rgba(0,0,0,.06);}
+  .auth-field{margin-bottom:12px;}
+  .auth-field label{display:block;font-size:12px;color:var(--text2);font-weight:700;margin-bottom:6px;}
+  .auth-field input{width:100%;padding:14px;background:var(--soft);border-radius:12px;font-size:16px;}
+  .auth-btn{width:100%;padding:14px;border-radius:12px;background:var(--grad);color:#fff;
+    font-weight:700;font-size:15px;margin-top:6px;min-height:48px;}
+  .auth-btn:active{transform:scale(.98);}
+  .auth-btn:disabled{opacity:.5;}
+  .auth-msg{font-size:13px;text-align:center;margin-top:14px;color:var(--text2);line-height:1.5;}
+  .auth-msg.err{color:#B57A6B;}
+  .auth-msg.ok{color:var(--ok);}
+  .auth-note{font-size:11px;color:var(--text2);text-align:center;margin-top:16px;
+    line-height:1.6;padding-top:14px;border-top:1px solid var(--border);}
+
+  .topbar{padding:20px 0 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .logo{font-size:24px;font-weight:800;letter-spacing:-.5px;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .topbar-right{display:flex;gap:8px;align-items:center;}
+  .dse-badge{background:var(--card);padding:8px 14px;border-radius:999px;
+    box-shadow:var(--shadow);font-size:12px;font-weight:600;color:var(--accent-d);
+    display:flex;align-items:center;gap:6px;white-space:nowrap;}
+  .dse-badge b{font-size:15px;color:var(--text);}
+  .user-btn{width:38px;height:38px;border-radius:50%;background:var(--card);box-shadow:var(--shadow);
+    display:flex;align-items:center;justify-content:center;font-size:16px;}
+
+  .hero-card{background:linear-gradient(135deg,#EFE6D2 0%,#E5D9BD 100%);
+    border-radius:20px;padding:16px 18px;margin-bottom:16px;
+    border:1px solid rgba(166,139,91,.18);}
+  .hero-row{display:flex;align-items:center;gap:14px;}
+  .checkin-btn{width:64px;height:64px;border-radius:50%;background:var(--card);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;flex-shrink:0;box-shadow:0 2px 8px rgba(61,54,43,.12);
+    transition:.2s;font-weight:700;font-size:10px;color:var(--accent-d);}
+  .checkin-btn:active{transform:scale(.93);}
+  .checkin-btn .em{font-size:24px;line-height:1;}
+  .checkin-btn.done{background:var(--grad);color:#fff;}
+  .checkin-info{flex:1;min-width:0;}
+  .checkin-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .checkin-streak{font-size:12px;color:var(--accent-d);font-weight:600;}
+  .checkin-streak b{font-size:18px;color:var(--text);}
+  .quote{font-size:13px;color:var(--text);line-height:1.6;margin-top:12px;
+    padding-top:12px;border-top:1px dashed rgba(166,139,91,.3);
+    display:flex;align-items:flex-start;gap:8px;}
+  .quote .ic{font-size:14px;flex-shrink:0;opacity:.7;}
+  .progress-line{height:6px;background:rgba(255,255,255,.5);border-radius:999px;
+    overflow:hidden;margin-top:10px;}
+  .progress-line .fill{height:100%;background:var(--grad);border-radius:999px;transition:width .5s;}
+
+  .page{display:none;}
+  .page.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .card{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px;}
+  .card-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .card-title .muted{font-size:12px;color:var(--text2);font-weight:500;}
+
+  .date-nav{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .date-nav .dbtn{width:40px;height:40px;border-radius:14px;background:var(--soft);
+    display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--text);}
+  .date-nav .dbtn:active{background:var(--border);}
+  .date-nav .cur{flex:1;text-align:center;font-weight:700;font-size:15px;}
+  .date-nav .cur small{display:block;font-size:11px;color:var(--text2);font-weight:500;margin-top:2px;}
+
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+  .stat-box{background:var(--card);border-radius:16px;padding:14px 8px;text-align:center;box-shadow:var(--shadow);}
+  .stat-num{font-size:22px;font-weight:800;line-height:1.1;color:var(--accent-d);}
+  .stat-label{font-size:11px;color:var(--text2);margin-top:4px;}
+
+  .timeline-wrap{display:flex;gap:8px;max-height:70vh;overflow-y:auto;overscroll-behavior:contain;
+    border-radius:14px;padding:4px 0;position:relative;-webkit-overflow-scrolling:touch;}
+  .timeline-hours{width:52px;flex-shrink:0;position:relative;}
+  .timeline-hours .hr{position:absolute;right:6px;font-size:11px;color:var(--text2);font-weight:600;
+    transform:translateY(-50%);white-space:nowrap;}
+  .timeline-track{flex:1;position:relative;
+    background:repeating-linear-gradient(to bottom,transparent 0,transparent 43px,var(--border) 43px,var(--border) 44px);
+    border-radius:12px;background-color:#FDFAF4;}
+  .now-line{position:absolute;left:0;right:0;height:2px;background:#C4956B;z-index:5;pointer-events:none;}
+  .now-line::before{content:'';position:absolute;left:-4px;top:-3px;width:8px;height:8px;
+    border-radius:50%;background:#C4956B;}
+  .now-line::after{content:'現在';position:absolute;right:4px;top:-18px;font-size:10px;
+    color:#C4956B;font-weight:700;}
+  .block{position:absolute;left:6px;right:6px;border-radius:12px;padding:7px 10px;overflow:hidden;
+    cursor:pointer;transition:transform .1s,box-shadow .15s;box-shadow:0 2px 6px rgba(61,54,43,.08);}
+  .block:active{transform:scale(.98);}
+  .block .bn{font-size:12.5px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .block .bt{font-size:10.5px;color:var(--text2);margin-top:2px;font-weight:500;}
+
+  .record{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;
+    background:var(--soft);margin-bottom:8px;}
+  .record-emoji{font-size:20px;width:36px;height:36px;display:flex;align-items:center;
+    justify-content:center;background:var(--card);border-radius:12px;flex-shrink:0;}
+  .record-info{flex:1;min-width:0;}
+  .record-name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .record-meta{font-size:12px;color:var(--text2);margin-top:2px;}
+  .record-del{width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+    color:var(--text2);border-radius:50%;font-size:15px;flex-shrink:0;}
+  .empty{text-align:center;color:var(--text2);font-size:13.5px;padding:28px 12px;line-height:1.7;}
+
+  .tabbar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,252,247,.96);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-top:1px solid var(--border);display:flex;z-index:100;
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+    padding:8px 2px;color:var(--text2);font-size:10px;font-weight:600;
+    border-radius:14px;min-height:52px;transition:.15s;}
+  .tab.active{color:var(--accent-d);}
+  .tab-icon{font-size:20px;line-height:1;transition:transform .15s;}
+  .tab.active .tab-icon{transform:scale(1.15);}
+
+  .cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .cal-title{font-size:17px;font-weight:800;}
+  .cal-nav{display:flex;gap:8px;}
+  .cal-nav button{width:38px;height:38px;border-radius:50%;background:var(--soft);
+    display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--text);}
+  .cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px;}
+  .cal-week div{text-align:center;font-size:11px;color:var(--text2);font-weight:700;padding:4px 0;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+  .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    border-radius:12px;font-size:14px;font-weight:500;position:relative;min-height:42px;transition:.12s;}
+  .cal-day:active{background:var(--soft);}
+  .cal-day.other{color:#D8CEB8;}
+  .cal-day.today{color:var(--accent-d);font-weight:800;}
+  .cal-day.sel{background:var(--grad);color:#fff;font-weight:700;}
+  .cal-day.dot::after{content:'';position:absolute;bottom:5px;width:5px;height:5px;
+    border-radius:50%;background:var(--accent);}
+  .cal-day.sel.dot::after{background:#fff;}
+  .cal-day.check::before{content:'✓';position:absolute;top:2px;right:3px;font-size:9px;
+    color:var(--ok);font-weight:900;}
+  .cal-day.sel.check::before{color:#fff;}
+
+  .goal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  @media(min-width:680px){.goal-grid{grid-template-columns:repeat(3,1fr);}}
+  .goal-day{background:var(--soft);border-radius:14px;padding:12px;min-height:130px;}
+  .goal-day-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .goal-day-date{font-size:12px;font-weight:700;color:var(--text2);}
+  .goal-day-badge{font-size:9px;background:var(--grad);color:#fff;padding:2px 7px;border-radius:999px;font-weight:700;}
+  .goal-mini-list{display:flex;flex-direction:column;gap:5px;}
+  .goal-mini{display:flex;align-items:flex-start;gap:6px;font-size:12px;line-height:1.35;cursor:pointer;}
+  .goal-check{width:16px;height:16px;border-radius:50%;border:2px solid #D8CEB8;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:9px;margin-top:1px;color:transparent;transition:.15s;}
+  .goal-check.done{background:var(--grad);border-color:transparent;color:#fff;}
+  .goal-mini.done span{text-decoration:line-through;color:var(--text2);}
+  .goal-add-mini{font-size:11px;color:var(--accent-d);font-weight:700;margin-top:6px;display:inline-block;}
+  .big-goal{background:var(--soft);border-radius:14px;padding:14px;margin-bottom:10px;}
+  .big-goal-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .big-goal-title{font-size:14px;font-weight:700;flex:1;}
+  .big-goal-del{color:var(--text2);font-size:16px;padding:4px;}
+  .big-goal-meta{font-size:12px;color:var(--text2);margin-top:4px;}
+  .bar{height:6px;background:#E8DFCC;border-radius:999px;overflow:hidden;margin-top:8px;}
+  .bar-fill{height:100%;background:var(--grad);border-radius:999px;transition:width .4s;}
+
+  .chart-wrap{position:relative;width:100%;height:180px;margin-top:6px;}
+  canvas{width:100%;height:100%;display:block;}
+  .legend{display:flex;gap:14px;font-size:12px;color:var(--text2);margin-top:8px;flex-wrap:wrap;}
+  .legend span{display:flex;align-items:center;gap:5px;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .summary{font-size:13px;color:var(--text);line-height:1.85;white-space:pre-wrap;}
+  .summary b{color:var(--accent-d);}
+
+  .chat-box{display:flex;flex-direction:column;gap:10px;min-height:300px;max-height:52vh;
+    overflow-y:auto;padding:6px 2px;margin-bottom:12px;-webkit-overflow-scrolling:touch;}
+  .msg{max-width:82%;padding:12px 14px;border-radius:16px;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word;}
+  .msg.user{align-self:flex-end;background:var(--grad);color:#fff;border-bottom-right-radius:4px;}
+  .msg.ai{align-self:flex-start;background:var(--soft);color:var(--text);border-bottom-left-radius:4px;}
+  .chat-input{display:flex;gap:8px;align-items:flex-end;}
+  .chat-input textarea{flex:1;padding:12px 14px;background:var(--soft);border-radius:16px;
+    min-height:48px;max-height:120px;resize:none;font-size:15px;line-height:1.4;}
+  .chat-input button{width:48px;height:48px;border-radius:50%;background:var(--grad);color:#fff;
+    font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .chip-row{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none;}
+  .chip-row::-webkit-scrollbar{display:none;}
+  .chip{flex-shrink:0;padding:8px 14px;border-radius:999px;background:var(--soft);
+    color:var(--accent-d);font-size:13px;font-weight:600;min-height:36px;border:1px solid var(--border);}
+
+  .set-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;
+    border-bottom:1px solid var(--border);font-size:14px;gap:10px;}
+  .set-row:last-child{border-bottom:none;}
+  .set-row input[type=number],.set-row input[type=date]{width:140px;padding:8px 10px;
+    background:var(--soft);border-radius:10px;text-align:right;font-weight:600;}
+  .set-row input[type=date]{text-align:left;}
+  .btn{padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;transition:.15s;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--grad);color:#fff;}
+  .btn-soft{background:var(--soft);color:var(--text);}
+  .btn-danger{background:#F2E2DC;color:#8B4A2E;}
+  .btn-block{width:100%;margin-top:10px;}
+  .storage-info{font-size:12px;color:var(--text2);text-align:center;margin-top:8px;line-height:1.6;}
+
+  .modal-bg{position:fixed;inset:0;background:rgba(61,54,43,.45);z-index:200;
+    display:none;align-items:flex-end;justify-content:center;}
+  .modal-bg.show{display:flex;}
+  @media(min-width:640px){.modal-bg{align-items:center;padding:20px;}}
+  .modal{background:var(--card);width:100%;max-width:480px;border-radius:24px 24px 0 0;
+    padding:22px;padding-bottom:calc(22px + env(safe-area-inset-bottom));
+    max-height:88vh;overflow-y:auto;animation:slideUp .25s ease;}
+  @media(min-width:640px){.modal{border-radius:24px;padding-bottom:22px;}}
+  @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+  .modal h3{font-size:17px;font-weight:800;margin-bottom:14px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:12px;color:var(--text2);font-weight:700;margin-bottom:6px;}
+  .field input,.field textarea,.field select{width:100%;padding:12px 14px;background:var(--soft);
+    border-radius:12px;font-size:16px;}
+  .field textarea{min-height:70px;resize:vertical;}
+  .cat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .cat-btn{padding:10px 4px;border-radius:14px;background:var(--soft);display:flex;
+    flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:600;
+    border:2px solid transparent;transition:.15s;color:var(--text);}
+  .cat-btn .em{font-size:20px;}
+  .cat-btn.sel{border-color:var(--accent);background:#F0E8D5;}
+  .modal-actions{display:flex;gap:10px;margin-top:16px;}
+  .modal-actions .btn{flex:1;}
+
+  .toast{position:fixed;bottom:calc(100px + env(safe-area-inset-bottom));left:50%;
+    transform:translateX(-50%) translateY(20px);background:rgba(61,54,43,.94);color:#fff;
+    padding:12px 22px;border-radius:999px;font-size:13.5px;font-weight:600;
+    opacity:0;pointer-events:none;transition:.25s;z-index:300;max-width:90vw;
+    text-align:center;line-height:1.4;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .toast.err{background:rgba(139,74,46,.96);}
+</style>
+</head>
+<body>
+
+<div id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo">Study Vision</div>
+    <div class="auth-sub">跨裝置同步你嘅學習記錄</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-mode="login">登入</button>
+      <button class="auth-tab" data-mode="register">註冊</button>
+    </div>
+    <div class="auth-field">
+      <label>Email</label>
+      <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="username">
+    </div>
+    <div class="auth-field">
+      <label>密碼（最少 6 位）</label>
+      <input type="password" id="authPassword" placeholder="••••••" autocomplete="current-password">
+    </div>
+    <button class="auth-btn" id="authSubmit">登入</button>
+    <div class="auth-msg" id="authMsg"></div>
+    <div class="auth-note">
+      首次用請先撳「註冊」建立帳號。<br>
+      同一個帳號登入任何裝置，都會見到相同資料。
+    </div>
+  </div>
+</div>
+
+<div class="app" id="mainApp" style="display:none;">
+  <div class="topbar">
+    <div class="logo">Study Vision</div>
+    <div class="topbar-right">
+      <div class="dse-badge">🎯 <b id="dseDays">—</b> 日</div>
+      <button class="user-btn" id="userBtn">👤</button>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-row">
+      <button class="checkin-btn" id="checkinBtn">
+        <span class="em" id="checkinEm">🔥</span>
+        <span id="checkinLbl">打卡</span>
+      </button>
+      <div class="checkin-info">
+        <div class="checkin-title" id="checkinTitle">今日打卡</div>
+        <div class="checkin-streak">連續 <b id="streakNum">0</b> 日 · 共 <b id="totalNum">0</b> 日</div>
+        <div class="progress-line"><div class="fill" id="dayProgress" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="quote">
+      <span class="ic">✨</span>
+      <span id="quoteText">—</span>
+    </div>
+  </div>
+
+  <section class="page active" id="page-today">
+    <div class="date-nav">
+      <button class="dbtn" id="dPrev">‹</button>
+      <div class="cur" id="curDate">—<small id="curWeekday">—</small></div>
+      <button class="dbtn" id="dNext">›</button>
+      <button class="dbtn" id="dToday" style="font-size:12px;">今</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-num" id="statStudy">0</div><div class="stat-label">學習（分）</div></div>
+      <div class="stat-box"><div class="stat-num" id="statPhone">0</div><div class="stat-label">手機（分）</div></div>
+      <div class="stat-box"><div class="stat-num" id="statOther">0</div><div class="stat-label">其他（分）</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">時間軸 <span class="muted">撳空白格即記錄</span></div>
+      <div class="timeline-wrap" id="timelineWrap">
+        <div class="timeline-hours" id="hoursCol"></div>
+        <div class="timeline-track" id="track"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">當日記錄 <span class="muted" id="recCount">0 條</span></div>
+      <div id="recList"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-calendar">
+    <div class="card">
+      <div class="cal-head">
+        <div class="cal-title" id="calTitle">—</div>
+        <div class="cal-nav">
+          <button id="calPrev">‹</button>
+          <button id="calToday">今</button>
+          <button id="calNext">›</button>
+        </div>
+      </div>
+      <div class="cal-week"><div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div></div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+    <div class="card">
+      <div class="empty" style="padding:8px;">🎯 有記錄嘅日子有小點 · 有打卡嘅日子有 ✓</div>
+    </div>
+  </section>
+
+  <section class="page" id="page-goals">
+    <div class="card">
+      <div class="card-title">最近 6 日日目標</div>
+      <div class="goal-grid" id="goalDayGrid"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">本月目標 <button class="btn btn-soft" style="padding:6px 12px;min-height:36px;font-size:13px;" id="btnAddMonth">＋</button></div>
+      <div id="monthGoalsList"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">年度目標 <button class="btn btn-soft" style="padding:6px 12px;min-height:36px;font-size:13px;" id="btnAddYear">＋</button></div>
+      <div id="yearGoalsList"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-insights">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-num" id="wStudy">0</div><div class="stat-label">本週學習（分）</div></div>
+      <div class="stat-box"><div class="stat-num" id="wPhone">0</div><div class="stat-label">本週手機（分）</div></div>
+      <div class="stat-box"><div class="stat-num" id="wRate">0%</div><div class="stat-label">學習達標</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">過去 7 日</div>
+      <div class="chart-wrap"><canvas id="chart7"></canvas></div>
+      <div class="legend">
+        <span><i class="dot" style="background:#8B9B6B"></i>學習</span>
+        <span><i class="dot" style="background:#B08B6B"></i>手機</span>
+        <span><i class="dot" style="background:#C4A876"></i>家務</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">分類佔比（本週）</div>
+      <div class="chart-wrap" style="height:200px;"><canvas id="chartPie"></canvas></div>
+      <div class="legend" id="pieLegend"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">本週總結</div>
+      <div class="summary" id="weeklySummary"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">本月總結</div>
+      <div class="summary" id="monthlySummary"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-ai">
+    <div class="card">
+      <div class="card-title">AI 學習助手</div>
+      <div class="chip-row" id="chipRow">
+        <button class="chip" data-q="如何溫數學？">如何溫數學？</button>
+        <button class="chip" data-q="時間管理建議">時間管理建議</button>
+        <button class="chip" data-q="DSE 溫書策略">DSE 策略</button>
+        <button class="chip" data-q="點樣減少玩手機？">減少玩手機</button>
+        <button class="chip" data-q="溫書專注力不足">專注力不足</button>
+        <button class="chip" data-q="冇動力點算">冇動力點算</button>
+      </div>
+      <div class="chat-box" id="chatBox"></div>
+      <div class="chat-input">
+        <textarea id="chatInput" placeholder="問我任何學習問題..." rows="1"></textarea>
+        <button id="chatSend">➤</button>
+      </div>
+      <button class="btn btn-soft btn-block" id="clearChat" style="margin-top:10px;">清除對話</button>
+    </div>
+  </section>
+
+  <section class="page" id="page-settings">
+    <div class="card">
+      <div class="card-title">目標設定（分鐘）</div>
+      <div class="set-row"><span>每日學習目標</span><input type="number" id="setDaily" min="0" step="10"></div>
+      <div class="set-row"><span>每週學習目標</span><input type="number" id="setWeekly" min="0" step="30"></div>
+      <div class="set-row"><span>每月學習目標</span><input type="number" id="setMonthly" min="0" step="60"></div>
+      <div class="set-row"><span>DSE 考試日期</span><input type="date" id="setExam"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">資料</div>
+      <button class="btn btn-soft btn-block" id="btnExport">📤 匯出 JSON 備份</button>
+      <button class="btn btn-soft btn-block" id="btnImport">📥 匯入 JSON 備份</button>
+      <input type="file" id="importFile" accept=".json" style="display:none">
+      <button class="btn btn-danger btn-block" id="btnClear">🗑️ 清空所有資料</button>
+      <div class="storage-info" id="storageInfo">—</div>
+    </div>
+  </section>
+</div>
+
+<nav class="tabbar" id="tabbar" style="display:none;">
+  <button class="tab active" data-page="today"><span class="tab-icon">🕐</span>時間表</button>
+  <button class="tab" data-page="calendar"><span class="tab-icon">📅</span>日曆</button>
+  <button class="tab" data-page="goals"><span class="tab-icon">🎯</span>目標</button>
+  <button class="tab" data-page="insights"><span class="tab-icon">📊</span>洞察</button>
+  <button class="tab" data-page="ai"><span class="tab-icon">🤖</span>AI</button>
+  <button class="tab" data-page="settings"><span class="tab-icon">⚙️</span>設定</button>
+</nav>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+/* ============================================================
+   Firebase 初始化（已用你嘅 project）
+============================================================ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+         signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp }
+         from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDlj6KUQevofoy0IcC8YvaS_mvLs2SGVUw",
+  authDomain: "study-vision-1be4a.firebaseapp.com",
+  projectId: "study-vision-1be4a",
+  storageBucket: "study-vision-1be4a.firebasestorage.app",
+  messagingSenderId: "855630536036",
+  appId: "1:855630536036:web:42ee5a30800f472375ee71",
+  measurementId: "G-RF847JPE04"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+const db = getFirestore(fbApp);
+
+/* ============================================================
+   常量
+============================================================ */
+const SLOT_H = 44, START_HOUR = 6, END_HOUR = 26;
+const TOTAL_SLOTS = (END_HOUR - START_HOUR) * 2;
+const TRACK_HEIGHT = TOTAL_SLOTS * SLOT_H;
+
+const CATS = {
+  study:  {name:'學習', emoji:'📚', color:'#8B9B6B', bg:'#E9EEDC'},
+  phone:  {name:'手機', emoji:'📱', color:'#B08B6B', bg:'#F2E5D8'},
+  chores: {name:'家務', emoji:'🧹', color:'#C4A876', bg:'#F5EDD9'},
+  sport:  {name:'運動', emoji:'🏃', color:'#7B9B8B', bg:'#E0EBE5'},
+  sleep:  {name:'睡眠', emoji:'😴', color:'#8B7B9B', bg:'#E8E2EE'},
+  fun:    {name:'娛樂', emoji:'🎮', color:'#B89B72', bg:'#F0E6D2'},
+  other:  {name:'其他', emoji:'✨', color:'#A89B84', bg:'#EDE7DC'}
+};
+const catInfo = id => CATS[id] || CATS.other;
+
+const QUOTES = [
+  '唔需要完美，只需要開始。','今日嘅努力，係聽日嘅底氣。','進步唔係直線，堅持就會見到。',
+  '就算慢，都唔好停低。','每一分鐘嘅專注，都係對未來嘅投資。','你今日做嘅事，決定你聽日企喺邊。',
+  '唔好同人比較，同昨日嘅自己比較。','休息都係計劃嘅一部分。','唔怕慢，只怕站。',
+  '唔需要一次做完，只需要今日做啲。','失敗唔緊要，最緊要係再試。','你唔需要睇到成條樓梯，只需要踏出第一步。',
+  '天賦決定起點，努力決定終點。','而家唔係永遠，撐過去就會唔同。','你比自己想像中更堅強。',
+  '唔好俾一時嘅懶惰，換嚟一世嘅後悔。','種一棵樹最好嘅時間係十年前，其次係而家。',
+  '成功唔係偶然，係每日嘅累積。','你今日嘅堅持，係聽日嘅自由。','努力唔一定有回報，但唔努力一定冇。',
+  '每一次想放棄嘅時候，諗下當初點解開始。','慢慢嚟，比較快。','你唔孤單，好多人喺後面撐你。',
+  '專注當下，唔好諗太多未來。','唔好等有心情先做，做咗就會有心情。','今日嘅辛苦，係聽日嘅故事。',
+  '你嘅極限，比你想像中遠。','想放棄嗰陣，已經行咗好遠。','與其焦慮，不如行動。',
+  '每日進步 1%，一年後就係 37 倍。','成功嘅人唔係冇失敗，係失敗咗繼續行。',
+  '你唔需要贏晒所有人，只需要贏昨日嘅自己。','你嘅努力，會喺某一日開花。',
+  '唔好俾恐懼，阻止你想做嘅事。','捱得過今日，聽日就會好啲。','做唔到最好，都要做自己嘅最好。',
+  '你可以休息，但唔可以放棄。','唔好怕做錯，怕嘅係唔敢做。','所有嘅努力，都會以另一種方式回報你。',
+  '今日嘅你，係過去嘅你選擇出嚟嘅。','想改變結果，就要改變行動。','唔好問自己得唔得，問自己肯唔肯。',
+  '當你覺得辛苦，就係進步緊嘅時候。','你唔需要證明俾人睇，只需要證明俾自己睇。',
+  '最黑暗嘅時候，就係最接近黎明嘅時候。','一步一腳印，冇捷徑。','唔好輸俾自己嘅藉口。',
+  '你嘅對手，從來都係自己。','冇人天生識，全部都係學返嚟。','你今日學嘅嘢，會成為你嘅武器。',
+  '唔好怕孤單，成功嘅路都係一個人行。','努力嘅人，運氣都唔會太差。','你嘅時間有限，唔好浪費喺後悔度。',
+  '做唔到，可能只係未做到。','你想要嘅生活，喺你唔想努力嘅背後。','你今日嘅付出，係聽日嘅禮物。',
+  '唔好等到完美先開始，開始先會完美。','你只需要比昨日進步少少。',
+  '每一次跌倒，都係下次站得更穩嘅準備。','唔好停，因為你已經行咗咁遠。',
+  '你想去嘅地方，冇人能夠阻止你。','撐落去，係對自己最大嘅溫柔。'
+];
+
+const DEFAULT_STATE = {
+  records: [], dailyGoals: [], monthlyGoals: [], yearlyGoals: [],
+  checkins: [],
+  settings: {daily:120, weekly:840, monthly:3600, examDate:'2027-04-20'},
+  chat: [],
+  currentDate: null, calendarMonth: null,
+  quoteOfDay: null, quoteDate: null
+};
+let state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+let currentUser = null;
+let unsubSnapshot = null;
+let saveTimer = null;
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const pad = n => String(n).padStart(2,'0');
+const fmtDate = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const fmtMonth = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}`;
+const today = () => fmtDate(new Date());
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const minToTime = m => { m = ((m%1440)+1440)%1440; return pad(Math.floor(m/60))+':'+pad(m%60); };
+const timeToMin = t => { if(!t) return null; const [h,m] = t.split(':').map(Number); return h*60+m; };
+const escapeHtml = s => String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function toast(msg, isErr){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.toggle('err', !!isErr);
+  t.classList.add('show');
+  clearTimeout(t._tid);
+  t._tid = setTimeout(()=>t.classList.remove('show'), isErr ? 3200 : 1800);
+}
+
+/* ========== 雲端儲存 ========== */
+function userDocRef(){ return currentUser ? doc(db, 'users', currentUser.uid) : null; }
+
+function scheduleSave(){
+  if(!currentUser) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(doSave, 700);
+}
+
+async function doSave(){
+  if(!currentUser) return;
+  if(state.chat.length > 60) state.chat = state.chat.slice(-60);
+  try{
+    const payload = {
+      records: state.records,
+      dailyGoals: state.dailyGoals,
+      monthlyGoals: state.monthlyGoals,
+      yearlyGoals: state.yearlyGoals,
+      checkins: state.checkins,
+      settings: state.settings,
+      chat: state.chat,
+      quoteOfDay: state.quoteOfDay,
+      quoteDate: state.quoteDate,
+      updatedAt: serverTimestamp()
+    };
+    await setDoc(userDocRef(), payload, {merge:true});
+  }catch(e){
+    console.error('Save failed', e);
+    toast('☁️ 同步失敗：' + (e.code || e.message), true);
+  }
+}
+
+function applyRemote(data){
+  state.records = data.records || [];
+  state.dailyGoals = data.dailyGoals || [];
+  state.monthlyGoals = data.monthlyGoals || [];
+  state.yearlyGoals = data.yearlyGoals || [];
+  state.checkins = data.checkins || [];
+  state.settings = data.settings || DEFAULT_STATE.settings;
+  state.chat = data.chat || [];
+  state.quoteOfDay = data.quoteOfDay || null;
+  state.quoteDate = data.quoteDate || null;
+  if(!state.currentDate) state.currentDate = today();
+  if(!state.calendarMonth) state.calendarMonth = fmtMonth(new Date());
+  renderCheckin();
+  renderTodayPage();
+  renderCalendar();
+  renderGoals();
+  renderInsights();
+  renderChat();
+  renderSettings();
+  initQuoteOfDay();
+}
+
+function attachSnapshot(){
+  if(unsubSnapshot) unsubSnapshot();
+  unsubSnapshot = onSnapshot(userDocRef(), (snap)=>{
+    if(snap.metadata.hasPendingWrites) return;
+    if(snap.exists()){
+      applyRemote(snap.data());
+    }else{
+      doSave();
+    }
+  }, (err)=>{
+    console.error('Snapshot error', err);
+  });
+}
+
+/* ========== 登入 / 註冊 =   ========= */
+let authMode = 'login';
+$$('.auth-t $$ab').forEach(tab=>{
+  tab.onclick =('. ()=>{
+    authMode = tab.dataset.mauthode;
+-tab').forEach(t=>t.classList.toggle('active', t===tab));
+    $('#authSubmit').textContent = authMode==='login' ? '登入' : '註冊';
+    $('#authMsg').textContent = '';
+    $('#authMsg').className = 'auth-msg';
+  };
+});
+
+$('#authSubmit').onclick = async ()=>{
+  const email = $('#authEmail').value.trim();
+  const pw = $('#authPassword').value;
+  const msg = $('#authMsg');
+  msg.className = 'auth-msg';
+  if(!email || !pw){ msg.textContent = '請填寫 Email 同密碼'; msg.classList.add('err'); return; }
+  if(pw.length < 6){ msg.textContent = '密碼最少 6 位'; msg.classList.add('err'); return; }
+  const btn = $('#authSubmit');
+  btn.disabled = true;
+  btn.textContent = '處理中...';
+  try{
+    if(authMode === 'login'){
+      await signInWithEmailAndPassword(auth, email, pw);
+    }else{
+      await createUserWithEmailAndPassword(auth, email, pw);
+    }
+  }catch(e){
+    const map = {
+      'auth/invalid-email':'Email 格式錯誤',
+      'auth/user-not-found':'找唔到呢個帳號，請先註冊',
+      'auth/wrong-password':'密碼錯誤',
+      'auth/invalid-credential':'Email 或密碼錯誤',
+      'auth/email-already-in-use':'呢個 Email 已經註冊過',
+      'auth/weak-password':'密碼太弱（最少 6 位）',
+      'auth/too-many-requests':'嘗試太多次，請遲啲再試',
+      'auth/network-request-failed':'網絡問題，請檢查連線',
+      'auth/operation-not-allowed':'請去 Firebase 啟用 Email/密碼登入',
+      'auth/unauthorized-domain':'呢個網域未授權，請去 Firebase 加入'
+    };
+    msg.textContent = map[e.code] || ('錯誤：' + e.code);
+    msg.classList.add('err');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = authMode==='login' ? '登入' : '註冊';
+  }
+};
+
+$('#authPassword').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') $('#authSubmit').click();
+});
+
+$('#userBtn').onclick = ()=>{
+  if(!confirm(`登出 ${currentUser?.email}？\n\n雲端資料會保留，下次登入會重新下載。`)) return;
+  signOut(auth);
+};
+
+onAuthStateChanged(auth, async (user)=>{
+  if(user){
+    currentUser = user;
+    $('#authScreen').classList.add('hide');
+    $('#mainApp').style.display = '';
+    $('#tabbar').style.display = '';
+    try{
+      const snap = await getDoc(userDocRef());
+      if(snap.exists()){
+        applyRemote(snap.data());
+      }else{
+        if(!state.currentDate) state.currentDate = today();
+        if(!state.calendarMonth) state.calendarMonth = fmtMonth(new Date());
+        renderCheckin(); renderTodayPage(); renderCalendar();
+        renderGoals(); renderInsights(); renderChat(); renderSettings();
+        initQuoteOfDay();
+        await doSave();
+      }
+      attachSnapshot();
+    }catch(e){
+      console.error(e);
+      toast('載入失敗：' + (e.code || e.message), true);
+    }
+  }else{
+    currentUser = null;
+    if(unsubSnapshot){ unsubSnapshot(); unsubSnapshot = null; }
+    $('#authScreen').classList.remove('hide');
+    $('#mainApp').style.display = 'none';
+    $('#tabbar').style.display = 'none';
+    state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  }
+});
+
+/* ========== 以下為應用功能 ========== */
+function save(){ scheduleSave(); }
+
+$$('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    const page = tab.dataset.page;
+    $$('.tab').forEach(t=>t.classList.toggle('active', t===tab));
+    $$('.page').forEach(p=>p.classList.toggle('active', p.id==='page-'+page));
+    if(page==='today') renderTodayPage();
+    if(page==='calendar') renderCalendar();
+    if(page==='goals') renderGoals();
+    if(page==='insights') renderInsights();
+    if(page==='ai') renderChat();
+    if(page==='settings') renderSettings();
+    window.scrollTo({top:0, behavior:'instant'});
+  });
+});
+
+function openModal(html){ $('#modalBox').innerHTML = html; $('#modalBg').classList.add('show'); }
+function closeModal(){ $('#modalBg').classList.remove('show'); $('#modalBox').innerHTML = ''; }
+$('#modalBg').addEventListener('click', e=>{ if(e.target.id==='modalBg') closeModal(); });
+
+function renderCheckin(){
+  const t = today();
+  const done = state.checkins.some(c=>c.date === t);
+  const streak = calcStreak();
+  const total = state.checkins.length;
+  $('#checkinEm').textContent = done ? '✓' : '🔥';
+  $('#checkinLbl').textContent = done ? '已打卡' : '打卡';
+  $('#checkinBtn').classList.toggle('done', done);
+  $('#checkinTitle').textContent = done ? '今日已完成打卡 🎉' : '撳一下完成今日打卡';
+  $('#streakNum').textContent = streak;
+  $('#totalNum').textContent = total;
+  $('#dayProgress').style.width = Math.min(100, Math.round(streak/30*100)) + '%';
+}
+function calcStreak(){
+  const set = new Set(state.checkins.map(c=>c.date));
+  let streak = 0;
+  const d = new Date();
+  if(!set.has(fmtDate(d))) d.setDate(d.getDate()-1);
+  while(set.has(fmtDate(d))){ streak++; d.setDate(d.getDate()-1); }
+  return streak;
+}
+$('#checkinBtn').addEventListener('click', ()=>{
+  const t = today();
+  const idx = state.checkins.findIndex(c=>c.date===t);
+  if(idx >= 0){
+    if(!confirm('取消今日打卡？')) return;
+    state.checkins.splice(idx, 1);
+    save(); renderCheckin(); toast('已取消打卡');
+  }else{
+    state.checkins.push({date: t, ts: Date.now()});
+    save(); renderCheckin();
+    const s = calcStreak();
+    let msg = `打卡成功！連續 ${s} 日 🔥`;
+    if(s === 7) msg = `🎉 連續 7 日！`;
+    else if(s === 14) msg = `🎊 連續 14 日！`;
+    else if(s === 30) msg = `🏆 連續 30 日！`;
+    else if(s === 100) msg = `👑 連續 100 日！`;
+    else if(s === 365) msg = `🌟 一年！`;
+    toast(msg);
+    pickRandomQuote();
+  }
+});
+
+function pickRandomQuote(){
+  let q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  if(q === $('#quoteText').textContent && QUOTES.length > 1){
+    q = QUOTES[(QUOTES.indexOf(q) + 1) % QUOTES.length];
+  }
+  $('#quoteText').textContent = q;
+}
+function initQuoteOfDay(){
+  const t = today();
+  if(state.quoteDate !== t || !state.quoteOfDay){
+    state.quoteOfDay = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    state.quoteDate = t;
+    save();
+  }
+  $('#quoteText').textContent = state.quoteOfDay;
+}
+
+function renderTimeline(){
+  const hoursCol = $('#hoursCol');
+  const track = $('#track');
+  const date = state.currentDate || today();
+  hoursCol.style.height = TRACK_HEIGHT + 'px';
+  track.style.height = TRACK_HEIGHT + 'px';
+  let hoursHtml = '';
+  for(let h = START_HOUR; h <= END_HOUR; h++){
+    const top = (h - START_HOUR) * 2 * SLOT_H;
+    const label = h < 24 ? pad(h)+':00' : pad(h-24)+':00';
+    hoursHtml += `<div class="hr" style="top:${top}px">${label}</div>`;
+  }
+  hoursCol.innerHTML = hoursHtml;
+  track.querySelectorAll('.block, .now-line').forEach(b=>b.remove());
+  const recs = state.records.filter(r=>r.date === date).sort((a,b)=>a.startMin-b.startMin);
+  if(date === today()){
+    const now = new Date();
+    const nowMin = now.getHours()*60 + now.getMinutes();
+    if(nowMin >= START_HOUR*60 && nowMin <= END_HOUR*60){
+      const top = (nowMin - START_HOUR*60) / 30 * SLOT_H;
+      const line = document.createElement('div');
+      line.className = 'now-line';
+      line.style.top = top + 'px';
+      track.appendChild(line);
+    }
+  }
+  recs.forEach(r=>{
+    const c = catInfo(r.catId);
+    const top = (r.startMin - START_HOUR*60) / 30 * SLOT_H;
+    const dur = Math.max(30, r.endMin - r.startMin);
+    const height = Math.max(30, dur / 30 * SLOT_H - 4);
+    if(top < -SLOT_H || top > TRACK_HEIGHT) return;
+    const el = document.createElement('div');
+    el.className = 'block';
+    el.style.top = Math.max(0, top) + 'px';
+    el.style.height = height + 'px';
+    el.style.background = c.bg;
+    el.style.borderLeft = `3px solid ${c.color}`;
+    el.dataset.id = r.id;
+    el.innerHTML = `
+      <div class="bn">${c.emoji} ${escapeHtml(r.name)}</div>
+      ${height > 38 ? `<div class="bt">${minToTime(r.startMin)} – ${minToTime(r.endMin)} · ${dur}分</div>` : ''}`;
+    el.addEventListener('click', e=>{ e.stopPropagation(); openTaskModal(r); });
+    track.appendChild(el);
+  });
+  let s=0, p=0, o=0;
+  recs.forEach(r=>{
+    const d = r.endMin - r.startMin;
+    if(r.catId==='study') s += d; else if(r.catId==='phone') p += d; else o += d;
+  });
+  $('#statStudy').textContent = s;
+  $('#statPhone').textContent = p;
+  $('#statOther').textContent = o;
+  $('#recCount').textContent = recs.length + ' 條';
+  renderRecordList($('#recList'), recs);
+}
+
+$('#track').addEventListener('click', e=>{
+  if(e.target.closest('.block')) return;
+  const rect = $('#track').getBoundingClientRect();
+  const y = e.clientY - rect.top;
+  const slot = Math.max(0, Math.min(TOTAL_SLOTS-1, Math.floor(y / SLOT_H)));
+  const startMin = START_HOUR*60 + slot*30;
+  openTaskModal(null, startMin);
+});
+
+function openTaskModal(existing, presetStart){
+  const date = state.currentDate || today();
+  const isEdit = !!existing;
+  const rec = existing || {name:'', catId:'study', startMin:presetStart || 6*60, endMin:(presetStart || 6*60)+30, note:'', date};
+  const catBtns = Object.entries(CATS).map(([id,c])=>`
+    <button type="button" class="cat-btn ${id===rec.catId?'sel':''}" data-cat="${id}">
+      <span class="em">${c.emoji}</span><span>${c.name}</span>
+    </button>`).join('');
+  openModal(`
+    <h3>${isEdit?'編輯任務':'新增任務'}</h3>
+    <div class="field"><label>做咗啲乜嘢？</label>
+      <input type="text" id="tName" placeholder="例如：溫數學" value="${escapeHtml(rec.name)}"></div>
+    <div class="field"><label>分類</label>
+      <div class="cat-row">${catBtns}</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="field"><label>開始時間</label><input type="time" id="tStart" value="${minToTime(rec.startMin)}"></div>
+      <div class="field"><label>結束時間</label><input type="time" id="tEnd" value="${minToTime(rec.endMin)}"></div>
+    </div>
+    <div class="field"><label>備註（可選）</label><textarea id="tNote">${escapeHtml(rec.note||'')}</textarea></div>
+    <div class="modal-actions">
+      ${isEdit ? `<button class="btn btn-danger" id="tDel">刪除</button>` : ''}
+      <button class="btn btn-soft" id="tCancel">取消</button>
+      <button class="btn btn-primary" id="tSave">儲存</button>
+    </div>`);
+  let selCat = rec.catId;
+  $('#modalBox').querySelectorAll('.cat-btn').forEach(b=>{
+    b.onclick = ()=>{ selCat = b.dataset.cat;
+      $('#modalBox').querySelectorAll('.cat-btn').forEach(x=>x.classList.toggle('sel', x===b)); };
+  });
+  $('#tCancel').onclick = closeModal;
+  if(isEdit) $('#tDel').onclick = ()=>{
+    if(!confirm('確定刪除？')) return;
+    state.records = state.records.filter(r=>r.id !== rec.id);
+    save(); closeModal(); renderTimeline(); toast('已刪除');
+  };
+  $('#tSave').onclick = ()=>{
+    const name = $('#tName').value.trim();
+    if(!name){ toast('請輸入活動名稱'); return; }
+    let startMin = timeToMin($('#tStart').value);
+    let endMin = timeToMin($('#tEnd').value);
+    if(startMin === null || endMin === null){ toast('請填寫時間'); return; }
+    if(endMin <= startMin) endMin += 1440;
+    if(endMin - startMin < 5){ toast('時長太短'); return; }
+    if(isEdit){
+      const r = state.records.find(x=>x.id===rec.id);
+      if(r){ r.name=name; r.catId=selCat; r.startMin=startMin; r.endMin=endMin; r.note=$('#tNote').value.trim(); }
+    }else{
+      state.records.push({id: uid(), date, name, catId: selCat, startMin, endMin, note: $('#tNote').value.trim()});
+    }
+    save(); closeModal(); renderTimeline(); toast(isEdit?'已更新':'已記錄');
+  };
+  setTimeout(()=>$('#tName').focus(), 100);
+}
+
+function renderRecordList(container, recs){
+  if(recs.length === 0){
+    container.innerHTML = `<div class="empty">呢日未有記錄<br>撳上面時間軸空白位開始記錄 ✨</div>`;
+    return;
+  }
+  container.innerHTML = recs.map(r=>{
+    const c = catInfo(r.catId);
+    const dur = r.endMin - r.startMin;
+    return `
+      <div class="record" data-id="${r.id}">
+        <div class="record-emoji">${c.emoji}</div>
+        <div class="record-info">
+          <div class="record-name">${escapeHtml(r.name)}</div>
+          <div class="record-meta">${minToTime(r.startMin)} – ${minToTime(r.endMin)} · ${dur}分${r.note?' · '+escapeHtml(r.note):''}</div>
+        </div>
+        <button class="record-del" data-del="${r.id}">✕</button>
+      </div>`;
+  }).join('');
+  container.querySelectorAll('.record').forEach(el=>{
+    el.onclick = e=>{
+      if(e.target.closest('[data-del]')) return;
+      const r = state.records.find(x=>x.id===el.dataset.id);
+      if(r) openTaskModal(r);
+    };
+  });
+  container.querySelectorAll('[data-del]').forEach(b=>{
+    b.onclick = e=>{
+      e.stopPropagation();
+      state.records = state.records.filter(r=>r.id !== b.dataset.del);
+      save(); renderTimeline(); toast('已刪除');
+    };
+  });
+}
+
+function shiftDate(days){
+  const d = new Date(state.currentDate + 'T00:00:00');
+  d.setDate(d.getDate() + days);
+  state.currentDate = fmtDate(d);
+  save(); renderTodayPage();
+}
+$('#dPrev').onclick = ()=>shiftDate(-1);
+$('#dNext').onclick = ()=>shiftDate(1);
+$('#dToday').onclick = ()=>{ state.currentDate = today(); save(); renderTodayPage(); };
+
+const WEEKDAYS = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+function renderTodayPage(){
+  if(!state.currentDate) state.currentDate = today();
+  const d = new Date(state.currentDate + 'T00:00:00');
+  $('#curDate').childNodes[0].nodeValue = state.currentDate;
+  $('#curWeekday').textContent = WEEKDAYS[d.getDay()];
+  renderTimeline();
+}
+
+if(!state.calendarMonth) state.calendarMonth = fmtMonth(new Date());
+$('#calPrev').onclick = ()=>{
+  const [y,m] = state.calendarMonth.split('-').map(Number);
+  state.calendarMonth = fmtMonth(new Date(y, m-2, 1));
+  save(); renderCalendar();
+};
+$('#calNext').onclick = ()=>{
+  const [y,m] = state.calendarMonth.split('-').map(Number);
+  state.calendarMonth = fmtMonth(new Date(y, m, 1));
+  save(); renderCalendar();
+};
+$('#calToday').onclick = ()=>{
+  state.calendarMonth = fmtMonth(new Date());
+  state.currentDate = today();
+  save(); renderCalendar();
+};
+
+function renderCalendar(){
+  if(!state.calendarMonth) return;
+  const [y,m] = state.calendarMonth.split('-').map(Number);
+  $('#calTitle').textContent = `${y} 年 ${m} 月`;
+  const first = new Date(y, m-1, 1);
+  const startW = first.getDay();
+  const daysInMonth = new Date(y, m, 0).getDate();
+  const prevDays = new Date(y, m-1, 0).getDate();
+  const cells = [];
+  for(let i=startW-1; i>=0; i--) cells.push({d:new Date(y, m-2, prevDays-i), other:true});
+  for(let i=1; i<=daysInMonth; i++) cells.push({d:new Date(y, m-1, i), other:false});
+  const totalNeeded = cells.length <= 35 ? 35 : 42;
+  while(cells.length < totalNeeded){
+    const idx = cells.length - (startW + daysInMonth) + 1;
+    cells.push({d:new Date(y, m, idx), other:true});
+  }
+  const t = today();
+  const checkedSet = new Set(state.checkins.map(c=>c.date));
+  $('#calGrid').innerHTML = cells.map(({d, other})=>{
+    const ds = fmtDate(d);
+    const hasRec = state.records.some(r=>r.date===ds);
+    const cls = ['cal-day'];
+    if(other) cls.push('other');
+    if(ds===t) cls.push('today');
+    if(ds===state.currentDate) cls.push('sel');
+    if(hasRec) cls.push('dot');
+    if(checkedSet.has(ds)) cls.push('check');
+    return `<button class="${cls.join(' ')}" data-date="${ds}">${d.getDate()}</button>`;
+  }).join('');
+  $('#calGrid').querySelectorAll('.cal-day').forEach(el=>{
+    el.onclick = ()=>{
+      state.currentDate = el.dataset.date;
+      save();
+      $$('.tab').forEach(t=>t.classList.toggle('active', t.dataset.page==='today'));
+      $$('.page').forEach(p=>p.classList.toggle('active', p.id==='page-today'));
+      renderTodayPage();
+      window.scrollTo({top:0, behavior:'instant'});
+      toast('已打開 '+el.dataset.date);
+    };
+  });
+}
+
+function renderGoals(){ renderDayGoals(); renderMonthGoals(); renderYearGoals(); }
+function renderDayGoals(){
+  const grid = $('#goalDayGrid');
+  const days = [];
+  const base = new Date();
+  for(let i=0;i<6;i++){ const d = new Date(base); d.setDate(base.getDate()-i); days.push(fmtDate(d)); }
+  const t = today();
+  grid.innerHTML = days.map(ds=>{
+    const goals = state.dailyGoals.filter(g=>g.date===ds);
+    const items = goals.map(g=>`
+      <div class="goal-mini ${g.done?'done':''}" data-toggle="${g.id}">
+        <span class="goal-check ${g.done?'done':''}">✓</span>
+        <span>${escapeHtml(g.text)}</span>
+      </div>`).join('');
+    const dObj = new Date(ds+'T00:00:00');
+    return `
+      <div class="goal-day">
+        <div class="goal-day-head">
+          <span class="goal-day-date">${dObj.getMonth()+1}/${dObj.getDate()}</span>
+          ${ds===t?'<span class="goal-day-badge">今天</span>':''}
+        </div>
+        <div class="goal-mini-list">${items || '<div style="font-size:11px;color:var(--text2);">（未有目標）</div>'}</div>
+        <button class="goal-add-mini" data-add="${ds}">＋ 新增</button>
+      </div>`;
+  }).join('');
+  grid.querySelectorAll('[data-toggle]').forEach(el=>{
+    el.onclick = ()=>{
+      const g = state.dailyGoals.find(x=>x.id===el.dataset.toggle);
+      if(g){ g.done = !g.done; save(); renderDayGoals(); }
+    };
+  });
+  grid.querySelectorAll('[data-add]').forEach(el=>{
+    el.onclick = ()=>openGoalModal(el.dataset.add);
+  });
+}
+function openGoalModal(date){
+  openModal(`
+    <h3>新增日目標（${date}）</h3>
+    <div class="field"><label>目標內容</label><input type="text" id="gText" placeholder="例如：完成數學卷 1"></div>
+    <div class="modal-actions"><button class="btn btn-soft" id="gCancel">取消</button><button class="btn btn-primary" id="gSave">新增</button></div>`);
+  $('#gCancel').onclick = closeModal;
+  setTimeout(()=>$('#gText').focus(), 100);
+  $('#gSave').onclick = ()=>{
+    const text = $('#gText').value.trim();
+    if(!text){ toast('請輸入目標'); return; }
+    state.dailyGoals.push({id:uid(), date, text, done:false});
+    save(); closeModal(); renderDayGoals(); toast('已新增');
+  };
+}
+function renderMonthGoals(){
+  const m = fmtMonth(new Date());
+  const list = state.monthlyGoals.filter(g=>g.month===m);
+  const box = $('#monthGoalsList');
+  if(list.length===0){ box.innerHTML = '<div class="empty">本月未有目標</div>'; return; }
+  box.innerHTML = list.map(g=>`
+    <div class="big-goal">
+      <div class="big-goal-top">
+        <div class="big-goal-title">${escapeHtml(g.title)}</div>
+        <button class="big-goal-del" data-del="${g.id}" data-type="month">✕</button>
+      </div>
+      <div class="big-goal-meta">進度 ${g.progress}% ${g.done?'· ✅':''}</div>
+      <div class="bar"><div class="bar-fill" style="width:${g.progress}%"></div></div>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="btn btn-soft" style="padding:6px 12px;min-height:34px;font-size:12px;" data-prog="${g.id}" data-delta="-10">-10%</button>
+        <button class="btn btn-soft" style="padding:6px 12px;min-height:34px;font-size:12px;" data-prog="${g.id}" data-delta="10">+10%</button>
+        <button class="btn btn-soft" style="padding:6px 12px;min-height:34px;font-size:12px;" data-done="${g.id}">${g.done?'取消完成':'標記完成'}</button>
+      </div>
+    </div>`).join('');
+  bindBigGoalEvents();
+}
+function renderYearGoals(){
+  const y = String(new Date().getFullYear());
+  const list = state.yearlyGoals.filter(g=>g.year===y);
+  const box = $('#yearGoalsList');
+  if(list.length===0){ box.innerHTML = '<div class="empty">本年未有目標</div>'; return; }
+  box.innerHTML = list.map(g=>`
+    <div class="big-goal">
+      <div class="big-goal-top">
+        <div class="big-goal-title">${escapeHtml(g.title)}</div>
+        <button class="big-goal-del" data-del="${g.id}" data-type="year">✕</button>
+      </div>
+      <div class="big-goal-meta">進度 ${g.progress}% ${g.done?'· ✅':''}</div>
+      <div class="bar"><div class="bar-fill" style="width:${g.progress}%"></div></div>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="btn btn-soft" style="padding:6px 12px;min-height:34px;font-size:12px;" data-prog="${g.id}" data-delta="-10">-10%</button>
+        <button class="btn btn-soft" style="padding:6px 12px;min-height:34px;font-size:12px;" data-prog="${g.id}" data-delta="10">+10%</button>
+        <button class="btn btn-soft" style="padding:6px 12px;min-height:34px;font-size:12px;" data-done="${g.id}">${g.done?'取消完成':'標記完成'}</button>
+      </div>
+    </div>`).join('');
+  bindBigGoalEvents();
+}
+function bindBigGoalEvents(){
+  $$('#page-goals [data-prog]').forEach(el=>{
+    el.onclick = ()=>{
+      const id = el.dataset.prog, delta = Number(el.dataset.delta);
+      const g = state.monthlyGoals.find(x=>x.id===id) || state.yearlyGoals.find(x=>x.id===id);
+      if(g){ g.progress = Math.max(0, Math.min(100, g.progress + delta)); save(); renderGoals(); }
+    };
+  });
+  $$('#page-goals [data-done]').forEach(el=>{
+    el.onclick = ()=>{
+      const id = el.dataset.done;
+      const g = state.monthlyGoals.find(x=>x.id===id) || state.yearlyGoals.find(x=>x.id===id);
+      if(g){ g.done = !g.done; if(g.done) g.progress = 100; save(); renderGoals(); }
+    };
+  });
+  $$('#page-goals [data-del]').forEach(el=>{
+    el.onclick = ()=>{
+      const id = el.dataset.del;
+      if(el.dataset.type==='month') state.monthlyGoals = state.monthlyGoals.filter(x=>x.id!==id);
+      else state.yearlyGoals = state.yearlyGoals.filter(x=>x.id!==id);
+      save(); renderGoals();
+    };
+  });
+}
+$('#btnAddMonth').onclick = ()=>{
+  openModal(`<h3>新增本月目標</h3>
+    <div class="field"><label>目標</label><input type="text" id="mgTitle" placeholder="例如：完成數學 Past Paper"></div>
+    <div class="modal-actions"><button class="btn btn-soft" id="mgCancel">取消</button><button class="btn btn-primary" id="mgSave">新增</button></div>`);
+  $('#mgCancel').onclick = closeModal;
+  $('#mgSave').onclick = ()=>{
+    const title = $('#mgTitle').value.trim();
+    if(!title){ toast('請輸入目標'); return; }
+    state.monthlyGoals.push({id:uid(), month:fmtMonth(new Date()), title, progress:0, done:false});
+    save(); closeModal(); renderMonthGoals();
+  };
+};
+$('#btnAddYear').onclick = ()=>{
+  openModal(`<h3>新增年度目標</h3>
+    <div class="field"><label>目標</label><input type="text" id="ygTitle" placeholder="例如：DSE 數學 5**"></div>
+    <div class="modal-actions"><button class="btn btn-soft" id="ygCancel">取消</button><button class="btn btn-primary" id="ygSave">新增</button></div>`);
+  $('#ygCancel').onclick = closeModal;
+  $('#ygSave').onclick = ()=>{
+    const title = $('#ygTitle').value.trim();
+    if(!title){ toast('請輸入目標'); return; }
+    state.yearlyGoals.push({id:uid(), year:String(new Date().getFullYear()), title, progress:0, done:false});
+    save(); closeModal(); renderYearGoals();
+  };
+};
+
+function renderInsights(){
+  const now = new Date();
+  const day = now.getDay() || 7;
+  const weekStart = new Date(now); weekStart.setDate(now.getDate() - (day-1));
+  const weekStartStr = fmtDate(weekStart);
+  const weekRecs = state.records.filter(r=>r.date >= weekStartStr);
+  let wS=0, wP=0;
+  weekRecs.forEach(r=>{
+    const d = r.endMin - r.startMin;
+    if(r.catId==='study') wS += d;
+    if(r.catId==='phone') wP += d;
+  });
+  $('#wStudy').textContent = wS;
+  $('#wPhone').textContent = wP;
+  const target = state.settings.weekly || 840;
+  const rate = target>0 ? Math.min(100, Math.round(wS/target*100)) : 0;
+  $('#wRate').textContent = rate + '%';
+  drawBarChart(); drawPieChart();
+  $('#weeklySummary').innerHTML = buildWeeklySummary(weekStartStr);
+  $('#monthlySummary').innerHTML = buildMonthlySummary();
+}
+function last7Days(){
+  const arr = []; const base = new Date();
+  for(let i=6;i>=0;i--){ const d = new Date(base); d.setDate(base.getDate()-i); arr.push(fmtDate(d)); }
+  return arr;
+}
+function drawBarChart(){
+  const canvas = $('#chart7'); if(!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  if(rect.width === 0) return;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr, dpr);
+  const w = rect.width, h = rect.height;
+  ctx.clearRect(0,0,w,h);
+  const days = last7Days();
+  const data = days.map(ds=>{
+    let s=0,p=0,c=0;
+    state.records.filter(r=>r.date===ds).forEach(r=>{
+      const d = r.endMin - r.startMin;
+      if(r.catId==='study') s+=d; else if(r.catId==='phone') p+=d; else if(r.catId==='chores') c+=d;
+    });
+    return {ds, s, p, c};
+  });
+  const maxVal = Math.max(60, ...data.map(d=>Math.max(d.s,d.p,d.c)));
+  const padL = 26, padR = 8, padT = 12, padB = 22;
+  const cw = w - padL - padR, ch = h - padT - padB;
+  const groupW = cw / days.length;
+  const barW = Math.max(6, (groupW - 10) / 3);
+  ctx.strokeStyle = '#E8DFCC'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padL, padT); ctx.lineTo(padL, padT+ch); ctx.lineTo(padL+cw, padT+ch); ctx.stroke();
+  ctx.fillStyle = '#938876'; ctx.font = '10px -apple-system'; ctx.textAlign = 'center';
+  days.forEach((ds, i)=>{ ctx.fillText(ds.slice(5).replace('-','/'), padL + groupW*i + groupW/2, h - 6); });
+  data.forEach((d, i)=>{
+    const cx = padL + groupW*i + groupW/2;
+    const cols = [{v:d.s, color:'#8B9B6B'},{v:d.p, color:'#B08B6B'},{v:d.c, color:'#C4A876'}];
+    const totalW = cols.length*barW + (cols.length-1)*3;
+    cols.forEach((col, j)=>{
+      const bh = ch * (col.v/maxVal);
+      const x = cx - totalW/2 + j*(barW+3);
+      const y = padT + ch - bh;
+      ctx.fillStyle = col.color;
+      roundRect(ctx, x, y, barW, bh, 3); ctx.fill();
+    });
+  });
+}
+function drawPieChart(){
+  const canvas = $('#chartPie'); if(!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  if(rect.width === 0) return;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr, dpr);
+  const w = rect.width, h = rect.height;
+  ctx.clearRect(0,0,w,h);
+  const now = new Date();
+  const day = now.getDay() || 7;
+  const weekStart = new Date(now); weekStart.setDate(now.getDate() - (day-1));
+  const weekStartStr = fmtDate(weekStart);
+  const weekRecs = state.records.filter(r=>r.date >= weekStartStr);
+  const totals = {};
+  weekRecs.forEach(r=>{ totals[r.catId] = (totals[r.catId]||0) + (r.endMin - r.startMin); });
+  const entries = Object.entries(totals).sort((a,b)=>b[1]-a[1]);
+  const sum = entries.reduce((s,[,v])=>s+v, 0);
+  const palette = ['#8B9B6B','#B08B6B','#C4A876','#7B9B8B','#8B7B9B','#B89B72','#A89B84'];
+  const cx = w/2, cy = h/2, r = Math.min(w,h)/2 - 10;
+  if(sum===0){
+    ctx.fillStyle = '#938876'; ctx.font = '13px -apple-system'; ctx.textAlign = 'center';
+    ctx.fillText('本週未有記錄', cx, cy);
+    $('#pieLegend').innerHTML = ''; return;
+  }
+  let start = -Math.PI/2;
+  entries.forEach(([catId, v], i)=>{
+    const angle = v/sum * Math.PI*2;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, start, start+angle); ctx.closePath();
+    ctx.fillStyle = palette[i % palette.length]; ctx.fill();
+    start += angle;
+  });
+  ctx.beginPath(); ctx.arc(cx, cy, r*0.58, 0, Math.PI*2);
+  ctx.fillStyle = '#FFFCF7'; ctx.fill();
+  ctx.fillStyle = '#3D362B'; ctx.font = 'bold 14px -apple-system';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(Math.round(sum/60)+'h', cx, cy);
+  $('#pieLegend').innerHTML = entries.map(([catId, v], i)=>{
+    const c = catInfo(catId);
+    const pct = Math.round(v/sum*100);
+    return `<span><i class="dot" style="background:${palette[i%palette.length]}"></i>${c.emoji} ${c.name} · ${v}分 (${pct}%)</span>`;
+  }).join('');
+}
+function roundRect(ctx, x, y, w, h, r){
+  if(h < r) r = h;
+  ctx.beginPath(); ctx.moveTo(x+r, y);
+  ctx.arcTo(x+w, y, x+w, y+h, r); ctx.arcTo(x+w, y+h, x, y+h, 0);
+  ctx.arcTo(x, y+h, x, y, 0); ctx.arcTo(x, y, x+w, y, r); ctx.closePath();
+}
+function buildWeeklySummary(weekStartStr){
+  const recs = state.records.filter(r=>r.date >= weekStartStr);
+  let s=0, p=0, c=0, sport=0;
+  recs.forEach(r=>{
+    const d = r.endMin - r.startMin;
+    if(r.catId==='study') s+=d; else if(r.catId==='phone') p+=d;
+    else if(r.catId==='chores') c+=d; else if(r.catId==='sport') sport+=d;
+  });
+  const days = new Set(recs.map(r=>r.date)).size || 1;
+  const avg = Math.round(s/days);
+  const target = state.settings.weekly || 840;
+  const rate = target>0 ? Math.round(s/target*100) : 0;
+  const dailyDone = state.dailyGoals.filter(g=>g.date>=weekStartStr);
+  const dailyRate = dailyDone.length ? Math.round(dailyDone.filter(g=>g.done).length/dailyDone.length*100) : 0;
+  const weekCheckins = state.checkins.filter(c=>c.date >= weekStartStr).length;
+  const byDate = {};
+  recs.filter(r=>r.catId==='study').forEach(r=>{ byDate[r.date]=(byDate[r.date]||0)+(r.endMin-r.startMin); });
+  const bestDay = Object.entries(byDate).sort((a,b)=>b[1]-a[1])[0];
+  let advice = '';
+  if(rate >= 100) advice = '做得非常好！今個星期超額完成學習目標 🎉';
+  else if(rate >= 70) advice = '進度唔錯，仲差少少就達標。';
+  else if(rate >= 40) advice = '有努力但仲有進步空間，試下將手機時間減少 30 分鐘。';
+  else advice = '今個星期學習時間偏少，由聽日開始每日先做 30 分鐘。';
+  return `
+本週學習：<b>${s} 分鐘</b>（約 ${(s/60).toFixed(1)} 小時）<br>
+每日平均：<b>${avg} 分鐘</b><br>
+玩手機：<b>${p} 分鐘</b>　家務：<b>${c} 分鐘</b>　運動：<b>${sport} 分鐘</b><br>
+學習目標達成率：<b>${rate}%</b>（目標 ${target} 分鐘）<br>
+日目標完成率：<b>${dailyRate}%</b>　打卡：<b>${weekCheckins} 日</b><br>
+${bestDay ? `最佳學習日：<b>${bestDay[0]}</b>（${bestDay[1]} 分鐘）<br>` : ''}
+<br>💡 ${advice}`;
+}
+function buildMonthlySummary(){
+  const m = fmtMonth(new Date());
+  const recs = state.records.filter(r=>r.date.startsWith(m));
+  let s=0, p=0, c=0;
+  recs.forEach(r=>{
+    const d = r.endMin - r.startMin;
+    if(r.catId==='study') s+=d; else if(r.catId==='phone') p+=d; else if(r.catId==='chores') c+=d;
+  });
+  const days = new Set(recs.map(r=>r.date)).size || 1;
+  const avg = Math.round(s/days);
+  const target = state.settings.monthly || 3600;
+  const rate = target>0 ? Math.round(s/target*100) : 0;
+  const monthGoals = state.monthlyGoals.filter(g=>g.month===m);
+  const monthDone = monthGoals.length ? Math.round(monthGoals.filter(g=>g.done).length/monthGoals.length*100) : 0;
+  const monthCheckins = state.checkins.filter(c=>c.date.startsWith(m)).length;
+  let advice = '';
+  if(rate >= 100) advice = '本月超額完成！你嘅堅持好犀利 💪';
+  else if(rate >= 60) advice = '本月表現穩定，繼續保持節奏。';
+  else advice = '本月進度偏慢，試下 set 一個細啲嘅每日目標。';
+  return `
+本月學習：<b>${s} 分鐘</b>（約 ${(s/60).toFixed(1)} 小時）<br>
+每日平均：<b>${avg} 分鐘</b><br>
+玩手機：<b>${p} 分鐘</b>　家務：<b>${c} 分鐘</b><br>
+學習目標達成率：<b>${rate}%</b><br>
+月目標完成率：<b>${monthDone}%</b>　打卡：<b>${monthCheckins} 日</b><br>
+<br>💡 ${advice}`;
+}
+
+function renderChat(){
+  const box = $('#chatBox');
+  if(!box) return;
+  if(state.chat.length === 0){
+    state.chat.push({role:'ai', text:'你好 👋 我係你嘅學習助手。\n\n可以問我：\n• 某科嘅溫書方法\n• 時間管理\n• 專注力技巧\n• DSE 策略'});
+    save();
+  }
+  box.innerHTML = state.chat.map(m=>`<div class="msg ${m.role}">${escapeHtml(m.text)}</div>`).join('');
+  box.scrollTop = box.scrollHeight;
+}
+function aiReply(q){
+  const s = q.toLowerCase();
+  const has = (...arr) => arr.some(k=>s.includes(k));
+  if(has('數學','math','m1','m2','微積分','代數','幾何'))
+    return `📐 數學溫習建議：\n\n1. 先搞清概念。\n2. 每做完一題，問自己考咩概念。\n3. 錯題簿每週重做。\n4. 限時做 past paper。`;
+  if(has('物理','phy','force','motion'))
+    return `🔬 物理溫習：\n\n1. 每個 topic 畫 concept map。\n2. 做題前寫低已知、未知、公式。\n3. 唔好忽略單位同方向。`;
+  if(has('英文','english','eng','作文','reading'))
+    return `📖 英文溫習：\n\n1. 每日抄 3 個靚句子。\n2. 背萬用句型。\n3. Reading 先睇題目。\n4. Listening 每日 15 分鐘。`;
+  if(has('中文','chin'))
+    return `📚 中文溫習：\n\n1. 文言文背常用字詞。\n2. 作文準備萬能例子。\n3. 每日讀一篇範文。`;
+  if(has('時間','計劃','時間表','排程'))
+    return `⏰ 時間管理：\n\n1. 番茄鐘 25+5。\n2. 每朝寫 3 件必做事。\n3. 手機放另一個房。\n4. 每週留半日緩衝。`;
+  if(has('手機','分心','專注','集中'))
+    return `🎯 專注力：\n\n1. 開飛航模式 25 分鐘。\n2. 手機放視線外。\n3. 每次一件事。\n4. 5 分鐘法則。`;
+  if(has('dse','文憑試','考試'))
+    return `🎓 DSE 策略：\n\n1. 早啲開始但唔好 burn out。\n2. Past paper 做 10 年。\n3. 弱科擺精神最好時段。\n4. 每月檢視進度。`;
+  if(has('懶','冇動力','唔想溫','放棄','灰'))
+    return `🌱 冇動力：\n\n1. 先做 5 分鐘。\n2. 諗下點解要考好。\n3. 睇返之前記錄。\n4. 休息都係計劃一部分。`;
+  if(has('睡眠','唔夠瞓','攰','累'))
+    return `😴 睡眠：\n\n1. 最少 7 小時。\n2. 睡前 1 小時唔睇手機。\n3. 固定時間上床。\n4. 午睡 20 分鐘。`;
+  return `🤔 你問嘅係：「${q}」\n\n可以試下：\n1. 將大問題拆細。\n2. 用 App 記錄實際做咗幾多。\n3. 保持每日最少 30 分鐘。\n\n可以問具體啲，例如「點樣溫數學？」`;
+}
+function sendChat(text){
+  if(!text.trim()) return;
+  state.chat.push({role:'user', text:text.trim()});
+  save(); renderChat();
+  $('#chatInput').value = '';
+  $('#chatInput').style.height = 'auto';
+  setTimeout(()=>{
+    state.chat.push({role:'ai', text: aiReply(text)});
+    save(); renderChat();
+  }, 350);
+}
+$('#chatSend').onclick = ()=> sendChat($('#chatInput').value);
+$('#chatInput').addEventListener('keydown', e=>{
+  if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendChat(e.target.value); }
+});
+$('#chatInput').addEventListener('input', e=>{
+  e.target.style.height = 'auto';
+  e.target.style.height = Math.min(120, e.target.scrollHeight) + 'px';
+});
+$('#chipRow').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(chip) sendChat(chip.dataset.q);
+});
+$('#clearChat').onclick = ()=>{
+  if(!confirm('清除所有對話？')) return;
+  state.chat = []; save(); renderChat(); toast('已清除對話');
+};
+
+function renderSettings(){
+  $('#setDaily').value = state.settings.daily;
+  $('#setWeekly').value = state.settings.weekly;
+  $('#setMonthly').value = state.settings.monthly;
+  $('#setExam').value = state.settings.examDate;
+  updateStorageInfo();
+}
+function updateStorageInfo(){
+  const recCount = state.records.length;
+  const chkCount = state.checkins.length;
+  const email = currentUser?.email || '—';
+  $('#storageInfo').textContent = `${email} · ${recCount} 條記錄 · ${chkCount} 日打卡 · 已同步 ☁️`;
+}
+$('#setDaily').onchange = e=>{ state.settings.daily = Number(e.target.value)||0; save(); };
+$('#setWeekly').onchange = e=>{ state.settings.weekly = Number(e.target.value)||0; save(); };
+$('#setMonthly').onchange = e=>{ state.settings.monthly = Number(e.target.value)||0; save(); };
+$('#setExam').onchange = e=>{ state.settings.examDate = e.target.value; save(); updateDSE(); };
+
+$('#btnExport').onclick = ()=>{
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `study-vision-${today()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('已匯出');
+};
+$('#btnImport').onclick = ()=> $('#importFile').click();
+$('#importFile').onchange = e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(!confirm('確定匯入？呢個會覆蓋現有資料。')) return;
+      Object.assign(state, data);
+      save();
+      renderTodayPage(); renderCalendar(); renderGoals(); renderInsights();
+      renderChat(); renderSettings(); renderCheckin(); initQuoteOfDay();
+      toast('已匯入');
+    }catch(err){ toast('檔案格式錯誤', true); }
+  };
+  reader.readAsText(f); e.target.value = '';
+};
+$('#btnClear').onclick = ()=>{
+  if(!confirm('⚠️ 確定清空所有資料？')) return;
+  if(!confirm('最後確認？雲端資料都會清空。')) return;
+  state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  save();
+  renderTodayPage(); renderCalendar(); renderGoals(); renderInsights();
+  renderChat(); renderSettings(); renderCheckin(); initQuoteOfDay();
+  toast('已清空');
+};
+
+function updateDSE(){
+  const d = new Date(state.settings.examDate);
+  const diff = Math.ceil((d - new Date()) / 86400000);
+  $('#dseDays').textContent = diff > 0 ? diff : '0';
+}
+
+let resizeTid;
+window.addEventListener('resize', ()=>{
+  clearTimeout(resizeTid);
+  resizeTid = setTimeout(()=>{
+    if($('#page-insights').classList.contains('active')) renderInsights();
+  }, 200);
+});
+
+setInterval(()=>{
+  if($('#page-today').classList.contains('active') && state.currentDate === today()){
+    renderTimeline();
+  }
+}, 60000);
+</script>
+</body>
+</html>

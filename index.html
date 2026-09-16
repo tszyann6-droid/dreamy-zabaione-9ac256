@@ -23,7 +23,6 @@
   button{cursor:pointer;}
   .app{max-width:860px;margin:0 auto;padding:0 16px calc(100px + env(safe-area-inset-bottom));}
 
-  /* 登入 */
   #authScreen{position:fixed;inset:0;background:var(--bg);z-index:1000;
     display:flex;align-items:center;justify-content:center;padding:24px;}
   #authScreen.hide{display:none;}
@@ -43,7 +42,7 @@
     font-weight:700;font-size:15px;margin-top:6px;min-height:48px;}
   .auth-btn:active{transform:scale(.98);}
   .auth-btn:disabled{opacity:.5;}
-  .auth-msg{font-size:13px;text-align:center;margin-top:14px;color:var(--text2);line-height:1.5;}
+  .auth-msg{font-size:13px;text-align:center;margin-top:14px;color:var(--text2);line-height:1.5;min-height:20px;}
   .auth-msg.err{color:#B57A6B;}
   .auth-msg.ok{color:var(--ok);}
   .auth-note{font-size:11px;color:var(--text2);text-align:center;margin-top:16px;
@@ -451,14 +450,11 @@
 <div class="toast" id="toast"></div>
 
 <script type="module">
-/* ============================================================
-   Firebase 初始化（已用你嘅 project）
-============================================================ */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-         signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+         signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp }
-         from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDlj6KUQevofoy0IcC8YvaS_mvLs2SGVUw",
@@ -474,9 +470,6 @@ const fbApp = initializeApp(firebaseConfig);
 const auth = getAuth(fbApp);
 const db = getFirestore(fbApp);
 
-/* ============================================================
-   常量
-============================================================ */
 const SLOT_H = 44, START_HOUR = 6, END_HOUR = 26;
 const TOTAL_SLOTS = (END_HOUR - START_HOUR) * 2;
 const TRACK_HEIGHT = TOTAL_SLOTS * SLOT_H;
@@ -551,7 +544,6 @@ function toast(msg, isErr){
   t._tid = setTimeout(()=>t.classList.remove('show'), isErr ? 3200 : 1800);
 }
 
-/* ========== 雲端儲存 ========== */
 function userDocRef(){ return currentUser ? doc(db, 'users', currentUser.uid) : null; }
 
 function scheduleSave(){
@@ -619,19 +611,18 @@ function attachSnapshot(){
   });
 }
 
-/* ========== 登入 / 註冊 =   ========= */
 let authMode = 'login';
-$$('.auth-t $$ab').forEach(tab=>{
-  tab.onclick =('. ()=>{
-    authMode = tab.dataset.mauthode;
--tab').forEach(t=>t.classList.toggle('active', t===tab));
+$$('.auth-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    authMode = tab.dataset.mode;
+    $$('.auth-tab').forEach(t=>t.classList.toggle('active', t===tab));
     $('#authSubmit').textContent = authMode==='login' ? '登入' : '註冊';
     $('#authMsg').textContent = '';
     $('#authMsg').className = 'auth-msg';
-  };
+  });
 });
 
-$('#authSubmit').onclick = async ()=>{
+$('#authSubmit').addEventListener('click', async ()=>{
   const email = $('#authEmail').value.trim();
   const pw = $('#authPassword').value;
   const msg = $('#authMsg');
@@ -662,20 +653,21 @@ $('#authSubmit').onclick = async ()=>{
     };
     msg.textContent = map[e.code] || ('錯誤：' + e.code);
     msg.classList.add('err');
+    console.error(e);
   }finally{
     btn.disabled = false;
     btn.textContent = authMode==='login' ? '登入' : '註冊';
   }
-};
+});
 
 $('#authPassword').addEventListener('keydown', e=>{
   if(e.key === 'Enter') $('#authSubmit').click();
 });
 
-$('#userBtn').onclick = ()=>{
+$('#userBtn').addEventListener('click', ()=>{
   if(!confirm(`登出 ${currentUser?.email}？\n\n雲端資料會保留，下次登入會重新下載。`)) return;
   signOut(auth);
-};
+});
 
 onAuthStateChanged(auth, async (user)=>{
   if(user){
@@ -710,7 +702,6 @@ onAuthStateChanged(auth, async (user)=>{
   }
 });
 
-/* ========== 以下為應用功能 ========== */
 function save(){ scheduleSave(); }
 
 $$('.tab').forEach(tab=>{

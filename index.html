@@ -72,8 +72,8 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
 .record-meta{font-size:12px;color:var(--text2);margin-top:2px}
 .record-del{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--text2);border-radius:50%;font-size:15px;flex-shrink:0;background:none}
 .empty{text-align:center;color:var(--text2);font-size:13.5px;padding:28px 12px;line-height:1.7}
-.tabbar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,252,247,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;z-index:100;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;color:var(--text2);font-size:10px;font-weight:600;border-radius:14px;min-height:52px}
+.tabbar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,252,247,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;z-index:100;overflow-x:auto;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.tab{flex:1 0 auto;min-width:60px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;color:var(--text2);font-size:10px;font-weight:600;border-radius:14px;min-height:52px}
 .tab.active{color:var(--accent-d)}
 .tab-icon{font-size:20px;line-height:1}
 .cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -91,9 +91,8 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
 .cal-day.sel.dot::after{background:#fff}
 .cal-day.check::before{content:'✓';position:absolute;top:2px;right:3px;font-size:9px;color:#8B9B6B;font-weight:900}
 .cal-day.sel.check::before{color:#fff}
-/* 蘋果日曆風格：日程月曆格子 */
 .cal-month{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cal-cell{min-height:84px;background:var(--soft);border-radius:10px;padding:4px;display:flex;flex-direction:column;gap:2px;position:relative;overflow:hidden}
+.cal-cell{min-height:84px;background:var(--soft);border-radius:10px;padding:4px;display:flex;flex-direction:column;gap:2px;position:relative;overflow:hidden;cursor:pointer}
 .cal-cell.other{opacity:.4}
 .cal-cell.today{background:#EFE6D2}
 .cal-cell.sel{outline:2px solid var(--accent)}
@@ -104,24 +103,23 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
 .cal-event.e2{background:#8B9B6B}
 .cal-event.e3{background:#B08B6B}
 .cal-event.e4{background:#7B9B8B}
-.cal-event.e5{background:#8B7B9B}
 .cal-more{font-size:9px;color:var(--text2);font-weight:600;padding-left:4px}
 .sched-item{display:flex;gap:12px;padding:12px;border-radius:14px;background:var(--soft);margin-bottom:8px;border-left:4px solid var(--accent)}
 .sched-time{font-size:13px;font-weight:700;color:var(--accent-d);min-width:56px;flex-shrink:0}
-.sched-body{flex:1;min-width:0}
+.sched-body{flex:1;min-width:0;cursor:pointer}
 .sched-title{font-size:14px;font-weight:700}
 .sched-note{font-size:12px;color:var(--text2);margin-top:2px;word-break:break-word}
-.insight-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
-.insight-row:last-child{border-bottom:none}
-.insight-row b{color:var(--accent-d)}
 .bar-chart{display:flex;align-items:flex-end;gap:6px;height:140px;margin-top:10px}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
 .bar-val{font-size:10px;color:var(--text2);margin-bottom:2px;font-weight:600}
 .bar-fill{width:100%;background:linear-gradient(180deg,#C9AE7E,#A68B5B);border-radius:6px 6px 0 0;min-height:0}
 .bar-lbl{font-size:10px;color:var(--text2);margin-top:4px}
-.summary-text{font-size:13px;line-height:1.9;color:var(--text)}
+.summary-text{font-size:13px;line-height:1.9}
 .summary-text b{color:var(--accent-d)}
-.tip{background:#EFE6D2;border-radius:12px;padding:12px 14px;font-size:13px;color:var(--text);line-height:1.6;margin-top:12px;border-left:3px solid var(--accent)}
+.tip{background:#EFE6D2;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.6;margin-top:12px;border-left:3px solid var(--accent)}
+.insight-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;gap:8px}
+.insight-row:last-child{border-bottom:none}
+.insight-row b{color:var(--accent-d)}
 .set-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);font-size:14px;gap:10px}
 .set-row:last-child{border-bottom:none}
 .set-row input[type=number],.set-row input[type=date]{width:150px;padding:8px 10px;background:var(--soft);border-radius:10px;text-align:right;font-weight:600}
@@ -130,7 +128,6 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
 .btn-primary{background:var(--grad);color:#fff}
 .btn-soft{background:var(--soft);color:var(--text)}
 .btn-danger{background:#F2E2DC;color:#8B4A2E}
-.btn-sm{width:auto;margin:0;padding:6px 12px;min-height:36px;font-size:13px}
 .storage-info{font-size:12px;color:var(--text2);text-align:center;margin-top:8px}
 .modal-bg{position:fixed;inset:0;background:rgba(61,54,43,.45);z-index:200;display:none;align-items:flex-end;justify-content:center}
 .modal-bg.show{display:flex}
@@ -158,12 +155,16 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
 .friend-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .friend-status{font-size:12px;color:var(--text2);margin-top:2px}
 .friend-status.done{color:#8B9B6B;font-weight:600}
-.toast{position:fixed;bottom:calc(100px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(20px);background:rgba(61,54,43,.94);color:#fff;padding:12px 22px;border-radius:999px;font-size:13.5px;font-weight:600;opacity:0;transition:.25s;z-index:300;max-width:90vw;text-align:center;pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.err{background:rgba(139,74,46,.96)}
+.code-display{text-align:center;padding:16px 0;font-size:32px;font-weight:800;letter-spacing:6px;color:var(--accent-d)}
 .menu-item{padding:16px 8px;font-size:15px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);background:none;width:100%;text-align:left}
 .menu-item:last-child{border-bottom:none}
 .menu-item .em{font-size:20px;width:28px;text-align:center}
+.heat-grid{display:flex;gap:4px;flex-wrap:wrap}
+.heat-dot{width:14px;height:14px;border-radius:4px;background:#E8DFCC}
+.heat-dot.on{background:var(--accent)}
+.toast{position:fixed;bottom:calc(100px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(20px);background:rgba(61,54,43,.94);color:#fff;padding:12px 22px;border-radius:999px;font-size:13.5px;font-weight:600;opacity:0;transition:.25s;z-index:300;max-width:90vw;text-align:center;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.err{background:rgba(139,74,46,.96)}
 </style>
 </head>
 <body>
@@ -269,6 +270,23 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
     <div class="card"><div class="empty">🎯 撳日期回顧時間表<br>粉點=記錄 · ✓=打卡</div></div>
   </section>
 
+  <section class="page" id="page-friends">
+    <div class="card">
+      <div class="card-title">我嘅好友碼 <button type="button" class="btn btn-soft" style="width:auto;margin:0;padding:6px 12px;min-height:36px;font-size:13px" id="copyCodeBtn">複製</button></div>
+      <div class="code-display" id="myFriendCode">------</div>
+      <div style="text-align:center;font-size:12px;color:var(--text2);margin-bottom:10px">俾呢個碼朋友就可以加你</div>
+      <button type="button" class="btn btn-primary" id="addFriendBtn">＋ 用好友碼加好友</button>
+    </div>
+    <div class="card">
+      <div class="card-title">好友請求 <span class="muted" id="reqCount"></span></div>
+      <div id="reqList"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">我嘅好友 <span class="muted" id="friendCount"></span></div>
+      <div id="friendList"></div>
+    </div>
+  </section>
+
   <section class="page" id="page-insights">
     <div class="stats-row">
       <div class="stat-box"><div class="stat-num" id="wStudy">0</div><div class="stat-label">本週學習（分）</div></div>
@@ -316,6 +334,7 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
   <button type="button" class="tab active" data-page="today"><span class="tab-icon">🕐</span>時間表</button>
   <button type="button" class="tab" data-page="schedule"><span class="tab-icon">📔</span>日程</button>
   <button type="button" class="tab" data-page="calendar"><span class="tab-icon">📅</span>回顧</button>
+  <button type="button" class="tab" data-page="friends"><span class="tab-icon">👥</span>好友</button>
   <button type="button" class="tab" data-page="insights"><span class="tab-icon">📊</span>洞察</button>
   <button type="button" class="tab" data-page="settings"><span class="tab-icon">⚙️</span>設定</button>
 </nav>
@@ -330,7 +349,6 @@ button,input,textarea,select{font-family:inherit;font-size:16px;color:inherit;bo
 window.addEventListener('DOMContentLoaded', function(){
   'use strict';
 
-  // ===== 工具 =====
   function $(s){ return document.querySelector(s); }
   function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
   function pad(n){ return String(n).padStart(2,'0'); }
@@ -352,7 +370,6 @@ window.addEventListener('DOMContentLoaded', function(){
     toastTimer = setTimeout(function(){ t.className = 'toast'; }, isErr ? 3200 : 1800);
   }
 
-  // ===== Firebase =====
   var firebaseReady = false;
   var auth = null, db = null;
   try{
@@ -370,10 +387,8 @@ window.addEventListener('DOMContentLoaded', function(){
     console.log('Firebase ready');
   }catch(e){
     console.error('Firebase init failed:', e);
-    toast('Firebase 載入失敗', true);
   }
 
-  // ===== 常量 =====
   var SLOT_H = 44, START_HOUR = 6, END_HOUR = 26;
   var TOTAL_SLOTS = (END_HOUR - START_HOUR) * 2;
   var TRACK_HEIGHT = TOTAL_SLOTS * SLOT_H;
@@ -390,7 +405,7 @@ window.addEventListener('DOMContentLoaded', function(){
   function catInfo(id){ return CATS[id] || CATS.other; }
 
   var AVATARS = ['👤','😀','😎','🤓','🧑‍🎓','👩‍🎓','👨‍🎓','🐱','🐶','🐼','🦊','🐯','🦁','🐸','🌸','🌟','🍀','🔥','💪','🎯','📚','✏️','💡','🎓'];
-  var QUOTES = ['唔需要完美，只需要開始。','今日嘅努力，係聽日嘅底氣。','進步唔係直線，堅持就會見到。','就算慢，都唔好停低。','每一分鐘嘅專注，都係對未來嘅投資。','你今日做嘅事，決定你聽日企喺邊。','唔好同人比較，同昨日嘅自己比較。','休息都係計劃嘅一部分。','唔怕慢，只怕站。','失敗唔緊要，最緊要係再試。','你唔需要睇到成條樓梯，只需要踏出第一步。','天賦決定起點，努力決定終點。','而家唔係永遠，撐過去就會唔同。','你比自己想像中更堅強。','種一棵樹最好嘅時間係十年前，其次係而家。','成功唔係偶然，係每日嘅累積。','你今日嘅堅持，係聽日嘅自由。','努力唔一定有回報，但唔努力一定冇。','慢慢嚟，比較快。','你唔孤單，好多人喺後面撐你。','專注當下，唔好諗太多未來。','唔好等有心情先做，做咗就會有心情。','今日嘅辛苦，係聽日嘅故事。','你嘅極限，比你想像中遠。','想放棄嗰陣，已經行咗好遠。','與其焦慮，不如行動。','每日進步 1%，一年後就係 37 倍。','你唔需要贏晒所有人，只需要贏昨日嘅自己。','你嘅努力，會喺某一日開花。','捱得過今日，聽日就會好啲。','你可以休息，但唔可以放棄。','所有嘅努力，都會以另一種方式回報你。','想改變結果，就要改變行動。','唔好問自己得得，問自己肯唔肯。','當你覺得辛苦，就係進步緊嘅時候。','最黑暗嘅時候，就係最接近黎明嘅時候。','一步一腳印，冇捷徑。','你嘅對手，從來都係自己。','唔好怕孤單，成功嘅路都係一個人行。','努力嘅人，運氣都唔會太差。','你想要嘅生活，喺你唔想努力嘅背後。','唔好等到完美先開始，開始先會完美。','每一次跌倒，都係下次站得更穩嘅準備。','唔好停，因為你已經行咗咁遠。','你想去嘅地方，冇人能夠阻止你。','撐落去，係對自己最大嘅溫柔。'];
+  var QUOTES = ['唔需要完美，只需要開始。','今日嘅努力，係聽日嘅底氣。','進步唔係直線，堅持就會見到。','就算慢，都唔好停低。','每一分鐘嘅專注，都係對未來嘅投資。','你今日做嘅事，決定你聽日企喺邊。','唔好同人比較，同昨日嘅自己比較。','休息都係計劃嘅一部分。','唔怕慢，只怕站。','失敗唔緊要，最緊要係再試。','你唔需要睇到成條樓梯，只需要踏出第一步。','天賦決定起點，努力決定終點。','而家唔係永遠，撐過去就會唔同。','你比自己想像中更堅強。','種一棵樹最好嘅時間係十年前，其次係而家。','成功唔係偶然，係每日嘅累積。','你今日嘅堅持，係聽日嘅自由。','努力唔一定有回報，但唔努力一定冇。','慢慢嚟，比較快。','你唔孤單，好多人喺後面撐你。','專注當下，唔好諗太多未來。','唔好等有心情先做，做咗就會有心情。','今日嘅辛苦，係聽日嘅故事。','你嘅極限，比你想像中遠。','想放棄嗰陣，已經行咗好遠。','與其焦慮，不如行動。','每日進步 1%，一年後就係 37 倍。','你唔需要贏晒所有人，只需要贏昨日嘅自己。','你嘅努力，會喺某一日開花。','捱得過今日，聽日就會好啲。','你可以休息，但唔可以放棄。','所有嘅努力，都會以另一種方式回報你。','想改變結果，就要改變行動。','當你覺得辛苦，就係進步緊嘅時候。','最黑暗嘅時候，就係最接近黎明嘅時候。','一步一腳印，冇捷徑。','你嘅對手，從來都係自己。','唔好怕孤單，成功嘅路都係一個人行。','努力嘅人，運氣都唔會太差。','你想要嘅生活，喺你唔想努力嘅背後。','唔好等到完美先開始，開始先會完美。','每一次跌倒，都係下次站得更穩嘅準備。','唔好停，因為你已經行咗咁遠。','你想去嘅地方，冇人能夠阻止你。','撐落去，係對自己最大嘅溫柔。'];
 
   var DEFAULT_SETTINGS = {daily:120, weekly:840, monthly:3600, examDate:'2027-04-20'};
   function freshState(){
@@ -405,7 +420,8 @@ window.addEventListener('DOMContentLoaded', function(){
   }
   var state = freshState();
   var currentUser = null;
-  var unsubUser = null;
+  var unsubUser = null, unsubReqs = null;
+  var friendsCache = {};
   var saveTimer = null;
   var schSelDate = today();
   var authMode = 'login';
@@ -424,6 +440,8 @@ window.addEventListener('DOMContentLoaded', function(){
     var cutoff = new Date(); cutoff.setDate(cutoff.getDate()-90);
     var cutStr = fmtDate(cutoff);
     state.publicCheckins = state.checkins.filter(function(c){ return c.date >= cutStr; }).map(function(c){ return c.date; });
+    // 公開資料（好友可睇）：名、頭像、好友碼、打卡、最近 30 日日程
+    var publicSchedules = state.schedules.slice(-60).map(function(s){ return {date:s.date, time:s.time||'', title:s.title}; });
     userDocRef().set({
       records: state.records, dailyGoals: state.dailyGoals,
       checkins: state.checkins, schedules: state.schedules,
@@ -438,6 +456,7 @@ window.addEventListener('DOMContentLoaded', function(){
         avatar: state.profile.avatar || '👤',
         friendCode: state.profile.friendCode || '',
         checkins: state.publicCheckins,
+        schedules: publicSchedules,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       }, {merge:true});
     }).catch(function(e){
@@ -473,6 +492,7 @@ window.addEventListener('DOMContentLoaded', function(){
     renderToday();
     renderSchedule();
     renderCalendar();
+    renderFriends();
     renderInsights();
     renderSettings();
     initQuoteOfDay();
@@ -491,6 +511,15 @@ window.addEventListener('DOMContentLoaded', function(){
       if(snap.exists) applyRemote(snap.data());
       else doSave();
     }, function(err){ console.error('snap', err); });
+  }
+
+  function attachRequestSnapshot(){
+    if(unsubReqs) unsubReqs();
+    unsubReqs = db.collection('friendRequests').doc(currentUser.uid).collection('inbox').onSnapshot(function(snap){
+      var reqs = [];
+      snap.forEach(function(d){ var o = d.data(); o.id = d.id; reqs.push(o); });
+      renderRequests(reqs);
+    }, function(err){ console.error('reqs', err); });
   }
 
   // ===== 登入 =====
@@ -548,7 +577,7 @@ window.addEventListener('DOMContentLoaded', function(){
     if(!email){ msg.textContent = '請先輸入你嘅 Email'; msg.className = 'auth-msg err'; return; }
     if(!confirm('發送密碼重設連結去 ' + email + '？')) return;
     auth.sendPasswordResetEmail(email).then(function(){
-      msg.textContent = '✅ 已發送，請去 Email 收信（檢查垃圾郵件）';
+      msg.textContent = '✅ 已發送！請去 Email 收信（檢查垃圾郵件）';
       msg.className = 'auth-msg ok';
     }).catch(function(e){
       msg.textContent = '發送失敗：' + (e.code || e.message);
@@ -575,6 +604,7 @@ window.addEventListener('DOMContentLoaded', function(){
           doSave();
         }
         attachUserSnapshot();
+        attachRequestSnapshot();
       }).catch(function(e){
         console.error(e);
         toast('載入失敗：' + (e.code || e.message), true);
@@ -582,13 +612,14 @@ window.addEventListener('DOMContentLoaded', function(){
     }else{
       currentUser = null;
       if(unsubUser){ unsubUser(); unsubUser = null; }
+      if(unsubReqs){ unsubReqs(); unsubReqs = null; }
+      friendsCache = {};
       $('#authScreen').className = '';
       $('#mainApp').style.display = 'none';
       $('#tabbar').style.display = 'none';
       state = freshState();
     }
   }
-
   if(firebaseReady) auth.onAuthStateChanged(handleAuthChange);
 
   // ===== 頭像 =====
@@ -690,9 +721,9 @@ window.addEventListener('DOMContentLoaded', function(){
   function openChangeEmail(){
     openModal(
       '<h3>更改綁定 Email</h3>' +
-      '<div class="field"><label>目前</label><input type="text" value="' + currentUser.email + '" disabled></div>' +
-      '<div class="field"><label>新 Email</label><input type="email" id="newEmail"></div>' +
-      '<div class="field"><label>目前密碼</label><input type="password" id="pwForEmail"></div>' +
+      '<div class="field"><label>目前 Email</label><input type="text" value="' + currentUser.email + '" disabled></div>' +
+      '<div class="field"><label>新 Email</label><input type="email" id="newEmail" placeholder="new@example.com"></div>' +
+      '<div class="field"><label>目前密碼（驗證用）</label><input type="password" id="pwForEmail"></div>' +
       '<div class="modal-actions"><button type="button" class="btn btn-soft" id="ceCancel">取消</button><button type="button" class="btn btn-primary" id="ceSave">確認</button></div>'
     );
     $('#ceCancel').onclick = closeModal;
@@ -704,7 +735,7 @@ window.addEventListener('DOMContentLoaded', function(){
       currentUser.reauthenticateWithCredential(cred).then(function(){
         return currentUser.updateEmail(newEmail);
       }).then(function(){
-        toast('✅ Email 已更新');
+        toast('✅ Email 已更新，下次用新 Email 登入');
         closeModal();
       }).catch(function(e){
         var map = {'auth/wrong-password':'密碼錯誤','auth/email-already-in-use':'呢個 Email 已被使用','auth/invalid-email':'Email 格式錯誤','auth/requires-recent-login':'請重新登入再試'};
@@ -752,7 +783,6 @@ window.addEventListener('DOMContentLoaded', function(){
     while(set[fmtDate(d)]){ s++; d.setDate(d.getDate()-1); }
     return s;
   }
-
   function renderCheckin(){
     var t = today();
     var done = false;
@@ -765,7 +795,6 @@ window.addEventListener('DOMContentLoaded', function(){
     $('#streakNum').textContent = streak;
     $('#totalNum').textContent = state.checkins.length;
   }
-
   $('#checkinBtn').onclick = function(){
     var t = today();
     var idx = -1;
@@ -787,7 +816,6 @@ window.addEventListener('DOMContentLoaded', function(){
       pickRandomQuote();
     }
   };
-
   function pickRandomQuote(){
     var q = QUOTES[Math.floor(Math.random()*QUOTES.length)];
     if(q === $('#quoteText').textContent && QUOTES.length > 1){
@@ -814,13 +842,13 @@ window.addEventListener('DOMContentLoaded', function(){
       if(page === 'today') renderToday();
       else if(page === 'schedule') renderSchedule();
       else if(page === 'calendar') renderCalendar();
+      else if(page === 'friends') renderFriends();
       else if(page === 'insights') renderInsights();
       else if(page === 'settings') renderSettings();
       window.scrollTo(0,0);
     };
   });
 
-  // ===== Modal =====
   function openModal(html){ $('#modalBox').innerHTML = html; $('#modalBg').className = 'modal-bg show'; }
   function closeModal(){ $('#modalBg').className = 'modal-bg'; $('#modalBox').innerHTML = ''; }
   $('#modalBg').onclick = function(e){ if(e.target.id === 'modalBg') closeModal(); };
@@ -1013,13 +1041,12 @@ window.addEventListener('DOMContentLoaded', function(){
   $('#dNext').onclick = function(){ shiftDate(1); };
   $('#dToday').onclick = function(){ state.currentDate = today(); scheduleSave(); renderToday(); };
 
-  // ===== 日程（蘋果風格月曆） =====
+  // ===== 日程 =====
   function renderSchedule(){
     if(!state.schMonth) state.schMonth = fmtMonth(new Date());
     var p = state.schMonth.split('-');
     var y = Number(p[0]), m = Number(p[1]);
     $('#schTitle').textContent = y + ' 年 ' + m + ' 月';
-
     var first = new Date(y, m-1, 1);
     var startW = first.getDay();
     var daysInMonth = new Date(y, m, 0).getDate();
@@ -1032,7 +1059,6 @@ window.addEventListener('DOMContentLoaded', function(){
       var idx = cells.length - (startW + daysInMonth) + 1;
       cells.push({d:new Date(y, m, idx), other:true});
     }
-
     var t = today();
     var html = '';
     for(var c=0;c<cells.length;c++){
@@ -1050,26 +1076,14 @@ window.addEventListener('DOMContentLoaded', function(){
         var evtCls = 'cal-event e' + ((e % 4) + 1);
         eventsHtml += '<div class="' + evtCls + '">' + (s.time ? s.time + ' ' : '') + esc(s.title) + '</div>';
       }
-      if(daySchedules.length > maxShow){
-        eventsHtml += '<div class="cal-more">+' + (daySchedules.length - maxShow) + ' 更多</div>';
-      }
+      if(daySchedules.length > maxShow) eventsHtml += '<div class="cal-more">+' + (daySchedules.length - maxShow) + '</div>';
       html += '<div class="' + cls + '" data-date="' + ds + '">' +
-        '<div class="cal-cell-num">' + cell.d.getDate() + '</div>' +
-        eventsHtml +
-      '</div>';
+        '<div class="cal-cell-num">' + cell.d.getDate() + '</div>' + eventsHtml + '</div>';
     }
     $('#schCal').innerHTML = html;
-
-    var cellEls = $('#schCal').querySelectorAll('.cal-cell');
-    for(var k=0;k<cellEls.length;k++){
-      (function(el){
-        el.onclick = function(){
-          schSelDate = el.getAttribute('data-date');
-          renderSchedule();
-        };
-      })(cellEls[k]);
-    }
-
+    $('#schCal').querySelectorAll('.cal-cell').forEach(function(el){
+      el.onclick = function(){ schSelDate = el.getAttribute('data-date'); renderSchedule(); };
+    });
     $('#schDateTitle').textContent = schSelDate + ' 嘅行程';
     var list = state.schedules.filter(function(s){ return s.date === schSelDate; }).sort(function(a,b){ return (a.time||'').localeCompare(b.time||''); });
     var box = $('#schList');
@@ -1132,12 +1146,7 @@ window.addEventListener('DOMContentLoaded', function(){
     $('#scSave').onclick = function(){
       var title = $('#scTitle').value.trim();
       if(!title){ toast('請輸入標題'); return; }
-      var data = {
-        date: $('#scDate').value,
-        time: $('#scTime').value,
-        title: title,
-        note: $('#scNote').value.trim()
-      };
+      var data = {date:$('#scDate').value, time:$('#scTime').value, title:title, note:$('#scNote').value.trim()};
       if(isEdit){
         for(var i=0;i<state.schedules.length;i++){
           if(state.schedules[i].id === s.id){
@@ -1151,49 +1160,26 @@ window.addEventListener('DOMContentLoaded', function(){
         state.schedules.push({id:uid(), date:data.date, time:data.time, title:data.title, note:data.note});
       }
       schSelDate = data.date;
-      scheduleSave();
-      closeModal();
-      renderSchedule();
+      scheduleSave(); closeModal(); renderSchedule();
       toast(isEdit ? '已更新' : '✅ 已新增行程');
     };
     setTimeout(function(){ var el = $('#scTitle'); if(el) el.focus(); }, 100);
   }
 
-  // 日程表頂部按鈕（用事件委託）
   document.addEventListener('click', function(e){
     var t = e.target.closest ? e.target.closest('[data-act]') : null;
     if(!t) return;
     var act = t.getAttribute('data-act');
-    if(act === 'sch-prev'){
-      var p = state.schMonth.split('-');
-      state.schMonth = fmtMonth(new Date(Number(p[0]), Number(p[1])-2, 1));
-      scheduleSave(); renderSchedule();
-    }else if(act === 'sch-next'){
-      var p2 = state.schMonth.split('-');
-      state.schMonth = fmtMonth(new Date(Number(p2[0]), Number(p2[1]), 1));
-      scheduleSave(); renderSchedule();
-    }else if(act === 'sch-today'){
-      state.schMonth = fmtMonth(new Date());
-      schSelDate = today();
-      scheduleSave(); renderSchedule();
-    }else if(act === 'sch-add'){
-      openSchedModal(null);
-    }else if(act === 'cal-prev'){
-      var p3 = state.calendarMonth.split('-');
-      state.calendarMonth = fmtMonth(new Date(Number(p3[0]), Number(p3[1])-2, 1));
-      scheduleSave(); renderCalendar();
-    }else if(act === 'cal-next'){
-      var p4 = state.calendarMonth.split('-');
-      state.calendarMonth = fmtMonth(new Date(Number(p4[0]), Number(p4[1]), 1));
-      scheduleSave(); renderCalendar();
-    }else if(act === 'cal-today'){
-      state.calendarMonth = fmtMonth(new Date());
-      state.currentDate = today();
-      scheduleSave(); renderCalendar();
-    }
+    if(act === 'sch-prev'){ var p = state.schMonth.split('-'); state.schMonth = fmtMonth(new Date(Number(p[0]), Number(p[1])-2, 1)); scheduleSave(); renderSchedule(); }
+    else if(act === 'sch-next'){ var p2 = state.schMonth.split('-'); state.schMonth = fmtMonth(new Date(Number(p2[0]), Number(p2[1]), 1)); scheduleSave(); renderSchedule(); }
+    else if(act === 'sch-today'){ state.schMonth = fmtMonth(new Date()); schSelDate = today(); scheduleSave(); renderSchedule(); }
+    else if(act === 'sch-add'){ openSchedModal(null); }
+    else if(act === 'cal-prev'){ var p3 = state.calendarMonth.split('-'); state.calendarMonth = fmtMonth(new Date(Number(p3[0]), Number(p3[1])-2, 1)); scheduleSave(); renderCalendar(); }
+    else if(act === 'cal-next'){ var p4 = state.calendarMonth.split('-'); state.calendarMonth = fmtMonth(new Date(Number(p4[0]), Number(p4[1]), 1)); scheduleSave(); renderCalendar(); }
+    else if(act === 'cal-today'){ state.calendarMonth = fmtMonth(new Date()); state.currentDate = today(); scheduleSave(); renderCalendar(); }
   });
 
-  // ===== 日曆回顧 =====
+  // ===== 日曆 =====
   function renderCalendar(){
     if(!state.calendarMonth) state.calendarMonth = fmtMonth(new Date());
     var p = state.calendarMonth.split('-');
@@ -1242,6 +1228,208 @@ window.addEventListener('DOMContentLoaded', function(){
     });
   }
 
+  // ===== 好友 =====
+  function loadFriendProfile(id){
+    if(friendsCache[id]) return Promise.resolve(friendsCache[id]);
+    return publicDocRef(id).get().then(function(s){
+      if(s.exists){ friendsCache[id] = s.data(); return friendsCache[id]; }
+      return null;
+    }).catch(function(e){ console.warn(e); return null; });
+  }
+
+  function renderFriends(){
+    if(!state.profile.friendCode) return;
+    $('#myFriendCode').textContent = state.profile.friendCode;
+    $('#friendCount').textContent = state.friends.length + ' 位';
+    var list = $('#friendList');
+    if(state.friends.length === 0){
+      list.innerHTML = '<div class="empty">未有好友，撳上面「用好友碼加好友」</div>';
+      return;
+    }
+    list.innerHTML = '<div class="empty">載入中...</div>';
+    var promises = state.friends.map(function(u){ return loadFriendProfile(u); });
+    Promise.all(promises).then(function(profiles){
+      var t = today();
+      var html = '';
+      for(var i=0;i<profiles.length;i++){
+        var p = profiles[i];
+        if(!p) continue;
+        var id = state.friends[i];
+        var checked = (p.checkins || []).indexOf(t) >= 0;
+        var av = p.avatar || '👤';
+        var avHtml = av.indexOf('data:') === 0 ? '<img src="' + av + '">' : av;
+        html += '<div class="friend-item" data-uid="' + id + '">' +
+          '<div class="friend-avatar">' + avHtml + '</div>' +
+          '<div class="friend-info">' +
+            '<div class="friend-name">' + esc(p.displayName || '用戶') + '</div>' +
+            '<div class="friend-status' + (checked ? ' done' : '') + '">' + (checked ? '✅ 今日已打卡' : '未打卡') + '</div>' +
+          '</div>' +
+        '</div>';
+      }
+      list.innerHTML = html || '<div class="empty">載入失敗</div>';
+      list.querySelectorAll('.friend-item').forEach(function(el){
+        el.onclick = function(){ openFriendDetail(el.getAttribute('data-uid')); };
+      });
+    });
+  }
+
+  function openFriendDetail(id){
+    loadFriendProfile(id).then(function(p){
+      if(!p){ toast('載入失敗', true); return; }
+      var t = today();
+      var checked = (p.checkins || []).indexOf(t) >= 0;
+      var set = {};
+      for(var i=0;i<(p.checkins || []).length;i++) set[p.checkins[i]] = 1;
+      var streak = 0;
+      var dd = new Date();
+      if(!set[fmtDate(dd)]) dd.setDate(dd.getDate()-1);
+      while(set[fmtDate(dd)]){ streak++; dd.setDate(dd.getDate()-1); }
+      var av = p.avatar || '👤';
+      var avHtml = av.indexOf('data:') === 0 ? '<img src="' + av + '">' : av;
+      var heat = '';
+      for(var j=29; j>=0; j--){
+        var d2 = new Date(); d2.setDate(d2.getDate()-j);
+        var ds = fmtDate(d2);
+        var on = set[ds];
+        heat += '<div class="heat-dot' + (on ? ' on' : '') + '" title="' + ds + '"></div>';
+      }
+      // 好友最近日程
+      var schs = (p.schedules || []).slice(-10).reverse();
+      var schHtml = '';
+      if(schs.length === 0){
+        schHtml = '<div class="empty" style="padding:12px">好友未有公開日程</div>';
+      }else{
+        for(var k=0;k<schs.length;k++){
+          var s = schs[k];
+          schHtml += '<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px">' +
+            '<span style="color:var(--accent-d);font-weight:700;min-width:88px">' + s.date.slice(5) + ' ' + (s.time || '') + '</span>' +
+            '<span>' + esc(s.title) + '</span>' +
+          '</div>';
+        }
+      }
+      openModal(
+        '<div style="text-align:center;margin-bottom:16px">' +
+          '<div class="avatar-btn" style="width:72px;height:72px;font-size:36px;margin:0 auto">' + avHtml + '</div>' +
+          '<div style="font-size:17px;font-weight:700;margin-top:10px">' + esc(p.displayName || '用戶') + '</div>' +
+          '<div style="font-size:13px;color:var(--text2);margin-top:4px">' + (checked ? '✅ 今日已打卡' : '💤 今日未打卡') + '</div>' +
+          '<div style="font-size:13px;color:var(--accent-d);font-weight:600;margin-top:6px">🔥 連續 ' + streak + ' 日</div>' +
+        '</div>' +
+        '<div class="card" style="box-shadow:none;background:var(--soft);margin-bottom:12px">' +
+          '<div style="font-size:13px;font-weight:700;margin-bottom:8px">最近 30 日打卡</div>' +
+          '<div class="heat-grid">' + heat + '</div>' +
+        '</div>' +
+        '<div class="card" style="box-shadow:none;background:var(--soft);margin-bottom:12px">' +
+          '<div style="font-size:13px;font-weight:700;margin-bottom:8px">最近日程</div>' +
+          schHtml +
+        '</div>' +
+        '<div class="modal-actions">' +
+          '<button type="button" class="btn btn-soft" id="fdClose">關閉</button>' +
+          '<button type="button" class="btn btn-danger" id="fdRemove">移除好友</button>' +
+        '</div>'
+      );
+      $('#fdClose').onclick = closeModal;
+      $('#fdRemove').onclick = function(){
+        if(!confirm('確定移除呢個好友？')) return;
+        state.friends = state.friends.filter(function(x){ return x !== id; });
+        scheduleSave(); closeModal(); renderFriends(); toast('已移除');
+      };
+    });
+  }
+
+  $('#copyCodeBtn').onclick = function(){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(state.profile.friendCode).then(function(){
+        toast('已複製好友碼');
+      }).catch(function(){ toast('好友碼：' + state.profile.friendCode); });
+    }else{
+      toast('好友碼：' + state.profile.friendCode);
+    }
+  };
+
+  $('#addFriendBtn').onclick = function(){
+    openModal(
+      '<h3>加好友</h3>' +
+      '<div class="field"><label>輸入對方嘅 6 位好友碼</label>' +
+        '<input type="text" id="afCode" placeholder="ABC123" maxlength="6" style="text-transform:uppercase;letter-spacing:4px;font-size:20px;text-align:center"></div>' +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn btn-soft" id="afCancel">取消</button>' +
+        '<button type="button" class="btn btn-primary" id="afSend">發送請求</button>' +
+      '</div>'
+    );
+    $('#afCancel').onclick = closeModal;
+    $('#afSend').onclick = function(){
+      var code = $('#afCode').value.trim().toUpperCase();
+      if(code.length !== 6){ toast('好友碼係 6 位'); return; }
+      if(code === state.profile.friendCode){ toast('唔可以加自己', true); return; }
+      db.collection('friendCodes').doc(code).get().then(function(s){
+        if(!s.exists){ toast('搵唔到呢個好友碼', true); return; }
+        var toUid = s.data().uid;
+        if(state.friends.indexOf(toUid) >= 0){ toast('已經係好友'); closeModal(); return; }
+        return db.collection('friendRequests').doc(toUid).collection('inbox').doc(currentUser.uid).set({
+          fromUid: currentUser.uid,
+          fromName: state.profile.displayName || currentUser.email,
+          fromAvatar: state.profile.avatar || '👤',
+          ts: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(function(){
+          toast('✅ 已發送請求，等對方接受');
+          closeModal();
+        });
+      }).catch(function(e){
+        toast('失敗：' + (e.code || e.message), true);
+      });
+    };
+  };
+
+  function renderRequests(reqs){
+    $('#reqCount').textContent = reqs.length ? reqs.length + ' 個' : '';
+    var box = $('#reqList');
+    if(reqs.length === 0){
+      box.innerHTML = '<div class="empty">暫時冇新請求</div>';
+      return;
+    }
+    var html = '';
+    for(var i=0;i<reqs.length;i++){
+      var r = reqs[i];
+      var av = r.fromAvatar || '👤';
+      var avHtml = av.indexOf('data:') === 0 ? '<img src="' + av + '">' : av;
+      html += '<div class="friend-item">' +
+        '<div class="friend-avatar">' + avHtml + '</div>' +
+        '<div class="friend-info">' +
+          '<div class="friend-name">' + esc(r.fromName || '用戶') + '</div>' +
+          '<div class="friend-status">想加你做朋友</div>' +
+        '</div>' +
+        '<button type="button" class="btn btn-primary" style="padding:8px 14px;min-height:36px;font-size:13px;width:auto;margin:0" data-accept="' + r.id + '">接受</button>' +
+        '<button type="button" class="btn btn-soft" style="padding:8px 14px;min-height:36px;font-size:13px;width:auto;margin:0" data-reject="' + r.id + '">拒絕</button>' +
+      '</div>';
+    }
+    box.innerHTML = html;
+    box.querySelectorAll('[data-accept]').forEach(function(b){
+      b.onclick = function(){
+        var fromUid = b.getAttribute('data-accept');
+        if(state.friends.indexOf(fromUid) < 0) state.friends.push(fromUid);
+        scheduleSave();
+        db.collection('friendRequests').doc(currentUser.uid).collection('inbox').doc(fromUid).delete().then(function(){
+          return db.collection('users').doc(fromUid).get();
+        }).then(function(snap){
+          if(snap.exists){
+            var data = snap.data();
+            var list = data.friends || [];
+            if(list.indexOf(currentUser.uid) < 0) list.push(currentUser.uid);
+            return db.collection('users').doc(fromUid).set({friends:list}, {merge:true});
+          }
+        }).catch(function(e){ console.warn(e); });
+        toast('✅ 已成為好友');
+        renderFriends();
+      };
+    });
+    box.querySelectorAll('[data-reject]').forEach(function(b){
+      b.onclick = function(){
+        db.collection('friendRequests').doc(currentUser.uid).collection('inbox').doc(b.getAttribute('data-reject')).delete().catch(function(e){ console.warn(e); });
+        toast('已拒絕');
+      };
+    });
+  }
+
   // ===== 洞察 =====
   function renderInsights(){
     var now = new Date();
@@ -1260,8 +1448,6 @@ window.addEventListener('DOMContentLoaded', function(){
     var target = state.settings.weekly || 840;
     var rate = target > 0 ? Math.min(100, Math.round(wS/target*100)) : 0;
     $('#wRate').textContent = rate + '%';
-
-    // 柱狀圖
     var days7 = [];
     for(var k=6;k>=0;k--){ var dd = new Date(); dd.setDate(dd.getDate()-k); days7.push(fmtDate(dd)); }
     var dataArr = [];
@@ -1279,22 +1465,14 @@ window.addEventListener('DOMContentLoaded', function(){
     for(var o=0;o<7;o++){
       var h = Math.round((dataArr[o]/maxV) * 100);
       var lbl = days7[o].slice(5).replace('-','/');
-      chartHtml += '<div class="bar-col">' +
-        '<div class="bar-val">' + (dataArr[o] || '') + '</div>' +
-        '<div class="bar-fill" style="height:' + h + '%"></div>' +
-        '<div class="bar-lbl">' + lbl + '</div>' +
-      '</div>';
+      chartHtml += '<div class="bar-col"><div class="bar-val">' + (dataArr[o] || '') + '</div><div class="bar-fill" style="height:' + h + '%"></div><div class="bar-lbl">' + lbl + '</div></div>';
     }
     $('#barChart').innerHTML = chartHtml;
-
-    // 本週總結
     var dateSet = {};
     for(var q=0;q<weekRecs.length;q++) dateSet[weekRecs[q].date] = 1;
     var dayCount = Object.keys(dateSet).length || 1;
     var avg = Math.round(wS/dayCount);
     var wCheckins = state.checkins.filter(function(c){ return c.date >= wsStr; }).length;
-    var dailyDone = state.dailyGoals.filter(function(g){ return g.date >= wsStr; });
-    var dailyRate = dailyDone.length ? Math.round(dailyDone.filter(function(g){ return g.done; }).length/dailyDone.length*100) : 0;
     var byDate = {};
     for(var z=0;z<weekRecs.length;z++){
       if(weekRecs[z].catId !== 'study') continue;
@@ -1308,17 +1486,14 @@ window.addEventListener('DOMContentLoaded', function(){
     else if(rate >= 70) tip = '進度唔錯，仲差少少就達標。';
     else if(rate >= 40) tip = '有努力但仲有進步空間，試下減少手機時間。';
     else tip = '學習時間偏少，由聽日開始每日先做 30 分鐘。';
-
     $('#weeklySummary').innerHTML =
       '本週學習：<b>' + wS + ' 分鐘</b>（約 ' + (wS/60).toFixed(1) + ' 小時）<br>' +
       '每日平均：<b>' + avg + ' 分鐘</b><br>' +
       '玩手機：<b>' + wP + ' 分鐘</b><br>' +
       '學習目標達成率：<b>' + rate + '%</b><br>' +
-      '日目標完成率：<b>' + dailyRate + '%</b>　打卡：<b>' + wCheckins + ' 日</b>' +
+      '打卡：<b>' + wCheckins + ' 日</b>' +
       (bestKey ? '<br>最佳學習日：<b>' + bestKey + '</b>（' + byDate[bestKey] + ' 分鐘）' : '');
     $('#weeklyTip').textContent = '💡 ' + tip;
-
-    // 本月總結
     var m3 = fmtMonth(new Date());
     var monthRecs = state.records.filter(function(r){ return r.date.indexOf(m3) === 0; });
     var mS=0, mP=0, mC=0;
@@ -1346,8 +1521,6 @@ window.addEventListener('DOMContentLoaded', function(){
       '學習目標達成率：<b>' + mRate + '%</b><br>' +
       '打卡：<b>' + mCheckins + ' 日</b>';
     $('#monthlyTip').textContent = '💡 ' + mTip;
-
-    // 每日復盤
     var reviewHtml = '';
     var last7 = [];
     for(var r7=6;r7>=0;r7--){ var d7 = new Date(); d7.setDate(d7.getDate()-r7); last7.push(fmtDate(d7)); }
@@ -1364,10 +1537,7 @@ window.addEventListener('DOMContentLoaded', function(){
       var checked = false;
       for(var ch=0;ch<state.checkins.length;ch++) if(state.checkins[ch].date === ds7) checked = true;
       var emoji = checked ? '✅' : (ds2 > 0 ? '📝' : '⚪');
-      reviewHtml += '<div class="insight-row">' +
-        '<span>' + emoji + ' ' + ds7.slice(5) + '</span>' +
-        '<span>學習 <b>' + ds2 + '</b> 分 · 手機 ' + dp + ' 分 · 家務 ' + dc + ' 分</span>' +
-      '</div>';
+      reviewHtml += '<div class="insight-row"><span>' + emoji + ' ' + ds7.slice(5) + '</span><span>學習 <b>' + ds2 + '</b> 分 · 手機 ' + dp + ' 分 · 家務 ' + dc + ' 分</span></div>';
     }
     $('#dailyReview').innerHTML = reviewHtml;
   }
@@ -1378,7 +1548,7 @@ window.addEventListener('DOMContentLoaded', function(){
     $('#setWeekly').value = state.settings.weekly;
     $('#setMonthly').value = state.settings.monthly;
     $('#setExam').value = state.settings.examDate;
-    $('#storageInfo').textContent = (currentUser ? currentUser.email : '—') + ' · ' + state.records.length + ' 條記錄 · ' + state.checkins.length + ' 日打卡 · ☁️';
+    $('#storageInfo').textContent = (currentUser ? currentUser.email : '—') + ' · ' + state.records.length + ' 條記錄 · ' + state.checkins.length + ' 日打卡 · ' + state.friends.length + ' 位好友 · ☁️';
   }
   $('#setDaily').onchange = function(){ state.settings.daily = Number(this.value)||0; scheduleSave(); };
   $('#setWeekly').onchange = function(){ state.settings.weekly = Number(this.value)||0; scheduleSave(); };

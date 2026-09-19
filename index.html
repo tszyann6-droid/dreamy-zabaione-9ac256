@@ -10,9 +10,9 @@
 body{font-family:-apple-system,"PingFang HK",sans-serif;background:#F2EDE3;color:#3D362B;font-size:16px;line-height:1.5;padding-bottom:100px}
 button,input,textarea{font-family:inherit;font-size:16px;color:inherit;border:none;background:none;outline:none;cursor:pointer}
 .app{max-width:860px;margin:0 auto;padding:0 16px}
-#auth{position:fixed;inset:0;background:#F2EDE3;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
+#auth{position:fixed;inset:0;background:#F2EDE3;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:oxauto}
 #auth.hide{display:none}
-.abox{width:100%;max-width:380px;background:#FFFCF7;border-radius:24px;padding:28px 22px;box-shadow:0 8px 40px rgba(61,54,43,.12)}
+.ab{width:100%;max-width:380px;background:#FFFCF7;border-radius:24px;padding:28px 22px;box-shadow:0 8px 40px rgba(61,54,43,.12)}
 h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:4px}
 .sub{text-align:center;font-size:13px;color:#938876;margin-bottom:20px}
 .tabs2{display:flex;gap:6px;background:#F6F0E4;border-radius:12px;padding:4px;margin-bottom:18px}
@@ -22,6 +22,7 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .fld label{display:block;font-size:12px;color:#938876;font-weight:700;margin-bottom:5px}
 .fld input,.fld textarea{width:100%;padding:12px;background:#F6F0E4;border-radius:12px;font-size:16px}
 .pbtn{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff;font-weight:700;font-size:15px;min-height:46px;margin-top:6px}
+.pbtn:disabled{opacity:.5}
 .link{display:block;text-align:center;margin-top:10px;font-size:13px;color:#8B7355;text-decoration:underline}
 .amsg{font-size:13px;text-align:center;margin-top:12px;min-height:18px;color:#938876}
 .amsg.err{color:#B57A6B}.amsg.ok{color:#8B9B6B}
@@ -40,35 +41,17 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .bp{background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff}
 .bd{background:#F2E2DC;color:#8B4A2E}
 .bs{padding:6px 12px;min-height:34px;font-size:12px;width:auto;margin:0;display:inline-flex;align-items:center;justify-content:center;background:#F6F0E4;color:#3D362B;border-radius:10px;font-weight:700}
-.hero{background:linear-gradient(135deg,#EFE6D2,#E5D9BD);border-radius:22px;padding:16px;margin-bottom:14px;border:1px solid rgba(166,139,91,.18)}
-.hrow{display:flex;gap:14px;align-items:flex-start}
-.petbox{width:120px;height:140px;background:linear-gradient(135deg,#fff,#F8F2E5);border-radius:24px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;box-shadow:inset 0 0 20px rgba(255,255,255,.6)}
-.petname{font-size:10px;font-weight:700;color:#8B7355;background:#fff;padding:3px 10px;border-radius:999px;margin-top:4px;white-space:nowrap;box-shadow:0 1px 3px rgba(61,54,43,.1)}
-.petsvg{width:92px;height:92px;overflow:visible}
-.petsvg.dog{animation:float 2.5s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.petsvg .tail{transform-origin:28px 74px;animation:wag .5s ease-in-out infinite}
-@keyframes wag{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
-.petsvg .eye{transform-origin:center;animation:blink 4s infinite}
-@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.05)}}
-.hinfo{flex:1;min-width:0}
-.htitle{font-size:14px;font-weight:700;margin-bottom:4px}
-.hstreak{font-size:12px;color:#8B7355;font-weight:600;margin-bottom:8px}
-.hstreak b{font-size:18px;color:#3D362B}
-.gbar{height:6px;background:rgba(255,255,255,.6);border-radius:999px;overflow:hidden;margin-bottom:8px}
-.gfill{height:100%;background:linear-gradient(90deg,#C9AE7E,#A68B5B);border-radius:999px;transition:width .5s}
-.cbtn{padding:11px;border-radius:12px;background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff;font-weight:700;font-size:14px;min-height:42px;width:100%}
+.hero{background:linear-gradient(135deg,#EFE6D2,#E5D9BD);border-radius:22px;padding:18px;margin-bottom:14px;border:1px solid rgba(166,139,91,.18)}
+.htitle{font-size:15px;font-weight:700;margin-bottom:6px}
+.hstreak{font-size:13px;color:#8B7355;font-weight:600;margin-bottom:12px}
+.hstreak b{font-size:22px;color:#3D362B}
+.cbtn{padding:13px;border-radius:14px;background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff;font-weight:700;font-size:15px;min-height:48px;width:100%}
 .cbtn.done{background:#8B9B6B}
-.inv{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(166,139,91,.3);align-items:center}
+.inv{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(166,139,91,.3);align-items:center}
 .invitem{background:rgba(255,255,255,.85);border-radius:10px;padding:8px 12px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:4px;box-shadow:0 1px 3px rgba(61,54,43,.08)}
 .invitem .cnt{color:#8B7355;font-size:13px}
-.feedbtn{background:linear-gradient(135deg,#C9AE7E,#A68B5B);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;color:#fff;border:none;cursor:pointer;box-shadow:0 3px 8px rgba(166,139,91,.35);touch-action:manipulation}
-.feedbtn:active{transform:scale(.94);opacity:.9}
 .quote{font-size:12.5px;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(166,139,91,.3);line-height:1.6}
 .page{display:none}.page.on{display:block}
-.paircard{padding:16px;background:linear-gradient(135deg,#FFF4E0,#FFE9CC);border-radius:18px;margin-bottom:14px;border:1px solid rgba(166,139,91,.25)}
-.pairrow{display:flex;gap:14px;align-items:center}
-.pairpet{width:100px;height:100px;background:linear-gradient(135deg,#fff,#F8F2E5);border-radius:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .tbox{background:linear-gradient(135deg,#EFE6D2,#E5D9BD);border-radius:18px;padding:14px;margin-bottom:14px;text-align:center;border:1px solid rgba(166,139,91,.18)}
 .tdisp{font-size:38px;font-weight:800;color:#8B7355;font-variant-numeric:tabular-nums;letter-spacing:2px;margin:6px 0}
 .tsub{font-size:12px;color:#938876;margin-bottom:10px}
@@ -104,6 +87,37 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .tb{flex:1 0 auto;min-width:52px;display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 2px;color:#938876;font-size:10px;font-weight:600;border-radius:12px;min-height:50px}
 .tb.on{color:#8B7355}
 .tbi{font-size:19px;line-height:1}
+/* 好友 + 共享狗卡片 */
+.frcard{background:#FFFCF7;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 2px 12px rgba(61,54,43,.06)}
+.frhead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.fav{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#C9AE7E,#A68B5B);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;overflow:hidden}
+.fav img{width:100%;height:100%;object-fit:cover}
+.finf{flex:1;min-width:0}
+.fn{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fs{font-size:12px;color:#938876;margin-top:2px}
+.fs.done{color:#8B9B6B;font-weight:600}
+.dogzone{background:linear-gradient(135deg,#FFF4E0,#FFE9CC);border-radius:14px;padding:12px;margin-top:8px;border:1px solid rgba(166,139,91,.2)}
+.dogrow{display:flex;gap:12px;align-items:center}
+.dogpic{width:80px;height:80px;background:rgba(255,255,255,.7);border-radius:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.doginfo{flex:1;min-width:0}
+.dogname{font-size:14px;font-weight:800;color:#8B7355}
+.dogstage{font-size:11px;color:#938876;margin-top:2px}
+.doginv{font-size:12px;font-weight:700;color:#8B7355;margin-top:6px;display:flex;gap:10px}
+.dogfeed{margin-top:8px;padding:9px;border-radius:10px;background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff;font-weight:700;font-size:13px;border:none;width:100%;cursor:pointer}
+.dogfeed:active{transform:scale(.96)}
+.doginvite{margin-top:8px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff;font-weight:700;font-size:13px;border:none;width:100%;cursor:pointer}
+.doginvite:active{transform:scale(.96)}
+.frbtns{display:flex;gap:6px;margin-top:10px}
+.frbtns button{flex:1;padding:8px;border-radius:10px;background:#F6F0E4;font-size:12px;font-weight:700;color:#8B7355;border:none;cursor:pointer}
+.petsvg{overflow:visible}
+.petsvg .tail{transform-origin:28px 74px;animation:wag .5s ease-in-out infinite}
+@keyframes wag{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.petsvg .eye{transform-origin:center;animation:blink 4s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.05)}}
+.code{text-align:center;padding:14px 0;font-size:30px;font-weight:800;letter-spacing:5px;color:#8B7355}
+.hg{display:flex;gap:4px;flex-wrap:wrap}
+.hd{width:14px;height:14px;border-radius:4px;background:#E8DFCC}
+.hd.on{background:#A68B5B}
 .gdgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 @media(min-width:680px){.gdgrid{grid-template-columns:repeat(3,1fr)}}
 .gd{background:#F6F0E4;border-radius:12px;padding:10px;min-height:110px}
@@ -134,17 +148,6 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .ring .rfg{fill:none;stroke:#fff;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .5s}
 .ringtxt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
 .bgmeta{font-size:12px;opacity:.95;line-height:1.5}
-.fi{display:flex;align-items:center;gap:10px;padding:11px;border-radius:12px;background:#F6F0E4;margin-bottom:8px}
-.fav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#C9AE7E,#A68B5B);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;overflow:hidden}
-.fav img{width:100%;height:100%;object-fit:cover}
-.finf{flex:1;min-width:0}
-.fn{font-size:14px;font-weight:700}
-.fs{font-size:12px;color:#938876;margin-top:2px}
-.fs.done{color:#8B9B6B;font-weight:600}
-.code{text-align:center;padding:14px 0;font-size:30px;font-weight:800;letter-spacing:5px;color:#8B7355}
-.hg{display:flex;gap:4px;flex-wrap:wrap}
-.hd{width:14px;height:14px;border-radius:4px;background:#E8DFCC}
-.hd.on{background:#A68B5B}
 .feed-item{background:#FFFCF7;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 2px 12px rgba(61,54,43,.06)}
 .feed-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .feed-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#C9AE7E,#A68B5B);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;overflow:hidden;flex-shrink:0}
@@ -158,8 +161,6 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .feed-stat{text-align:center}
 .feed-stat-n{font-size:13px;font-weight:800;color:#8B7355;line-height:1.2}
 .feed-stat-l{font-size:10px;color:#938876;margin-top:2px}
-.feed-actions{display:flex;gap:6px;margin-top:10px}
-.feed-actions button{flex:1;padding:8px;border-radius:10px;background:#F6F0E4;font-size:12px;font-weight:700;color:#8B7355}
 .bc{display:flex;align-items:flex-end;gap:6px;height:130px;margin-top:10px}
 .bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
 .bv{font-size:9px;color:#938876;margin-bottom:2px;font-weight:600;line-height:1.1;text-align:center}
@@ -224,23 +225,12 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
   </div>
 
   <div class="hero">
-    <div class="hrow">
-      <div class="petbox">
-        <div id="petStage"></div>
-        <div class="petname" id="petName">邊牧 BB</div>
-      </div>
-      <div class="hinfo">
-        <div class="htitle" id="ckTitle">今日打卡</div>
-        <div class="hstreak">連續 <b id="streakN">0</b> 日 · 共 <b id="totalN">0</b> 日</div>
-        <div class="gbar"><div class="gfill" id="gfill" style="width:0%"></div></div>
-        <button class="cbtn" id="ckBtn">🔥 打卡</button>
-      </div>
-    </div>
+    <div class="htitle" id="ckTitle">今日打卡</div>
+    <div class="hstreak">連續 <b id="streakN">0</b> 日 · 共 <b id="totalN">0</b> 日</div>
+    <button class="cbtn" id="ckBtn">🔥 打卡</button>
     <div class="inv" id="inv"></div>
     <div class="quote">✨ <span id="qtext">—</span></div>
   </div>
-
-  <div id="pairBox"></div>
 
   <section class="page on" id="p-today">
     <div class="tbox">
@@ -315,10 +305,8 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
       <div class="ct">好友請求 <span class="muted" id="reqCnt"></span></div>
       <div id="reqList"></div>
     </div>
-    <div class="card">
-      <div class="ct">我嘅好友 <span class="muted" id="frCnt"></span></div>
-      <div id="frList"></div>
-    </div>
+    <div class="ct" style="margin-top:14px;padding:0 4px">我嘅好友 <span class="muted" id="frCnt"></span></div>
+    <div id="frList"></div>
   </section>
 
   <section class="page" id="p-stats">
@@ -379,8 +367,8 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 <script>
 window.addEventListener('DOMContentLoaded', function(){
 'use strict';
-var $=function(s){return document.querySelector(s);};
-var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+function $(s){return document.querySelector(s);}
+function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s));}
 function pad(n){return String(n).padStart(2,'0');}
 function fd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
 function fm(d){return d.getFullYear()+'-'+pad(d.getMonth()+1);}
@@ -423,11 +411,12 @@ var QS=['唔需要完美，只需要開始。','今日嘅努力，係聽日嘅�
 var DS={daily:120,weekly:840,monthly:180,yearly:2000,examDate:'2027-04-20'};
 function fresh(){
   return {records:[],dailyGoals:[],monthlyGoals:[],yearlyGoals:[],checkins:[],friends:[],
-    settings:JSON.parse(JSON.stringify(DS)),currentDate:null,calendarMonth:null,
+    settings:JSON.parse(JSON.stringify(DS)),currentDate:null,
     quoteOfDay:null,quoteDate:null,profile:{displayName:'',avatar:'👤',friendCode:''},
-    inventory:{bone:10,food:20,heart:5},lastReward:null,petBowl:0,petPairId:''};
+    inventory:{bone:10,food:20,heart:5},lastReward:null,
+    petPairMap:{}};
 }
-var S=fresh(),user=null,unsubU=null,unsubR=null,unsubP=null,unsubPD=null,cache={},st=null,mode='login';
+var S=fresh(),user=null,unsubU=null,unsubR=null,unsubP=null,cache={},pairCache={},pairUnsubs={},st=null,mode='login';
 
 function udr(){return user?db.collection('users').doc(user.uid):null;}
 function pdr(id){return db.collection('public').doc(id||(user?user.uid:''));}
@@ -450,9 +439,6 @@ function safeInv(inv){
   if(typeof inv.food!=='number')inv.food=20;
   if(typeof inv.bone!=='number')inv.bone=10;
   if(typeof inv.heart!=='number')inv.heart=5;
-  if(inv.food<0)inv.food=0;
-  if(inv.bone<0)inv.bone=0;
-  if(inv.heart<0)inv.heart=0;
   return inv;
 }
 
@@ -466,20 +452,20 @@ function doSave(){
     records:S.records,dailyGoals:S.dailyGoals,monthlyGoals:S.monthlyGoals,yearlyGoals:S.yearlyGoals,
     checkins:S.checkins,friends:S.friends,settings:S.settings,
     quoteOfDay:S.quoteOfDay,quoteDate:S.quoteDate,profile:S.profile,
-    inventory:S.inventory,lastReward:S.lastReward,petBowl:S.petBowl,petPairId:S.petPairId||'',
+    inventory:S.inventory,lastReward:S.lastReward,
     updatedAt:firebase.firestore.FieldValue.serverTimestamp()
   },{merge:true}).then(function(){
     return pdr().set({
       uid:user.uid,displayName:S.profile.displayName||user.email,
       avatar:S.profile.avatar||'👤',friendCode:S.profile.friendCode||'',
-      checkins:pc,petStage:petStage(),streak:streak(),inv:S.inventory,
+      checkins:pc,streak:streak(),inv:S.inventory,
       todayStudy:calcStudyRange(today(),today()),todayDate:today(),
       monthStudy:calcStudyRange(m+'-01',m+'-31'),
       weekStudy:calcStudyRange(fd(weekStart()),today()),
-      petPairId:S.petPairId||'',liveTimer:lt,
+      liveTimer:lt,
       updatedAt:firebase.firestore.FieldValue.serverTimestamp()
     },{merge:true});
-  }).catch(function(e){console.error(e);toast('同步失敗：'+(e.code||e.message),true);});
+  }).catch(function(e){console.error(e);});
 }
 
 function applyRemote(d){
@@ -489,14 +475,13 @@ function applyRemote(d){
   S.quoteOfDay=d.quoteOfDay||null;S.quoteDate=d.quoteDate||null;
   S.profile=d.profile||{displayName:'',avatar:'👤',friendCode:''};
   S.inventory=safeInv(d.inventory);
-  S.lastReward=d.lastReward||null;S.petBowl=d.petBowl||0;S.petPairId=d.petPairId||'';
+  S.lastReward=d.lastReward||null;
   if(!S.currentDate)S.currentDate=today();
   if(!S.profile.friendCode){S.profile.friendCode=gc();regCode(S.profile.friendCode);sSave();}
   renderAll();
-  if(S.petPairId){setTimeout(attachPair,300);setTimeout(attachPair,1500);}
 }
 
-function renderAll(){rHead();rPet();rToday();rGoals();rFriends();rFeed();rStats();rSet();initQ();dse();}
+function renderAll(){rHead();rToday();rGoals();rFriends();rFeed();rStats();rSet();initQ();dse();}
 function regCode(code){if(!code||!FB||!user)return;db.collection('friendCodes').doc(code).set({uid:user.uid,email:user.email}).catch(function(){});}
 
 function attachU(){
@@ -520,14 +505,20 @@ function attachPI(){
     if(arr.length>0)showPairInvite(arr[0]);
   });
 }
-function attachPair(){
-  if(unsubPD){unsubPD();unsubPD=null;}
-  if(!S.petPairId){var pb0=$('#pairBox');if(pb0){pb0.className='';pb0.innerHTML='';}return;}
-  unsubPD=db.collection('pairs').doc(S.petPairId).onSnapshot(function(s){
-    var pb=$('#pairBox');if(!pb)return;
-    if(!s.exists){pb.className='';pb.innerHTML='';return;}
-    S.pairData=s.data();rPair();
-  },function(e){console.warn('pair',e);});
+
+function attachPair(friendUid){
+  var pid=pairIdFor(user.uid,friendUid);
+  if(pairUnsubs[pid])return;
+  pairUnsubs[pid]=db.collection('pairs').doc(pid).onSnapshot(function(s){
+    if(s.exists){pairCache[pid]=s.data();}
+    else{delete pairCache[pid];}
+    // 只更新相關好友嘅卡片
+    if($('#p-friends').classList.contains('on'))rFriends();
+    if($('#p-feed').classList.contains('on'))rFeed();
+  },function(e){console.warn('pair listen',pid,e);});
+}
+function attachAllPairs(){
+  for(var i=0;i<S.friends.length;i++)attachPair(S.friends[i]);
 }
 
 function streak(){
@@ -537,141 +528,36 @@ function streak(){
   while(set[fd(d)]){n++;d.setDate(d.getDate()-1);}
   return n;
 }
-function petStage(){
-  var t=S.checkins.length;
-  if(t<=0)return 0;if(t<=2)return 1;if(t<=6)return 2;
-  if(t<=14)return 3;if(t<=29)return 4;if(t<=59)return 5;return 6;
-}
-function petName(st){return ['未孵化嘅蛋','邊牧 BB','邊牧幼犬','活潑邊牧','忠心邊牧','成年邊牧','靚仔邊牧'][st];}
 
-/* 可愛版邊牧 SVG */
-function dogSvg(st){
+/* 可愛邊牧 SVG */
+function dogSvg(st,size){
+  if(!size)size=80;
   if(st===0){
-    return '<svg class="petsvg" viewBox="0 0 100 100" style="animation:float 3s ease-in-out infinite">'+
-      '<ellipse cx="50" cy="58" rx="26" ry="32" fill="#F5E6C8" stroke="#D9BC8F" stroke-width="2"/>'+
-      '<ellipse cx="42" cy="45" rx="5" ry="8" fill="#D9BC8F" opacity=".4"/>'+
-      '<circle cx="45" cy="55" r="2" fill="#B89B72"/>'+
-      '<circle cx="58" cy="68" r="2" fill="#B89B72"/>'+
-      '<ellipse cx="38" cy="72" rx="3" ry="1.5" fill="#F4A6B8" opacity=".5"/>'+
-      '<ellipse cx="60" cy="70" rx="3" ry="1.5" fill="#F4A6B8" opacity=".5"/>'+
-    '</svg>';
+    return '<svg class="petsvg" width="'+size+'" height="'+size+'" viewBox="0 0 100 100"><ellipse cx="50" cy="58" rx="26" ry="32" fill="#F5E6C8" stroke="#D9BC8F" stroke-width="2"/><ellipse cx="42" cy="45" rx="5" ry="8" fill="#D9BC8F" opacity=".4"/><circle cx="45" cy="55" r="2" fill="#B89B72"/><circle cx="58" cy="68" r="2" fill="#B89B72"/><ellipse cx="38" cy="72" rx="3" ry="1.5" fill="#F4A6B8" opacity=".5"/><ellipse cx="60" cy="70" rx="3" ry="1.5" fill="#F4A6B8" opacity=".5"/></svg>';
   }
   var sc=0.8+st*0.03;
-  var crown=st>=6?'<path d="M36 16 L40 9 L45 16 L50 8 L55 16 L60 9 L64 16 L60 19 L40 19 Z" fill="#F5C842" stroke="#D9A825" stroke-width="1.5" stroke-linejoin="round"/><circle cx="40" cy="15" r="1.5" fill="#FFE066"/><circle cx="50" cy="13" r="1.5" fill="#FFE066"/><circle cx="60" cy="15" r="1.5" fill="#FFE066"/>':'';
-  var collar=st>=4?'<path d="M35 73 Q50 79 65 73" stroke="#4A90D9" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="50" cy="77" r="3.5" fill="#F5C842" stroke="#D9A825" stroke-width="0.8"/><circle cx="49" cy="76" r="1" fill="#FFE066"/>':'';
-  var tongue=st>=2?'<ellipse cx="50" cy="64" rx="4" ry="5" fill="#F4A6B8"/><path d="M50 60 L50 64" stroke="#D97A8E" stroke-width="0.8"/>':'';
+  var crown=st>=6?'<path d="M36 16 L40 9 L45 16 L50 8 L55 16 L60 9 L64 16 L60 19 L40 19 Z" fill="#F5C842" stroke="#D9A825" stroke-width="1.5" stroke-linejoin="round"/>':'';
+  var collar=st>=4?'<path d="M35 73 Q50 79 65 73" stroke="#4A90D9" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="50" cy="77" r="3.5" fill="#F5C842" stroke="#D9A825" stroke-width="0.8"/>':'';
+  var tongue=st>=2?'<ellipse cx="50" cy="64" rx="4" ry="5" fill="#F4A6B8"/>':'';
   var tail='<path class="tail" d="M28 76 Q14 64 22 44" stroke="#3D362B" stroke-width="8" fill="none" stroke-linecap="round"/><path class="tail" d="M22 46 Q19 42 24 41" stroke="#FFFCF7" stroke-width="5" fill="none" stroke-linecap="round"/>';
-  var body='<ellipse cx="50" cy="79" rx="'+(23*sc)+'" ry="'+(15*sc)+'" fill="#3D362B"/>'+
-    '<ellipse cx="50" cy="84" rx="'+(14*sc)+'" ry="'+(9*sc)+'" fill="#FFFCF7"/>'+
-    '<ellipse cx="37" cy="77" rx="3.5" ry="2.5" fill="#FFFCF7" opacity=".8"/>'+
-    '<ellipse cx="63" cy="79" rx="3" ry="2" fill="#FFFCF7" opacity=".7"/>';
-  var paws='<ellipse cx="35" cy="89" rx="6" ry="4.5" fill="#FFFCF7" stroke="#3D362B" stroke-width="1"/>'+
-    '<ellipse cx="65" cy="89" rx="6" ry="4.5" fill="#FFFCF7" stroke="#3D362B" stroke-width="1"/>'+
-    '<ellipse cx="33" cy="88" rx="1.5" ry="1" fill="#F4A6B8" opacity=".6"/>'+
-    '<ellipse cx="37" cy="88" rx="1.5" ry="1" fill="#F4A6B8" opacity=".6"/>'+
-    '<ellipse cx="63" cy="88" rx="1.5" ry="1" fill="#F4A6B8" opacity=".6"/>'+
-    '<ellipse cx="67" cy="88" rx="1.5" ry="1" fill="#F4A6B8" opacity=".6"/>';
-  var ears='<ellipse cx="30" cy="28" rx="8" ry="15" fill="#3D362B" transform="rotate(-20 30 28)"/>'+
-    '<ellipse cx="30" cy="28" rx="4" ry="10" fill="#F4A6B8" opacity=".55" transform="rotate(-20 30 28)"/>'+
-    '<ellipse cx="70" cy="28" rx="8" ry="15" fill="#3D362B" transform="rotate(20 70 28)"/>'+
-    '<ellipse cx="70" cy="28" rx="4" ry="10" fill="#F4A6B8" opacity=".55" transform="rotate(20 70 28)"/>';
+  var body='<ellipse cx="50" cy="79" rx="'+(23*sc)+'" ry="'+(15*sc)+'" fill="#3D362B"/><ellipse cx="50" cy="84" rx="'+(14*sc)+'" ry="'+(9*sc)+'" fill="#FFFCF7"/>';
+  var paws='<ellipse cx="35" cy="89" rx="6" ry="4.5" fill="#FFFCF7" stroke="#3D362B" stroke-width="1"/><ellipse cx="65" cy="89" rx="6" ry="4.5" fill="#FFFCF7" stroke="#3D362B" stroke-width="1"/>';
+  var ears='<ellipse cx="30" cy="28" rx="8" ry="15" fill="#3D362B" transform="rotate(-20 30 28)"/><ellipse cx="30" cy="28" rx="4" ry="10" fill="#F4A6B8" opacity=".55" transform="rotate(-20 30 28)"/><ellipse cx="70" cy="28" rx="8" ry="15" fill="#3D362B" transform="rotate(20 70 28)"/><ellipse cx="70" cy="28" rx="4" ry="10" fill="#F4A6B8" opacity=".55" transform="rotate(20 70 28)"/>';
   var head='<circle cx="50" cy="46" r="'+(25*sc)+'" fill="#3D362B"/>';
   var face='<path d="M50 24 Q46 46 50 64" stroke="#FFFCF7" stroke-width="'+(8*sc)+'" fill="none" stroke-linecap="round"/>';
   var muzzle='<ellipse cx="50" cy="57" rx="'+(11*sc)+'" ry="'+(9*sc)+'" fill="#FFFCF7"/>';
-  var eyes='<ellipse class="eye" cx="40" cy="44" rx="4.5" ry="5" fill="#1A1A1A"/>'+
-    '<ellipse class="eye" cx="60" cy="44" rx="4.5" ry="5" fill="#1A1A1A"/>'+
-    '<circle cx="42" cy="42" r="2" fill="#fff"/>'+
-    '<circle cx="62" cy="42" r="2" fill="#fff"/>'+
-    '<circle cx="39" cy="46" r="1.2" fill="#fff" opacity=".8"/>'+
-    '<circle cx="59" cy="46" r="1.2" fill="#fff" opacity=".8"/>'+
-    '<path d="M36 37 Q39 35 43 37" stroke="#1A1A1A" stroke-width="1.3" fill="none" stroke-linecap="round"/>'+
-    '<path d="M57 37 Q61 35 64 37" stroke="#1A1A1A" stroke-width="1.3" fill="none" stroke-linecap="round"/>';
-  var nose='<ellipse cx="50" cy="56" rx="3.8" ry="2.8" fill="#1A1A1A"/>'+
-    '<ellipse cx="49" cy="55.3" rx="1.2" ry="0.8" fill="#fff" opacity=".7"/>';
-  var mouth='<path d="M50 58 Q46 63 41 61" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round"/>'+
-    '<path d="M50 58 Q54 63 59 61" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round"/>';
-  var blush='<ellipse cx="31" cy="53" rx="5" ry="3.2" fill="#F4A6B8" opacity=".6"/>'+
-    '<ellipse cx="69" cy="53" rx="5" ry="3.2" fill="#F4A6B8" opacity=".6"/>';
-  return '<svg class="petsvg dog" viewBox="0 0 100 100">'+
-    crown+tail+body+paws+ears+head+face+muzzle+eyes+nose+mouth+blush+tongue+collar+'</svg>';
+  var eyes='<ellipse class="eye" cx="40" cy="44" rx="4.5" ry="5" fill="#1A1A1A"/><ellipse class="eye" cx="60" cy="44" rx="4.5" ry="5" fill="#1A1A1A"/><circle cx="42" cy="42" r="2" fill="#fff"/><circle cx="62" cy="42" r="2" fill="#fff"/><circle cx="39" cy="46" r="1.2" fill="#fff" opacity=".8"/><circle cx="59" cy="46" r="1.2" fill="#fff" opacity=".8"/>';
+  var nose='<ellipse cx="50" cy="56" rx="3.8" ry="2.8" fill="#1A1A1A"/><ellipse cx="49" cy="55.3" rx="1.2" ry="0.8" fill="#fff" opacity=".7"/>';
+  var mouth='<path d="M50 58 Q46 63 41 61" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M50 58 Q54 63 59 61" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round"/>';
+  var blush='<ellipse cx="31" cy="53" rx="5" ry="3.2" fill="#F4A6B8" opacity=".6"/><ellipse cx="69" cy="53" rx="5" ry="3.2" fill="#F4A6B8" opacity=".6"/>';
+  return '<svg class="petsvg" width="'+size+'" height="'+size+'" viewBox="0 0 100 100">'+crown+tail+body+paws+ears+head+face+muzzle+eyes+nose+mouth+blush+tongue+collar+'</svg>';
 }
 
-function rPet(){
-  var st=petStage(),s=streak();
-  $('#petStage').innerHTML=dogSvg(st);
-  $('#petName').textContent=petName(st);
-  var ns=[1,3,7,15,30,60,100];
-  var cur=ns[Math.min(st,6)],prev=st===0?0:ns[st-1];
-  var pct=Math.min(100,Math.round((S.checkins.length-prev)/Math.max(1,cur-prev)*100));
-  $('#gfill').style.width=pct+'%';
-  var inv=safeInv(S.inventory);
-  $('#inv').innerHTML=
-    '<div class="invitem"><span>🦴</span><span class="cnt">'+inv.bone+'</span></div>'+
-    '<div class="invitem"><span>🍖</span><span class="cnt">'+inv.food+'</span></div>'+
-    '<div class="invitem"><span>❤️</span><span class="cnt">'+inv.heart+'</span></div>'+
-    '<button type="button" class="feedbtn" id="feedBtn">🍖 餵狗狗</button>';
+function pairStage(total){
+  if(total<=0)return 0;if(total<=4)return 1;if(total<=10)return 2;
+  if(total<=20)return 3;if(total<=40)return 4;if(total<=80)return 5;return 6;
 }
-
-function feedPet(){
-  S.inventory=safeInv(S.inventory);
-  if(S.inventory.food<=0){
-    S.inventory.food=10;
-    toast('🎁 冇食物啦！自動補給 🍖 +10');
-  }
-  S.inventory.food=S.inventory.food-1;
-  S.petBowl=(S.petBowl||0)+1;
-  sSave();
-  rPet();
-  var el=$('#petStage');
-  if(el){
-    el.style.transition='transform .15s';
-    el.style.transform='scale(1.3) rotate(8deg)';
-    setTimeout(function(){el.style.transform='scale(1.1) rotate(-5deg)';},150);
-    setTimeout(function(){el.style.transform='';},400);
-  }
-  toast('🍖 狗狗食咗一餐！剩 '+S.inventory.food+' 個 🍖');
-}
-
-/* 餵狗按鈕用事件委託 - 保證一定 work */
-document.addEventListener('click', function(ev){
-  var t = ev.target;
-  if(!t) return;
-  if(t.id === 'feedBtn'){ ev.preventDefault(); feedPet(); }
-  else if(t.id === 'pairFeed'){ ev.preventDefault(); feedPair(); }
-});
-
-function feedPair(){
-  if(!S.petPairId||!S.pairData)return;
-  var inv={bone:S.pairData.bone||0,food:S.pairData.food||0,heart:S.pairData.heart||0};
-  if(inv.food<=0){toast('共享狗冇食物啦！',true);return;}
-  db.collection('pairs').doc(S.petPairId).set({
-    food:firebase.firestore.FieldValue.increment(-1),
-    heart:firebase.firestore.FieldValue.increment(1),
-    lastFedBy:user.uid
-  },{merge:true}).then(function(){toast('🍖 共享狗食咗嘢！❤️');});
-}
-
-function rPair(){
-  if(!S.pairData)return;
-  var p=S.pairData;
-  var total=p.totalCheckins||0;
-  var st=total<=0?0:(total<=4?1:(total<=10?2:(total<=20?3:(total<=40?4:(total<=80?5:6)))));
-  var box=$('#pairBox');
-  box.className='paircard';
-  var inv={bone:p.bone||0,food:p.food||0,heart:p.heart||0};
-  box.innerHTML='<div class="ct">🐕 共享狗狗 · '+esc(p.dogName||'邊牧')+' <span class="muted">同好友一齊養</span></div>'+
-    '<div class="pairrow">'+
-      '<div class="pairpet">'+dogSvg(st)+'</div>'+
-      '<div style="flex:1;min-width:0">'+
-        '<div style="font-size:14px;font-weight:700;margin-bottom:4px">階段 '+(st+1)+' / 7</div>'+
-        '<div style="font-size:12px;color:#938876;margin-bottom:8px">總共 '+total+' 次打卡</div>'+
-        '<div style="display:flex;gap:8px;font-size:13px;font-weight:700;margin-bottom:8px">'+
-          '<span>🦴 '+inv.bone+'</span><span>🍖 '+inv.food+'</span><span>❤️ '+inv.heart+'</span>'+
-        '</div>'+
-        '<button type="button" class="btn bp" style="margin:0;padding:9px" id="pairFeed">🍖 餵共享狗</button>'+
-      '</div>'+
-    '</div>';
-}
+function pairName(st){return ['未孵化嘅蛋','邊牧 BB','邊牧幼犬','活潑邊牧','忠心邊牧','成年邊牧','靚仔邊牧'][st];}
 
 function rHead(){
   var b=$('#avBtn'),a=S.profile.avatar||'👤';
@@ -790,15 +676,15 @@ if(FB)auth.onAuthStateChanged(function(u){
         regCode(S.profile.friendCode);renderAll();doSave();
       }
       attachU();attachR();attachPI();
-      if(S.petPairId){setTimeout(attachPair,500);setTimeout(attachPair,2000);}
+      setTimeout(attachAllPairs,1000);
     }).catch(function(e){console.error(e);toast('載入失敗：'+(e.code||e.message),true);});
   }else{
     user=null;
     if(unsubU){unsubU();unsubU=null;}
     if(unsubR){unsubR();unsubR=null;}
     if(unsubP){unsubP();unsubP=null;}
-    if(unsubPD){unsubPD();unsubPD=null;}
-    cache={};
+    for(var k in pairUnsubs){if(pairUnsubs[k])pairUnsubs[k]();}
+    pairUnsubs={};pairCache={};cache={};
     $('#auth').className='';
     $('#main').style.display='none';
     $('#tabbar').style.display='none';
@@ -814,7 +700,11 @@ function rCk(){
   $('#ckBtn').className='cbtn'+(done?' done':'');
   $('#streakN').textContent=streak();
   $('#totalN').textContent=S.checkins.length;
-  rPet();
+  var inv=safeInv(S.inventory);
+  $('#inv').innerHTML=
+    '<div class="invitem"><span>🦴</span><span class="cnt">'+inv.bone+'</span></div>'+
+    '<div class="invitem"><span>🍖</span><span class="cnt">'+inv.food+'</span></div>'+
+    '<div class="invitem"><span>❤️</span><span class="cnt">'+inv.heart+'</span></div>';
 }
 $('#ckBtn').onclick=function(){
   var t=today(),idx=-1;
@@ -825,22 +715,20 @@ $('#ckBtn').onclick=function(){
   }else{
     S.checkins.push({date:t,ts:Date.now()});
     S.inventory=safeInv(S.inventory);
-    S.inventory.bone=S.inventory.bone+1;
-    if(S.petPairId){
-      db.collection('pairs').doc(S.petPairId).set({
-        totalCheckins:firebase.firestore.FieldValue.increment(1),
-        bone:firebase.firestore.FieldValue.increment(1)
-      },{merge:true}).catch(function(){});
+    S.inventory.bone++;
+    // 所有共享狗 +1
+    for(var j=0;j<S.friends.length;j++){
+      var pid=pairIdFor(user.uid,S.friends[j]);
+      if(pairCache[pid]){
+        db.collection('pairs').doc(pid).set({
+          totalCheckins:firebase.firestore.FieldValue.increment(1),
+          bone:firebase.firestore.FieldValue.increment(1)
+        },{merge:true}).catch(function(){});
+      }
     }
     sSave();rCk();
     var s=streak();
-    var msg='打卡成功！連續 '+s+' 日 🔥 🦴 +1';
-    if(s===3)msg='🐶 邊牧 BB 出現啦！🦴 +1';
-    else if(s===7)msg='🎉 連續 7 日！狗狗好開心 ❤️ +1';
-    else if(s===14)msg='🎊 連續 14 日！狗狗升級 🦴 +2';
-    else if(s===30)msg='🏆 連續 30 日！成年邊牧 🍖 +1';
-    else if(s===60)msg='👑 連續 60 日！靚仔邊牧 ❤️❤️';
-    toast(msg);
+    toast('打卡成功！連續 '+s+' 日 🔥 🦴 +1');
     pickQ();
   }
 };
@@ -1078,54 +966,236 @@ function rFeed(){
       var lt=p.liveTimer||{};
       var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
       var liveHtml=isLive?'<div class="feed-live">🔴 正喺度溫'+esc(lt.catName||'書')+' · 已 '+Math.floor((Date.now()-lt.startedAt)/60000)+' 分</div>':'';
-      var pct=Math.min(100,Math.round(todayMin/120*100));
       h+='<div class="feed-item"><div class="feed-top"><div class="feed-av">'+ah+'</div><div class="feed-info"><div class="feed-name">'+esc(p.displayName||'用戶')+' '+(isChecked?'✅':'')+'</div><div class="feed-time">'+(isToday?'今日已更新':'未更新今日數據')+' · 🔥'+(p.streak||0)+' 日</div>'+liveHtml+'</div></div>'+
         '<div class="feed-stats"><div class="feed-stat"><div class="feed-stat-n">'+fmtTime(todayMin)+'</div><div class="feed-stat-l">今日學習</div></div>'+
         '<div class="feed-stat"><div class="feed-stat-n">'+fmtTime(weekMin)+'</div><div class="feed-stat-l">本週學習</div></div>'+
-        '<div class="feed-stat"><div class="feed-stat-n">'+fmtTime(monthMin)+'</div><div class="feed-stat-l">本月學習</div></div></div>'+
-        '<div class="feed-actions"><button data-u="'+it.uid+'" data-act="view">睇詳情</button><button data-u="'+it.uid+'" data-act="pair">🐕 一齊養狗</button></div></div>';
+        '<div class="feed-stat"><div class="feed-stat-n">'+fmtTime(monthMin)+'</div><div class="feed-stat-l">本月學習</div></div></div></div>';
     });
     l.innerHTML=h||'<div class="empty">載入失敗</div>';
-    l.querySelectorAll('[data-act="view"]').forEach(function(b){b.onclick=function(){openFD(b.getAttribute('data-u'));};});
-    l.querySelectorAll('[data-act="pair"]').forEach(function(b){b.onclick=function(){invitePair(b.getAttribute('data-u'));};});
   });
 }
+function loadFP(id){
+  if(cache[id])return Promise.resolve(cache[id]);
+  return pdr(id).get().then(function(s){if(s.exists){cache[id]=s.data();return cache[id];}return null;}).catch(function(){return null;});
+}
+
+/* 好友頁 - 每個好友一張卡片，顯示共享狗 */
+function rFriends(){
+  if(!S.profile.friendCode)return;
+  $('#myCode').textContent=S.profile.friendCode;
+  $('#frCnt').textContent=S.friends.length+' 位';
+  var l=$('#frList');
+  if(S.friends.length===0){l.innerHTML='<div class="empty">未有好友</div>';return;}
+  l.innerHTML='<div class="empty">載入中...</div>';
+  var ps=S.friends.map(loadFP);
+  Promise.all(ps).then(function(profs){
+    var t=today(),h='';
+    for(var i=0;i<profs.length;i++){
+      var p=profs[i];if(!p)continue;
+      var id=S.friends[i];
+      var pid=pairIdFor(user.uid,id);
+      var pair=pairCache[pid];
+      var ok=(p.checkins||[]).indexOf(t)>=0;
+      var av=p.avatar||'👤';
+      var ah=av.indexOf('data:')===0?'<img src="'+av+'">':av;
+      var lt=p.liveTimer||{};
+      var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
+      var statusTxt=isLive?'🔴 溫'+esc(lt.catName||'書')+'中':((ok?'✅ 已打卡':'未打卡')+' · 🔥'+(p.streak||0)+' 日');
+      h+='<div class="frcard"><div class="frhead"><div class="fav">'+ah+'</div><div class="finf"><div class="fn">'+esc(p.displayName||'用戶')+'</div><div class="fs'+(isLive||ok?' done':'')+'">'+statusTxt+'</div></div></div>';
+      // 共享狗區塊
+      if(pair){
+        var total=pair.totalCheckins||0;
+        var stage=pairStage(total);
+        var inv={bone:pair.bone||0,food:pair.food||0,heart:pair.heart||0};
+        h+='<div class="dogzone"><div class="dogrow"><div class="dogpic">'+dogSvg(stage,72)+'</div><div class="doginfo">'+
+          '<div class="dogname">🐕 '+esc(pair.dogName||'我哋嘅邊牧')+'</div>'+
+          '<div class="dogstage">'+pairName(stage)+' · 共同打卡 '+total+' 次</div>'+
+          '<div class="doginv"><span>🦴 '+inv.bone+'</span><span>🍖 '+inv.food+'</span><span>❤️ '+inv.heart+'</span></div>'+
+          '<button class="dogfeed" data-feed="'+pid+'">🍖 餵狗狗</button>'+
+          '</div></div></div>';
+      }else{
+        h+='<button class="doginvite" data-invite="'+id+'">🐕 邀請 '+esc(p.displayName||'好友')+' 一齊養狗</button>';
+      }
+      h+='<div class="frbtns"><button data-view="'+id+'">睇詳情</button></div></div>';
+    }
+    l.innerHTML=h||'<div class="empty">載入失敗</div>';
+  });
+}
+
+/* 事件委託 - 好友頁 */
+document.addEventListener('click',function(ev){
+  var t=ev.target;
+  if(!t||!t.getAttribute)return;
+  var invite=t.getAttribute('data-invite');
+  var feed=t.getAttribute('data-feed');
+  var view=t.getAttribute('data-view');
+  if(invite){ev.preventDefault();invitePair(invite);}
+  else if(feed){ev.preventDefault();feedPair(feed);}
+  else if(view){ev.preventDefault();openFD(view);}
+});
+
 function invitePair(friendUid){
   var pid=pairIdFor(user.uid,friendUid);
   var name=prompt('幫你哋隻狗改個名：','邊牧 BB');
   if(!name)return;
   db.collection('pairInvites').doc(friendUid).collection('inbox').doc(user.uid).set({
-    fromUid:user.uid,fromName:S.profile.displayName||user.email,fromAvatar:S.profile.avatar||'👤',
-    dogName:name,pairId:pid,
+    fromUid:user.uid,
+    fromName:S.profile.displayName||user.email,
+    fromAvatar:S.profile.avatar||'👤',
+    dogName:name,
+    pairId:pid,
     ts:firebase.firestore.FieldValue.serverTimestamp()
   }).then(function(){toast('✅ 已發送邀請，等對方接受');})
   .catch(function(e){toast('失敗：'+(e.code||e.message),true);});
 }
+
+function feedPair(pid){
+  if(!pairCache[pid]){toast('狗資料載入中',true);return;}
+  var inv=pairCache[pid];
+  if((inv.food||0)<=0){toast('🍖 冇食物啦！',true);return;}
+  db.collection('pairs').doc(pid).set({
+    food:firebase.firestore.FieldValue.increment(-1),
+    heart:firebase.firestore.FieldValue.increment(1),
+    lastFedBy:user.uid
+  },{merge:true}).then(function(){toast('🍖 狗狗食咗嘢！❤️');});
+}
+
 function showPairInvite(inv){
-  openM('<h3>🐕 一齊養狗邀請</h3><div style="text-align:center;padding:16px 0"><div style="font-size:56px">🐕</div><div style="font-size:14px;margin-top:8px"><b>'+esc(inv.fromName)+'</b> 想同你一齊養狗</div><div style="font-size:16px;font-weight:800;color:#8B7355;margin-top:6px">狗名：'+esc(inv.dogName)+'</div></div><div class="macts"><button class="btn" id="piRej">拒絕</button><button class="btn bp" id="piAcc">接受</button></div>');
+  openM('<h3>🐕 一齊養狗邀請</h3>'+
+    '<div style="text-align:center;padding:16px 0">'+
+      '<div style="margin-bottom:8px">'+dogSvg(1,100)+'</div>'+
+      '<div style="font-size:14px;margin-top:8px"><b>'+esc(inv.fromName)+'</b> 想同你一齊養狗</div>'+
+      '<div style="font-size:16px;font-weight:800;color:#8B7355;margin-top:6px">狗名：'+esc(inv.dogName)+'</div>'+
+    '</div>'+
+    '<div class="macts">'+
+      '<button class="btn" id="piRej">拒絕</button>'+
+      '<button class="btn bp" id="piAcc">接受</button>'+
+    '</div>');
   $('#piRej').onclick=function(){
     db.collection('pairInvites').doc(user.uid).collection('inbox').doc(inv.fromUid).delete().catch(function(){});
     closeM();toast('已拒絕');
   };
   $('#piAcc').onclick=function(){
+    var btn=$('#piAcc');
+    btn.disabled=true;btn.textContent='處理中...';
     var pid=inv.pairId;
     var members=pid.split('_');
+    // 1. 建立 pair
     db.collection('pairs').doc(pid).set({
-      members:members,dogName:inv.dogName,totalCheckins:0,bone:0,food:5,heart:3,lastFedBy:'',
+      members:members,
+      dogName:inv.dogName,
+      totalCheckins:firebase.firestore.FieldValue.increment(0),
+      bone:firebase.firestore.FieldValue.increment(0),
+      food:firebase.firestore.FieldValue.increment(5),
+      heart:firebase.firestore.FieldValue.increment(3),
+      lastFedBy:'',
       createdAt:firebase.firestore.FieldValue.serverTimestamp()
     },{merge:true}).then(function(){
-      return udr().set({petPairId:pid},{merge:true});
-    }).then(function(){
-      return db.collection('users').doc(inv.fromUid).set({petPairId:pid},{merge:true});
-    }).then(function(){
-      S.petPairId=pid;
+      // 2. 刪除邀請
       return db.collection('pairInvites').doc(user.uid).collection('inbox').doc(inv.fromUid).delete();
     }).then(function(){
-      sSave();closeM();toast('✅ 開始一齊養狗啦！');
-      attachPair();
-      setTimeout(attachPair,1000);
+      // 3. 立即監聽 + 顯示
+      pairUnsubs[pid]=null;
+      attachPair(inv.fromUid);
+      setTimeout(function(){
+        closeM();
+        toast('✅ 開始一齊養狗啦！');
+        rFriends();
+      },500);
+    }).catch(function(e){
+      btn.disabled=false;btn.textContent='接受';
+      toast('失敗：'+(e.code||e.message),true);
+    });
+  };
+}
+
+function openFD(id){
+  loadFP(id).then(function(p){
+    if(!p){toast('載入失敗',true);return;}
+    var t=today();
+    var ok=(p.checkins||[]).indexOf(t)>=0;
+    var set={};(p.checkins||[]).forEach(function(c){set[c]=1;});
+    var sk=p.streak||0;
+    var av=p.avatar||'👤';
+    var ah=av.indexOf('data:')===0?'<img src="'+av+'">':av;
+    var heat='';
+    for(var j=29;j>=0;j--){var d=new Date();d.setDate(d.getDate()-j);var ds=fd(d);heat+='<div class="hd'+(set[ds]?' on':'')+'" title="'+ds+'"></div>';}
+    var todayStudy=p.todayDate===t?(p.todayStudy||0):0;
+    var lt=p.liveTimer||{};
+    var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
+    var liveBlock=isLive?'<div style="background:#FFE9CC;border-radius:12px;padding:12px;margin-bottom:10px;text-align:center"><div style="font-size:16px;font-weight:800;color:#D9534F">🔴 正喺度溫'+esc(lt.catName||'書')+'</div><div style="font-size:12px;color:#938876;margin-top:4px">已開始 '+Math.floor((Date.now()-lt.startedAt)/60000)+' 分鐘</div></div>':'';
+    openM('<div style="text-align:center;margin-bottom:14px"><div class="av" style="width:60px;height:60px;font-size:30px;margin:0 auto">'+ah+'</div><div style="font-size:16px;font-weight:700;margin-top:6px">'+esc(p.displayName||'用戶')+'</div><div style="font-size:13px;color:#938876;margin-top:2px">'+(ok?'✅ 已打卡':'💤 未打卡')+'</div><div style="font-size:13px;color:#8B7355;font-weight:600;margin-top:4px">🔥 連續 '+sk+' 日</div></div>'+
+      liveBlock+
+      '<div class="card" style="box-shadow:none;background:#F6F0E4;margin-bottom:10px"><div style="font-size:13px;font-weight:700;margin-bottom:6px">學習時數</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center"><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(todayStudy)+'</div><div style="font-size:11px;color:#938876">今日</div></div><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(p.weekStudy||0)+'</div><div style="font-size:11px;color:#938876">本週</div></div><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(p.monthStudy||0)+'</div><div style="font-size:11px;color:#938876">本月</div></div></div></div>'+
+      '<div class="card" style="box-shadow:none;background:#F6F0E4;margin-bottom:10px"><div style="font-size:13px;font-weight:700;margin-bottom:6px">最近 30 日打卡</div><div class="hg">'+heat+'</div></div>'+
+      '<div class="macts"><button class="btn" id="fc">關閉</button><button class="btn bd" id="fr">移除</button></div>');
+    $('#fc').onclick=closeM;
+    $('#fr').onclick=function(){
+      if(!confirm('確定移除？'))return;
+      S.friends=S.friends.filter(function(x){return x!==id;});
+      sSave();closeM();rFriends();rFeed();toast('已移除');
+    };
+  });
+}
+$('#copyCode').onclick=function(){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(S.profile.friendCode).then(function(){toast('已複製');}).catch(function(){toast('好友碼：'+S.profile.friendCode);});
+  }else toast('好友碼：'+S.profile.friendCode);
+};
+$('#addFriend').onclick=function(){
+  openM('<h3>加好友</h3><div class="fld"><label>輸入對方 6 位好友碼</label><input id="afc" placeholder="ABC123" maxlength="6" style="text-transform:uppercase;letter-spacing:4px;font-size:20px;text-align:center"></div><div class="macts"><button class="btn" id="ac">取消</button><button class="btn bp" id="as">發送</button></div>');
+  $('#ac').onclick=closeM;
+  $('#as').onclick=function(){
+    var c=$('#afc').value.trim().toUpperCase();
+    if(c.length!==6){toast('好友碼 6 位');return;}
+    if(c===S.profile.friendCode){toast('唔可以加自己',true);return;}
+    db.collection('friendCodes').doc(c).get().then(function(s){
+      if(!s.exists){toast('搵唔到呢個碼',true);return;}
+      var tu=s.data().uid;
+      if(S.friends.indexOf(tu)>=0){toast('已係好友');closeM();return;}
+      return db.collection('friendRequests').doc(tu).collection('inbox').doc(user.uid).set({
+        fromUid:user.uid,fromName:S.profile.displayName||user.email,fromAvatar:S.profile.avatar||'👤',
+        ts:firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function(){toast('✅ 已發送');closeM();});
     }).catch(function(e){toast('失敗：'+(e.code||e.message),true);});
   };
+};
+function rReqs(reqs){
+  $('#reqCnt').textContent=reqs.length?reqs.length+' 個':'';
+  var b=$('#reqList');
+  if(reqs.length===0){b.innerHTML='<div class="empty">暫時冇新請求</div>';return;}
+  var h='';
+  reqs.forEach(function(r){
+    var av=r.fromAvatar||'👤';
+    var ah=av.indexOf('data:')===0?'<img src="'+av+'">':av;
+    h+='<div class="frcard"><div class="frhead"><div class="fav">'+ah+'</div><div class="finf"><div class="fn">'+esc(r.fromName||'用戶')+'</div><div class="fs">想加你做朋友</div></div></div><div class="frbtns"><button data-y="'+r.id+'" style="background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff">接受</button><button data-n="'+r.id+'">拒絕</button></div></div>';
+  });
+  b.innerHTML=h;
+  b.querySelectorAll('[data-y]').forEach(function(el){
+    el.onclick=function(){
+      var fu=el.getAttribute('data-y');
+      if(S.friends.indexOf(fu)<0)S.friends.push(fu);
+      sSave();
+      db.collection('friendRequests').doc(user.uid).collection('inbox').doc(fu).delete().then(function(){
+        return db.collection('users').doc(fu).get();
+      }).then(function(s){
+        if(s.exists){
+          var d=s.data(),l=d.friends||[];
+          if(l.indexOf(user.uid)<0)l.push(user.uid);
+          return db.collection('users').doc(fu).set({friends:l},{merge:true});
+        }
+      }).then(function(){
+        attachPair(fu);
+      }).catch(function(){});
+      toast('✅ 已成為好友');rFriends();rFeed();
+    };
+  });
+  b.querySelectorAll('[data-n]').forEach(function(el){
+    el.onclick=function(){
+      db.collection('friendRequests').doc(user.uid).collection('inbox').doc(el.getAttribute('data-n')).delete().catch(function(){});
+      toast('已拒絕');
+    };
+  });
 }
 
 function rGoals(){rDG();rMG();rYG();}
@@ -1240,124 +1310,6 @@ $('#addY').onclick=function(){
   };
 };
 
-function loadFP(id){
-  if(cache[id])return Promise.resolve(cache[id]);
-  return pdr(id).get().then(function(s){if(s.exists){cache[id]=s.data();return cache[id];}return null;}).catch(function(){return null;});
-}
-function rFriends(){
-  if(!S.profile.friendCode)return;
-  $('#myCode').textContent=S.profile.friendCode;
-  $('#frCnt').textContent=S.friends.length+' 位';
-  var l=$('#frList');
-  if(S.friends.length===0){l.innerHTML='<div class="empty">未有好友</div>';return;}
-  l.innerHTML='<div class="empty">載入中...</div>';
-  var ps=S.friends.map(loadFP);
-  Promise.all(ps).then(function(profs){
-    var t=today(),h='';
-    for(var i=0;i<profs.length;i++){
-      var p=profs[i];if(!p)continue;
-      var id=S.friends[i];
-      var ok=(p.checkins||[]).indexOf(t)>=0;
-      var av=p.avatar||'👤';
-      var ah=av.indexOf('data:')===0?'<img src="'+av+'">':av;
-      var inv=p.inv||{bone:0};
-      var lt=p.liveTimer||{};
-      var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
-      h+='<div class="fi" data-u="'+id+'"><div class="fav">'+ah+'</div><div class="fin"><div class="fn">'+esc(p.displayName||'用戶')+'</div><div class="fs'+(isLive?' done':'')+'">'+(isLive?'🔴 溫'+esc(lt.catName||'書')+'中':((ok?'✅ 已打卡':'未打卡')+' · 🔥'+(p.streak||0)+' 日'))+'</div></div><div style="font-size:22px">🐕</div></div>';
-    }
-    l.innerHTML=h||'<div class="empty">載入失敗</div>';
-    l.querySelectorAll('.fi').forEach(function(el){el.onclick=function(){openFD(el.getAttribute('data-u'));};});
-  });
-}
-function openFD(id){
-  loadFP(id).then(function(p){
-    if(!p){toast('載入失敗',true);return;}
-    var t=today();
-    var ok=(p.checkins||[]).indexOf(t)>=0;
-    var set={};(p.checkins||[]).forEach(function(c){set[c]=1;});
-    var sk=p.streak||0;
-    var av=p.avatar||'👤';
-    var ah=av.indexOf('data:')===0?'<img src="'+av+'">':av;
-    var heat='';
-    for(var j=29;j>=0;j--){var d=new Date();d.setDate(d.getDate()-j);var ds=fd(d);heat+='<div class="hd'+(set[ds]?' on':'')+'" title="'+ds+'"></div>';}
-    var inv=p.inv||{bone:0,food:0,heart:0};
-    var todayStudy=p.todayDate===t?(p.todayStudy||0):0;
-    var lt=p.liveTimer||{};
-    var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
-    var liveBlock=isLive?'<div style="background:#FFE9CC;border-radius:12px;padding:12px;margin-bottom:10px;text-align:center"><div style="font-size:16px;font-weight:800;color:#D9534F">🔴 正喺度溫'+esc(lt.catName||'書')+'</div><div style="font-size:12px;color:#938876;margin-top:4px">已開始 '+Math.floor((Date.now()-lt.startedAt)/60000)+' 分鐘</div></div>':'';
-    openM('<div style="text-align:center;margin-bottom:14px"><div style="font-size:54px;line-height:1">🐕</div><div class="av" style="width:60px;height:60px;font-size:30px;margin:6px auto 0">'+ah+'</div><div style="font-size:16px;font-weight:700;margin-top:6px">'+esc(p.displayName||'用戶')+'</div><div style="font-size:13px;color:#938876;margin-top:2px">'+(ok?'✅ 已打卡':'💤 未打卡')+'</div><div style="font-size:13px;color:#8B7355;font-weight:600;margin-top:4px">🔥 連續 '+sk+' 日</div><div style="font-size:12px;color:#938876;margin-top:4px">🦴'+inv.bone+' 🍖'+inv.food+' ❤️'+inv.heart+'</div></div>'+
-      liveBlock+
-      '<div class="card" style="box-shadow:none;background:#F6F0E4;margin-bottom:10px"><div style="font-size:13px;font-weight:700;margin-bottom:6px">學習時數</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center"><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(todayStudy)+'</div><div style="font-size:11px;color:#938876">今日</div></div><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(p.weekStudy||0)+'</div><div style="font-size:11px;color:#938876">本週</div></div><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(p.monthStudy||0)+'</div><div style="font-size:11px;color:#938876">本月</div></div></div></div>'+
-      '<div class="card" style="box-shadow:none;background:#F6F0E4;margin-bottom:10px"><div style="font-size:13px;font-weight:700;margin-bottom:6px">最近 30 日打卡</div><div class="hg">'+heat+'</div></div>'+
-      '<div class="macts"><button class="btn" id="fc">關閉</button><button class="btn bp" id="fp">🐕 一齊養狗</button><button class="btn bd" id="fr">移除</button></div>');
-    $('#fc').onclick=closeM;
-    $('#fp').onclick=function(){closeM();invitePair(id);};
-    $('#fr').onclick=function(){
-      if(!confirm('確定移除？'))return;
-      S.friends=S.friends.filter(function(x){return x!==id;});
-      sSave();closeM();rFriends();rFeed();toast('已移除');
-    };
-  });
-}
-$('#copyCode').onclick=function(){
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(S.profile.friendCode).then(function(){toast('已複製');}).catch(function(){toast('好友碼：'+S.profile.friendCode);});
-  }else toast('好友碼：'+S.profile.friendCode);
-};
-$('#addFriend').onclick=function(){
-  openM('<h3>加好友</h3><div class="fld"><label>輸入對方 6 位好友碼</label><input id="afc" placeholder="ABC123" maxlength="6" style="text-transform:uppercase;letter-spacing:4px;font-size:20px;text-align:center"></div><div class="macts"><button class="btn" id="ac">取消</button><button class="btn bp" id="as">發送</button></div>');
-  $('#ac').onclick=closeM;
-  $('#as').onclick=function(){
-    var c=$('#afc').value.trim().toUpperCase();
-    if(c.length!==6){toast('好友碼 6 位');return;}
-    if(c===S.profile.friendCode){toast('唔可以加自己',true);return;}
-    db.collection('friendCodes').doc(c).get().then(function(s){
-      if(!s.exists){toast('搵唔到呢個碼',true);return;}
-      var tu=s.data().uid;
-      if(S.friends.indexOf(tu)>=0){toast('已係好友');closeM();return;}
-      return db.collection('friendRequests').doc(tu).collection('inbox').doc(user.uid).set({
-        fromUid:user.uid,fromName:S.profile.displayName||user.email,fromAvatar:S.profile.avatar||'👤',
-        ts:firebase.firestore.FieldValue.serverTimestamp()
-      }).then(function(){toast('✅ 已發送');closeM();});
-    }).catch(function(e){toast('失敗：'+(e.code||e.message),true);});
-  };
-};
-function rReqs(reqs){
-  $('#reqCnt').textContent=reqs.length?reqs.length+' 個':'';
-  var b=$('#reqList');
-  if(reqs.length===0){b.innerHTML='<div class="empty">暫時冇新請求</div>';return;}
-  var h='';
-  reqs.forEach(function(r){
-    var av=r.fromAvatar||'👤';
-    var ah=av.indexOf('data:')===0?'<img src="'+av+'">':av;
-    h+='<div class="fi"><div class="fav">'+ah+'</div><div class="fin"><div class="fn">'+esc(r.fromName||'用戶')+'</div><div class="fs">想加你做朋友</div></div><button class="bs bp" data-y="'+r.id+'">接受</button><button class="bs" data-n="'+r.id+'">拒絕</button></div>';
-  });
-  b.innerHTML=h;
-  b.querySelectorAll('[data-y]').forEach(function(el){
-    el.onclick=function(){
-      var fu=el.getAttribute('data-y');
-      if(S.friends.indexOf(fu)<0)S.friends.push(fu);
-      sSave();
-      db.collection('friendRequests').doc(user.uid).collection('inbox').doc(fu).delete().then(function(){
-        return db.collection('users').doc(fu).get();
-      }).then(function(s){
-        if(s.exists){
-          var d=s.data(),l=d.friends||[];
-          if(l.indexOf(user.uid)<0)l.push(user.uid);
-          return db.collection('users').doc(fu).set({friends:l},{merge:true});
-        }
-      }).catch(function(){});
-      toast('✅ 已成為好友');rFriends();rFeed();
-    };
-  });
-  b.querySelectorAll('[data-n]').forEach(function(el){
-    el.onclick=function(){
-      db.collection('friendRequests').doc(user.uid).collection('inbox').doc(el.getAttribute('data-n')).delete().catch(function(){});
-      toast('已拒絕');
-    };
-  });
-}
-
 function rStats(){
   var n=new Date(),dd=n.getDay()||7;
   var ws=new Date(n);ws.setDate(n.getDate()-(dd-1));
@@ -1443,7 +1395,8 @@ function dse(){
 
 setInterval(function(){
   if($('#p-feed').classList.contains('on')) rFeed();
-}, 30000);
+  if($('#p-friends').classList.contains('on')) rFriends();
+}, 20000);
 
 rCk();initQ();dse();
 setTimeout(checkRewards,1500);

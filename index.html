@@ -42,18 +42,13 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .bp{background:linear-gradient(135deg,#C9AE7E,#A68B5B);color:#fff}
 .bd{background:#F2E2DC;color:#8B4A2E}
 .bs{padding:6px 12px;min-height:34px;font-size:12px;width:auto;margin:0;display:inline-flex;align-items:center;justify-content:center;background:#F6F0E4;color:#3D362B;border-radius:10px;font-weight:700}
-/* 寵物 */
 .hero{background:linear-gradient(135deg,#EFE6D2,#E5D9BD);border-radius:22px;padding:16px;margin-bottom:14px;border:1px solid rgba(166,139,91,.18)}
 .hrow{display:flex;gap:14px;align-items:flex-start}
-.petbox{width:120px;height:130px;background:rgba(255,255,255,.55);border-radius:20px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:6px}
+.petbox{width:120px;height:135px;background:rgba(255,255,255,.55);border-radius:20px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:6px}
 .petname{font-size:10px;font-weight:700;color:#8B7355;background:#fff;padding:2px 8px;border-radius:999px;white-space:nowrap;margin-top:2px}
-.petsvg{width:86px;height:86px;overflow:visible}
+.petsvg{width:92px;height:92px;overflow:visible}
 .petsvg.dog{animation:float 2.5s ease-in-out infinite}
-.petsvg .tail{transform-origin:30px 72px;animation:wag .6s ease-in-out infinite}
-.petsvg .eye{animation:blink 4s infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes wag{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}}
-@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
 .hinfo{flex:1;min-width:0}
 .htitle{font-size:14px;font-weight:700;margin-bottom:4px}
 .hstreak{font-size:12px;color:#8B7355;font-weight:600;margin-bottom:8px}
@@ -65,14 +60,12 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .inv{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(166,139,91,.3);align-items:center}
 .invitem{background:rgba(255,255,255,.7);border-radius:10px;padding:6px 10px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px}
 .invitem .cnt{color:#8B7355;font-size:12px}
-.feedbtn{background:rgba(255,255,255,.7);border-radius:10px;padding:6px 12px;font-size:12px;font-weight:700;color:#8B7355;border:1px solid rgba(166,139,91,.3)}
+.feedbtn{background:linear-gradient(135deg,#C9AE7E,#A68B5B);border-radius:10px;padding:8px 14px;font-size:12px;font-weight:700;color:#fff;border:none}
 .quote{font-size:12.5px;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(166,139,91,.3);color:#3D362B;line-height:1.6}
 .page{display:none}.page.on{display:block}
-/* 共享狗 */
-.paircard{background:linear-gradient(135deg,#FFF4E0,#FFE9CC);border-radius:18px;padding:16px;margin-bottom:14px;border:1px solid rgba(166,139,91,.25)}
+.paircard{padding:16px;background:linear-gradient(135deg,#FFF4E0,#FFE9CC);border-radius:18px;margin-bottom:14px;border:1px solid rgba(166,139,91,.25);box-shadow:0 2px 12px rgba(61,54,43,.06)}
 .pairrow{display:flex;gap:14px;align-items:center}
-.pairpet{width:100px;height:100px;background:rgba(255,255,255,.6);border-radius:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-/* 計時 */
+.pairpet{width:100px;height:100px;background:rgba(255,255,255,.7);border-radius:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .tbox{background:linear-gradient(135deg,#EFE6D2,#E5D9BD);border-radius:18px;padding:14px;margin-bottom:14px;text-align:center;border:1px solid rgba(166,139,91,.18)}
 .tdisp{font-size:38px;font-weight:800;color:#8B7355;font-variant-numeric:tabular-nums;letter-spacing:2px;margin:6px 0}
 .tsub{font-size:12px;color:#938876;margin-bottom:10px}
@@ -175,7 +168,6 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .hg{display:flex;gap:4px;flex-wrap:wrap}
 .hd{width:14px;height:14px;border-radius:4px;background:#E8DFCC}
 .hd.on{background:#A68B5B}
-/* 動態牆 */
 .feed-item{background:#FFFCF7;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 2px 12px rgba(61,54,43,.06)}
 .feed-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .feed-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#C9AE7E,#A68B5B);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;overflow:hidden;flex-shrink:0}
@@ -183,6 +175,8 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .feed-info{flex:1;min-width:0}
 .feed-name{font-size:14px;font-weight:700}
 .feed-time{font-size:11px;color:#938876;margin-top:2px}
+.feed-live{display:inline-block;background:#FFE9CC;color:#D9534F;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;margin-top:4px;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
 .feed-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed #E8DFCC}
 .feed-stat{text-align:center}
 .feed-stat-n{font-size:13px;font-weight:800;color:#8B7355;line-height:1.2}
@@ -191,7 +185,6 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .feed-bar-fill{height:100%;background:linear-gradient(90deg,#C9AE7E,#A68B5B);border-radius:999px;transition:width .4s}
 .feed-actions{display:flex;gap:6px;margin-top:10px}
 .feed-actions button{flex:1;padding:8px;border-radius:10px;background:#F6F0E4;font-size:12px;font-weight:700;color:#8B7355}
-/* 洞察 */
 .bc{display:flex;align-items:flex-end;gap:6px;height:130px;margin-top:10px}
 .bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
 .bv{font-size:9px;color:#938876;margin-bottom:2px;font-weight:600;line-height:1.1;text-align:center}
@@ -228,6 +221,11 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(61,54,43,.94);color:#fff;padding:11px 20px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;transition:.25s;z-index:300;max-width:90vw;text-align:center;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.err{background:rgba(139,74,46,.96)}
+/* 狗動畫 */
+.petsvg .eye{transform-origin:center;animation:blink 4s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.05)}}
+.petsvg .tail{transform-origin:28px 74px;animation:wag .5s ease-in-out infinite}
+@keyframes wag{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
 </style>
 </head>
 <body>
@@ -509,7 +507,7 @@ function fresh(){
   return {records:[],dailyGoals:[],monthlyGoals:[],yearlyGoals:[],checkins:[],schedules:[],friends:[],
     settings:JSON.parse(JSON.stringify(DS)),currentDate:null,calendarMonth:null,schMonth:null,
     quoteOfDay:null,quoteDate:null,profile:{displayName:'',avatar:'👤',friendCode:''},
-    inventory:{bone:0,food:0,heart:0},lastReward:null,petBowl:0,petPairId:''};
+    inventory:{bone:5,food:5,heart:3},lastReward:null,petBowl:0,petPairId:''};
 }
 var S=fresh(),user=null,unsubU=null,unsubR=null,unsubP=null,unsubPD=null,cache={},st=null,schSel=today(),mode='login';
 
@@ -542,6 +540,7 @@ function doSave(){
     inventory:S.inventory,lastReward:S.lastReward,petBowl:S.petBowl,petPairId:S.petPairId||'',
     updatedAt:firebase.firestore.FieldValue.serverTimestamp()
   },{merge:true}).then(function(){
+    var lt = window._liveTimer || {active:false};
     return pdr().set({
       uid:user.uid,
       displayName:S.profile.displayName||user.email,
@@ -554,6 +553,7 @@ function doSave(){
       monthStudy:calcStudyRange(m+'-01',m+'-31'),
       weekStudy:calcStudyRange(fd(weekStart()),today()),
       petPairId:S.petPairId||'',
+      liveTimer:lt,
       updatedAt:firebase.firestore.FieldValue.serverTimestamp()
     },{merge:true});
   }).catch(function(e){console.error(e);toast('同步失敗：'+(e.code||e.message),true);});
@@ -565,14 +565,21 @@ function applyRemote(d){
   S.friends=d.friends||[];S.settings=d.settings||JSON.parse(JSON.stringify(DS));
   S.quoteOfDay=d.quoteOfDay||null;S.quoteDate=d.quoteDate||null;
   S.profile=d.profile||{displayName:'',avatar:'👤',friendCode:''};
-  S.inventory=d.inventory||{bone:0,food:0,heart:0};
+  var inv=d.inventory;
+  if(!inv || (!inv.bone && !inv.food && !inv.heart)){
+    inv={bone:5,food:5,heart:3};
+  }
+  S.inventory=inv;
   S.lastReward=d.lastReward||null;S.petBowl=d.petBowl||0;S.petPairId=d.petPairId||'';
   if(!S.currentDate)S.currentDate=today();
   if(!S.calendarMonth)S.calendarMonth=fm(new Date());
   if(!S.schMonth)S.schMonth=fm(new Date());
   if(!S.profile.friendCode){S.profile.friendCode=gc();regCode(S.profile.friendCode);sSave();}
   renderAll();
-  if(S.petPairId)setTimeout(attachPair,800);
+  if(S.petPairId){
+    attachPair();
+    setTimeout(attachPair,1500);
+  }
 }
 
 function renderAll(){rHead();rPet();rToday();rSched();rCal();rGoals();rFriends();rFeed();rStats();rSet();initQ();dse();}
@@ -600,12 +607,23 @@ function attachPairInvites(){
   });
 }
 function attachPair(){
-  if(unsubPD)unsubPD();
-  if(!S.petPairId){var pb=$('#pairBox');if(pb)pb.innerHTML='';return;}
+  if(unsubPD){unsubPD();unsubPD=null;}
+  if(!S.petPairId){
+    var pb0=$('#pairBox');
+    if(pb0){pb0.className='';pb0.innerHTML='';}
+    return;
+  }
   unsubPD=db.collection('pairs').doc(S.petPairId).onSnapshot(function(s){
-    if(!s.exists){var pb=$('#pairBox');if(pb)pb.innerHTML='';return;}
+    var pb=$('#pairBox');
+    if(!pb)return;
+    if(!s.exists){
+      pb.className='';pb.innerHTML='';
+      return;
+    }
     S.pairData=s.data();
     rPair();
+  },function(e){
+    console.warn('pair listen fail',e);
   });
 }
 
@@ -622,30 +640,46 @@ function petStage(){
   if(t<=14)return 3;if(t<=29)return 4;if(t<=59)return 5;return 6;
 }
 function petName(st){return ['未孵化嘅蛋','邊牧 BB','邊牧幼犬','活潑邊牧','忠心邊牧','成年邊牧','靚仔邊牧'][st];}
+
+/* 靚仔邊牧 SVG */
 function dogSvg(st){
-  if(st===0)return '<svg class="petsvg" viewBox="0 0 100 100" style="animation:float 3s ease-in-out infinite"><ellipse cx="50" cy="58" rx="26" ry="32" fill="#F5E6C8" stroke="#D9BC8F" stroke-width="2"/><ellipse cx="42" cy="45" rx="5" ry="8" fill="#D9BC8F" opacity=".4"/><circle cx="45" cy="55" r="2" fill="#B89B72"/><circle cx="58" cy="68" r="2" fill="#B89B72"/></svg>';
-  var sc=0.75+st*0.035;
-  var collar=st>=4?'<rect x="35" y="72" width="30" height="5" rx="2" fill="#4A90D9"/><circle cx="50" cy="77" r="2.5" fill="#F5C842"/>':'';
-  var crown=st>=6?'<path d="M36 16 L40 9 L45 16 L50 8 L55 16 L60 9 L64 16 L60 19 L40 19 Z" fill="#F5C842" stroke="#D9A825" stroke-width="1.5" stroke-linejoin="round"/>':'';
-  var tongue=st>=2?'<ellipse cx="50" cy="62" rx="3" ry="4" fill="#F4A6B8"/>':'';
-  return '<svg class="petsvg dog" viewBox="0 0 100 100">'+crown+
-    '<path class="tail" d="M28 74 Q18 62 24 48" stroke="#3D362B" stroke-width="7" fill="none" stroke-linecap="round"/>'+
-    '<ellipse cx="50" cy="78" rx="'+(21*sc)+'" ry="'+(13*sc)+'" fill="#3D362B"/>'+
-    '<ellipse cx="50" cy="82" rx="'+(12*sc)+'" ry="'+(8*sc)+'" fill="#FFFCF7"/>'+
-    '<ellipse cx="33" cy="30" rx="7" ry="13" fill="#3D362B" transform="rotate(-15 33 30)"/>'+
-    '<ellipse cx="67" cy="30" rx="7" ry="13" fill="#3D362B" transform="rotate(15 67 30)"/>'+
-    '<circle cx="50" cy="46" r="'+(23*sc)+'" fill="#3D362B"/>'+
-    '<path d="M50 28 Q46 46 50 62" stroke="#FFFCF7" stroke-width="'+(6*sc)+'" fill="none" stroke-linecap="round"/>'+
-    '<ellipse cx="50" cy="55" rx="'+(9*sc)+'" ry="'+(7*sc)+'" fill="#FFFCF7"/>'+
-    '<ellipse class="eye" cx="42" cy="45" rx="3" ry="3.5" fill="#3D362B"/>'+
-    '<ellipse class="eye" cx="58" cy="45" rx="3" ry="3.5" fill="#3D362B"/>'+
-    '<circle cx="43" cy="43.5" r="1.2" fill="#fff"/>'+
-    '<circle cx="59" cy="43.5" r="1.2" fill="#fff"/>'+
-    '<ellipse cx="50" cy="55" rx="3" ry="2.2" fill="#3D362B"/>'+
-    '<path d="M50 57 Q46 61 42 59" stroke="#3D362B" stroke-width="1.3" fill="none" stroke-linecap="round"/>'+
-    '<path d="M50 57 Q54 61 58 59" stroke="#3D362B" stroke-width="1.3" fill="none" stroke-linecap="round"/>'+
-    tongue+collar+'</svg>';
+  if(st===0)return '<svg class="petsvg" viewBox="0 0 100 100" style="animation:float 3s ease-in-out infinite"><ellipse cx="50" cy="58" rx="26" ry="32" fill="#F5E6C8" stroke="#D9BC8F" stroke-width="2"/><ellipse cx="42" cy="45" rx="5" ry="8" fill="#D9BC8F" opacity=".4"/><circle cx="45" cy="55" r="2" fill="#B89B72"/><circle cx="58" cy="68" r="2" fill="#B89B72"/><ellipse cx="38" cy="72" rx="3" ry="1.5" fill="#F4A6B8" opacity=".5"/><ellipse cx="60" cy="70" rx="3" ry="1.5" fill="#F4A6B8" opacity=".5"/></svg>';
+  var sc=0.8+st*0.03;
+  var collar=st>=4?'<rect x="35" y="72" width="30" height="5" rx="2.5" fill="#4A90D9"/><circle cx="50" cy="77" r="3" fill="#F5C842" stroke="#D9A825" stroke-width="0.8"/>':'';
+  var crown=st>=6?'<path d="M36 16 L40 9 L45 16 L50 8 L55 16 L60 9 L64 16 L60 19 L40 19 Z" fill="#F5C842" stroke="#D9A825" stroke-width="1.5" stroke-linejoin="round"/><circle cx="40" cy="15" r="1.5" fill="#FFE066"/><circle cx="50" cy="13" r="1.5" fill="#FFE066"/><circle cx="60" cy="15" r="1.5" fill="#FFE066"/>':'';
+  var tongue=st>=2?'<ellipse cx="50" cy="63" rx="3.5" ry="4.5" fill="#F4A6B8"/><path d="M50 60 L50 63" stroke="#D97A8E" stroke-width="0.8"/>':'';
+  var tail='<path class="tail" d="M28 74 Q18 62 24 46" stroke="#3D362B" stroke-width="7" fill="none" stroke-linecap="round"/><path class="tail" d="M24 48 Q22 44 26 44" stroke="#FFFCF7" stroke-width="5" fill="none" stroke-linecap="round"/>';
+  var body='<ellipse cx="50" cy="78" rx="'+(22*sc)+'" ry="'+(14*sc)+'" fill="#3D362B"/>'+
+    '<ellipse cx="50" cy="83" rx="'+(13*sc)+'" ry="'+(9*sc)+'" fill="#FFFCF7"/>'+
+    '<ellipse cx="38" cy="76" rx="3" ry="2" fill="#FFFCF7" opacity=".7"/>'+
+    '<ellipse cx="62" cy="78" rx="2.5" ry="1.8" fill="#FFFCF7" opacity=".6"/>';
+  var paws='<ellipse cx="36" cy="88" rx="5" ry="4" fill="#FFFCF7" stroke="#3D362B" stroke-width="1"/>'+
+    '<ellipse cx="64" cy="88" rx="5" ry="4" fill="#FFFCF7" stroke="#3D362B" stroke-width="1"/>';
+  var ears='<ellipse cx="32" cy="30" rx="7.5" ry="14" fill="#3D362B" transform="rotate(-15 32 30)"/>'+
+    '<ellipse cx="32" cy="30" rx="3.5" ry="9" fill="#F4A6B8" opacity=".5" transform="rotate(-15 32 30)"/>'+
+    '<ellipse cx="68" cy="30" rx="7.5" ry="14" fill="#3D362B" transform="rotate(15 68 30)"/>'+
+    '<ellipse cx="68" cy="30" rx="3.5" ry="9" fill="#F4A6B8" opacity=".5" transform="rotate(15 68 30)"/>';
+  var head='<circle cx="50" cy="46" r="'+(24*sc)+'" fill="#3D362B"/>';
+  var face='<path d="M50 26 Q47 46 50 62" stroke="#FFFCF7" stroke-width="'+(7*sc)+'" fill="none" stroke-linecap="round"/>';
+  var muzzle='<ellipse cx="50" cy="56" rx="'+(10*sc)+'" ry="'+(8*sc)+'" fill="#FFFCF7"/>';
+  var eyes='<ellipse class="eye" cx="41" cy="44" rx="4" ry="4.5" fill="#1A1A1A"/>'+
+    '<ellipse class="eye" cx="59" cy="44" rx="4" ry="4.5" fill="#1A1A1A"/>'+
+    '<circle cx="42.5" cy="42" r="1.8" fill="#fff"/>'+
+    '<circle cx="60.5" cy="42" r="1.8" fill="#fff"/>'+
+    '<circle cx="40" cy="46" r="1" fill="#fff" opacity=".7"/>'+
+    '<circle cx="58" cy="46" r="1" fill="#fff" opacity=".7"/>'+
+    '<path d="M38 38 Q41 36 44 38" stroke="#1A1A1A" stroke-width="1.2" fill="none" stroke-linecap="round"/>'+
+    '<path d="M56 38 Q59 36 62 38" stroke="#1A1A1A" stroke-width="1.2" fill="none" stroke-linecap="round"/>';
+  var nose='<ellipse cx="50" cy="55" rx="3.5" ry="2.5" fill="#1A1A1A"/>'+
+    '<ellipse cx="49" cy="54.5" rx="1" ry="0.7" fill="#fff" opacity=".6"/>';
+  var mouth='<path d="M50 57 Q46 62 41 60" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round"/>'+
+    '<path d="M50 57 Q54 62 59 60" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round"/>';
+  var blush='<ellipse cx="33" cy="53" rx="4.5" ry="3" fill="#F4A6B8" opacity=".55"/>'+
+    '<ellipse cx="67" cy="53" rx="4.5" ry="3" fill="#F4A6B8" opacity=".55"/>';
+  return '<svg class="petsvg dog" viewBox="0 0 100 100">'+
+    crown+tail+body+paws+ears+head+face+muzzle+eyes+nose+mouth+blush+tongue+collar+'</svg>';
 }
+
 function rPet(){
   var st=petStage(),s=streak();
   $('#petStage').innerHTML=dogSvg(st);
@@ -654,7 +688,7 @@ function rPet(){
   var cur=ns[Math.min(st,6)],prev=st===0?0:ns[st-1];
   var pct=Math.min(100,Math.round((S.checkins.length-prev)/Math.max(1,cur-prev)*100));
   $('#gfill').style.width=pct+'%';
-  var inv=S.inventory||{bone:0,food:0,heart:0};
+  var inv=S.inventory||{bone:5,food:5,heart:3};
   $('#inv').innerHTML='<div class="invitem"><span>🦴</span><span class="cnt">'+inv.bone+'</span></div>'+
     '<div class="invitem"><span>🍖</span><span class="cnt">'+inv.food+'</span></div>'+
     '<div class="invitem"><span>❤️</span><span class="cnt">'+inv.heart+'</span></div>'+
@@ -662,12 +696,23 @@ function rPet(){
   var fb=$('#feedBtn');if(fb)fb.onclick=feedPet;
 }
 function feedPet(){
-  var inv=S.inventory||{bone:0,food:0,heart:0};
-  if(inv.food<=0){toast('冇食物啦！打卡/達標先有得拎 🍖',true);return;}
-  inv.food--;S.inventory=inv;S.petBowl=(S.petBowl||0)+1;
-  sSave();rPet();toast('🍖 狗狗食咗一餐！好滿足 ❤️');
-  var el=$('#petStage');if(el){el.style.transform='scale(1.15)';setTimeout(function(){el.style.transform='';},300);}
+  if(!S.inventory)S.inventory={bone:5,food:5,heart:3};
+  if(S.inventory.food<=0){
+    toast('冇食物啦！打卡 / 學習達標先有得拎 🍖',true);
+    return;
+  }
+  S.inventory.food--;
+  S.petBowl=(S.petBowl||0)+1;
+  sSave();
+  rPet();
+  toast('🍖 狗狗食咗一餐！好滿足 ❤️');
+  var el=$('#petStage');
+  if(el){
+    el.style.transform='scale(1.2)';
+    setTimeout(function(){el.style.transform='';},300);
+  }
 }
+
 function rPair(){
   if(!S.pairData)return;
   var p=S.pairData;
@@ -799,7 +844,7 @@ $('#forgotBtn').onclick=function(){
   m.className='amsg';
   if(!em){m.textContent='請輸入 Email';m.className='amsg err';return;}
   if(!confirm('發送重設連結去 '+em+'？'))return;
-  auth.sendPasswordResetEmail(em).then(function(){m.textContent='✅ 已發送！請去 Email 收信（檢查垃圾郵件）';m.className='amsg ok';})
+  auth.sendPasswordResetEmail(em).then(function(){m.textContent='✅ 已發送！請去 Email 收信';m.className='amsg ok';})
   .catch(function(e){m.textContent='失敗：'+(e.code||e.message);m.className='amsg err';});
 };
 if(FB)auth.onAuthStateChanged(function(u){
@@ -816,7 +861,10 @@ if(FB)auth.onAuthStateChanged(function(u){
         regCode(S.profile.friendCode);renderAll();doSave();
       }
       attachU();attachR();attachPairInvites();
-      if(S.petPairId)setTimeout(attachPair,500);
+      if(S.petPairId){
+        setTimeout(attachPair,500);
+        setTimeout(attachPair,2000);
+      }
     }).catch(function(e){console.error(e);toast('載入失敗：'+(e.code||e.message),true);});
   }else{
     user=null;
@@ -858,9 +906,8 @@ $('#ckBtn').onclick=function(){
     S.checkins.splice(idx,1);sSave();rCk();toast('已取消');
   }else{
     S.checkins.push({date:t,ts:Date.now()});
-    if(!S.inventory)S.inventory={bone:0,food:0,heart:0};
+    if(!S.inventory)S.inventory={bone:5,food:5,heart:3};
     S.inventory.bone+=1;
-    // 更新共享狗
     if(S.petPairId){
       db.collection('pairs').doc(S.petPairId).set({
         totalCheckins:firebase.firestore.FieldValue.increment(1),
@@ -885,7 +932,7 @@ function checkRewards(){
   var study=dailyStudy(t);
   var target=S.settings.daily||120;
   if(study>=target){
-    if(!S.inventory)S.inventory={bone:0,food:0,heart:0};
+    if(!S.inventory)S.inventory={bone:5,food:5,heart:3};
     S.inventory.food+=2;S.inventory.heart+=1;S.lastReward=t;
     sSave();
     setTimeout(function(){toast('🎉 今日學習達標！🍖 +2 ❤️ +1');},300);
@@ -937,6 +984,11 @@ $('#tStart').onclick=function(){
     var m=Math.floor(telapsed/60),s=telapsed%60;
     $('#tdisp').textContent=pad(m)+':'+pad(s);
   },500);
+  // 寫入實時狀態
+  window._liveTimer={active:true,catId:tcat,catName:ci(tcat).n,startedAt:Date.now(),uid:user.uid,name:S.profile.displayName||user.email};
+  if(FB&&user){
+    pdr().set({liveTimer:window._liveTimer},{merge:true}).catch(function(){});
+  }
   toast('▶️ 開始');
 };
 $('#tStop').onclick=function(){
@@ -946,6 +998,11 @@ $('#tStop').onclick=function(){
   var en=new Date().getHours()*60+new Date().getMinutes();
   var sn=Math.max(0,en-mn);
   S.records.push({id:uid(),date:S.currentDate||today(),name:ci(tcat).n+'（計時）',catId:tcat,startMin:sn,endMin:en,note:''});
+  // 清除實時
+  window._liveTimer={active:false};
+  if(FB&&user){
+    pdr().set({liveTimer:{active:false}},{merge:true}).catch(function(){});
+  }
   sSave();tstart=null;telapsed=0;
   $('#tdisp').textContent='00:00';
   $('#tsub').textContent='已記錄 '+fmtTime(mn)+'！';
@@ -1073,7 +1130,7 @@ $('#dPrev').onclick=function(){shiftD(-1);};
 $('#dNext').onclick=function(){shiftD(1);};
 $('#dToday').onclick=function(){S.currentDate=today();sSave();rToday();};
 
-/* ==== 動態牆 ==== */
+/* 動態牆 */
 function rFeed(){
   var l=$('#feedList');
   if(S.friends.length===0){l.innerHTML='<div class="empty">未有好友<br>去「好友」分頁加朋友啦</div>';$('#feedCnt').textContent='';return;}
@@ -1085,7 +1142,12 @@ function rFeed(){
       var p=profs[i];if(!p)continue;
       items.push({uid:S.friends[i],p:p});
     }
-    items.sort(function(a,b){return (b.p.todayStudy||0)-(a.p.todayStudy||0);});
+    items.sort(function(a,b){
+      var aLive=(a.p.liveTimer&&a.p.liveTimer.active&&(Date.now()-a.p.liveTimer.startedAt<4*60*60*1000))?1:0;
+      var bLive=(b.p.liveTimer&&b.p.liveTimer.active&&(Date.now()-b.p.liveTimer.startedAt<4*60*60*1000))?1:0;
+      if(aLive!==bLive)return bLive-aLive;
+      return (b.p.todayStudy||0)-(a.p.todayStudy||0);
+    });
     $('#feedCnt').textContent=items.length+' 位好友';
     items.forEach(function(it){
       var p=it.p;
@@ -1096,8 +1158,11 @@ function rFeed(){
       var monthMin=p.monthStudy||0;
       var weekMin=p.weekStudy||0;
       var isChecked=(p.checkins||[]).indexOf(t)>=0;
+      var lt=p.liveTimer||{};
+      var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
+      var liveHtml=isLive?'<div class="feed-live">🔴 正喺度溫'+esc(lt.catName||'書')+' · 已 '+Math.floor((Date.now()-lt.startedAt)/60000)+' 分</div>':'';
       var pct=Math.min(100,Math.round(todayMin/120*100));
-      h+='<div class="feed-item"><div class="feed-top"><div class="feed-av">'+ah+'</div><div class="feed-info"><div class="feed-name">'+esc(p.displayName||'用戶')+' '+(isChecked?'✅':'')+'</div><div class="feed-time">'+(isToday?'今日已更新':'未更新今日數據')+' · 🔥'+(p.streak||0)+' 日</div></div></div>'+
+      h+='<div class="feed-item"><div class="feed-top"><div class="feed-av">'+ah+'</div><div class="feed-info"><div class="feed-name">'+esc(p.displayName||'用戶')+' '+(isChecked?'✅':'')+'</div><div class="feed-time">'+(isToday?'今日已更新':'未更新今日數據')+' · 🔥'+(p.streak||0)+' 日</div>'+liveHtml+'</div></div>'+
         '<div class="feed-stats"><div class="feed-stat"><div class="feed-stat-n">'+fmtTime(todayMin)+'</div><div class="feed-stat-l">今日學習</div></div>'+
         '<div class="feed-stat"><div class="feed-stat-n">'+fmtTime(weekMin)+'</div><div class="feed-stat-l">本週學習</div></div>'+
         '<div class="feed-stat"><div class="feed-stat-n">'+fmtTime(monthMin)+'</div><div class="feed-stat-l">本月學習</div></div></div>'+
@@ -1111,15 +1176,14 @@ function rFeed(){
 }
 function invitePair(friendUid){
   var pid=pairIdFor(user.uid,friendUid);
-  db.collection('pairs').doc(pid).get().then(function(s){
-    var name=prompt('幫你哋隻狗改個名：','邊牧 BB');
-    if(!name)return;
-    return db.collection('pairInvites').doc(friendUid).collection('inbox').doc(user.uid).set({
-      fromUid:user.uid,fromName:S.profile.displayName||user.email,fromAvatar:S.profile.avatar||'👤',
-      dogName:name,pairId:pid,
-      ts:firebase.firestore.FieldValue.serverTimestamp()
-    }).then(function(){toast('✅ 已發送邀請，等對方接受');});
-  }).catch(function(e){toast('失敗：'+(e.code||e.message),true);});
+  var name=prompt('幫你哋隻狗改個名：','邊牧 BB');
+  if(!name)return;
+  db.collection('pairInvites').doc(friendUid).collection('inbox').doc(user.uid).set({
+    fromUid:user.uid,fromName:S.profile.displayName||user.email,fromAvatar:S.profile.avatar||'👤',
+    dogName:name,pairId:pid,
+    ts:firebase.firestore.FieldValue.serverTimestamp()
+  }).then(function(){toast('✅ 已發送邀請，等對方接受');})
+  .catch(function(e){toast('失敗：'+(e.code||e.message),true);});
 }
 function showPairInvite(inv){
   openM('<h3>🐕 一齊養狗邀請</h3><div style="text-align:center;padding:16px 0"><div style="font-size:56px">🐕</div><div style="font-size:14px;margin-top:8px"><b>'+esc(inv.fromName)+'</b> 想同你一齊養狗</div><div style="font-size:16px;font-weight:800;color:#8B7355;margin-top:6px">狗名：'+esc(inv.dogName)+'</div></div><div class="macts"><button class="btn" id="piReject">拒絕</button><button class="btn bp" id="piAccept">接受</button></div>');
@@ -1131,7 +1195,7 @@ function showPairInvite(inv){
     var pid=inv.pairId;
     var members=pid.split('_');
     db.collection('pairs').doc(pid).set({
-      members:members,dogName:inv.dogName,totalCheckins:0,bone:0,food:0,heart:0,lastFedBy:'',
+      members:members,dogName:inv.dogName,totalCheckins:0,bone:0,food:5,heart:3,lastFedBy:'',
       createdAt:firebase.firestore.FieldValue.serverTimestamp()
     },{merge:true}).then(function(){
       return udr().set({petPairId:pid},{merge:true});
@@ -1143,11 +1207,12 @@ function showPairInvite(inv){
     }).then(function(){
       sSave();closeM();toast('✅ 開始一齊養狗啦！');
       attachPair();
+      setTimeout(attachPair,1000);
     }).catch(function(e){toast('失敗：'+(e.code||e.message),true);});
   };
 }
 
-/* ==== 日程 ==== */
+/* 日程 */
 function rSched(){
   if(!S.schMonth)S.schMonth=fm(new Date());
   var p=S.schMonth.split('-'),y=+p[0],m=+p[1];
@@ -1224,7 +1289,6 @@ document.addEventListener('click',function(e){
   else if(a==='cal-today'){S.calendarMonth=fm(new Date());S.currentDate=today();sSave();rCal();}
 });
 
-/* ==== 回顧 ==== */
 function rCal(){
   if(!S.calendarMonth)S.calendarMonth=fm(new Date());
   var p=S.calendarMonth.split('-'),y=+p[0],m=+p[1];
@@ -1264,7 +1328,6 @@ function rCal(){
   });
 }
 
-/* ==== 目標 ==== */
 function rGoals(){rDG();rMG();rYG();}
 function rDG(){
   var g=$('#gdGrid'),days=[],b=new Date();
@@ -1377,7 +1440,6 @@ $('#addY').onclick=function(){
   };
 };
 
-/* ==== 好友 ==== */
 function loadFP(id){
   if(cache[id])return Promise.resolve(cache[id]);
   return pdr(id).get().then(function(s){if(s.exists){cache[id]=s.data();return cache[id];}return null;}).catch(function(){return null;});
@@ -1399,7 +1461,9 @@ function rFriends(){
       var av=p.avatar||'👤';
       var ah=av.indexOf('data:')===0?'<img src="'+av+'">':av;
       var inv=p.inv||{bone:0};
-      h+='<div class="fi" data-u="'+id+'"><div class="fav">'+ah+'</div><div class="fin"><div class="fn">'+esc(p.displayName||'用戶')+'</div><div class="fs'+(ok?' done':'')+'">'+(ok?'✅ 已打卡':'未打卡')+' · 🔥'+(p.streak||0)+' 日 · 🦴'+inv.bone+'</div></div><div class="fpet">🐕</div></div>';
+      var lt=p.liveTimer||{};
+      var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
+      h+='<div class="fi" data-u="'+id+'"><div class="fav">'+ah+'</div><div class="fin"><div class="fn">'+esc(p.displayName||'用戶')+'</div><div class="fs'+(isLive?' done':'')+'">'+(isLive?'🔴 溫'+esc(lt.catName||'書')+'中':((ok?'✅ 已打卡':'未打卡')+' · 🔥'+(p.streak||0)+' 日'))+'</div></div><div class="fpet">🐕</div></div>';
     }
     l.innerHTML=h||'<div class="empty">載入失敗</div>';
     l.querySelectorAll('.fi').forEach(function(el){el.onclick=function(){openFD(el.getAttribute('data-u'));};});
@@ -1422,7 +1486,11 @@ function openFD(id){
     else schs.forEach(function(s){sh+='<div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px solid #E8DFCC;font-size:13px"><span style="color:#8B7355;font-weight:700;min-width:98px">'+s.date.slice(5)+' '+(s.time||'')+'</span><span>'+esc(s.title)+'</span></div>';});
     var inv=p.inv||{bone:0,food:0,heart:0};
     var todayStudy=p.todayDate===t?(p.todayStudy||0):0;
+    var lt=p.liveTimer||{};
+    var isLive=lt.active&&(Date.now()-lt.startedAt<4*60*60*1000);
+    var liveBlock=isLive?'<div style="background:#FFE9CC;border-radius:12px;padding:12px;margin-bottom:10px;text-align:center"><div style="font-size:16px;font-weight:800;color:#D9534F">🔴 正喺度溫'+esc(lt.catName||'書')+'</div><div style="font-size:12px;color:#938876;margin-top:4px">已開始 '+Math.floor((Date.now()-lt.startedAt)/60000)+' 分鐘</div></div>':'';
     openM('<div style="text-align:center;margin-bottom:14px"><div style="font-size:54px;line-height:1">🐕</div><div class="av" style="width:60px;height:60px;font-size:30px;margin:6px auto 0">'+ah+'</div><div style="font-size:16px;font-weight:700;margin-top:6px">'+esc(p.displayName||'用戶')+'</div><div style="font-size:13px;color:#938876;margin-top:2px">'+(ok?'✅ 已打卡':'💤 未打卡')+'</div><div style="font-size:13px;color:#8B7355;font-weight:600;margin-top:4px">🔥 連續 '+sk+' 日</div><div style="font-size:12px;color:#938876;margin-top:4px">🦴'+inv.bone+' 🍖'+inv.food+' ❤️'+inv.heart+'</div></div>'+
+      liveBlock+
       '<div class="card" style="box-shadow:none;background:#F6F0E4;margin-bottom:10px"><div style="font-size:13px;font-weight:700;margin-bottom:6px">學習時數</div>'+
       '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center"><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(todayStudy)+'</div><div style="font-size:11px;color:#938876">今日</div></div><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(p.weekStudy||0)+'</div><div style="font-size:11px;color:#938876">本週</div></div><div><div style="font-size:14px;font-weight:800;color:#8B7355">'+fmtTime(p.monthStudy||0)+'</div><div style="font-size:11px;color:#938876">本月</div></div></div></div>'+
       '<div class="card" style="box-shadow:none;background:#F6F0E4;margin-bottom:10px"><div style="font-size:13px;font-weight:700;margin-bottom:6px">最近 30 日打卡</div><div class="hg">'+heat+'</div></div>'+
@@ -1496,7 +1564,6 @@ function rReqs(reqs){
   });
 }
 
-/* ==== 洞察 ==== */
 function rStats(){
   var n=new Date(),dd=n.getDay()||7;
   var ws=new Date(n);ws.setDate(n.getDate()-(dd-1));
@@ -1590,6 +1657,11 @@ function dse(){
   var df=Math.ceil((d-new Date())/86400000);
   $('#dseDays').textContent=df>0?df:'0';
 }
+
+// 每 30 秒更新一次 live timer 顯示
+setInterval(function(){
+  if($('#p-feed').classList.contains('on')) rFeed();
+}, 30000);
 
 rCk();initQ();dse();
 setTimeout(checkRewards,1500);

@@ -160,7 +160,7 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .bl{font-size:10px;color:#938876;margin-top:4px}
 .sum{font-size:13px;line-height:1.85}
 .sum b{color:#8B7355}
-.tip{background:#EFE6D2;border-radius:12px;padding:11px 13px;font-size:13px;line-height:1.6;margin-top:10px;border-left:3px solid #A68B5B}
+.tip{background:#EFE6D2;border-radius:12px;padding:11px 13px;font-size:13px;line-height:1.B6;margin-top:10px;border-left:3px solid #A68B5B}
 .sr{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #E8DFCC;font-size:14px;gap:10px}
 .sr:last-child{border-bottom:none}
 .sr input[type=number],.sr input[type=date]{width:140px;padding:8px 10px;background:#F6F0E4;border-radius:10px;text-align:right;font-weight:600}
@@ -174,13 +174,14 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 .catr{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .catb{padding:9px 4px;border-radius:12px;background:#F6F0E4;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;border:2px solid transparent}
 .catb .e{font-size:19px}
-.catb.on{border-color:#A68B5B;background:#F0E8D5}
+.catb.on{border-color:#A685B;background:#F0E8D5}
 .egrid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:6px}
 .ep{aspect-ratio:1;border-radius:10px;background:#F6F0E4;font-size:19px;border:2px solid transparent;display:flex;align-items:center;justify-content:center}
-.ep.on{border-color:#A68B5B;background:#F0E8D5}
-.macts{display:flex;gap:8px;margin-top:14px}
-.macts .btn{flex:1;margin:0}
-.mi{padding:14px 8px;font-size:15px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #E8DFCC;background:none;width:100%;text-align:left}
+.ep.on{border-color:#A68B5B;background:#F0E8D id5}
+.macts{display:flex=";gap:8px;margin-top:14authpx}
+.macts .btn">
+{flex:1;margin:0}
+ .mi{padding:14px 8px;font-size:15px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #E8DFCC;background:none;width:100%;text-align:left}
 .mi:last-child{border-bottom:none}
 .mi .e{font-size:19px;width:26px;text-align:center}
 .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(61,54,43,.94);color:#fff;padding:11px 20px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;transition:.25s;z-index:300;max-width:90vw;text-align:center;pointer-events:none}
@@ -194,8 +195,7 @@ h1{font-size:26px;font-weight:800;text-align:center;color:#8B7355;margin-bottom:
 </head>
 <body>
 
-<div id="auth">
-  <div class="abox">
+<div <div class="abox">
     <h1>Study Vision</h1>
     <div class="sub">跨裝置同步你嘅學習記錄</div>
     <div class="tabs2">
@@ -529,7 +529,6 @@ function dogSvg(st,size){
 function pairStage(t){if(t<=0)return 0;if(t<=4)return 1;if(t<=10)return 2;if(t<=20)return 3;if(t<=40)return 4;if(t<=80)return 5;return 6;}
 function pairName(st){return ['未孵化嘅蛋','邊牧 BB','邊牧幼犬','活潑邊牧','忠心邊牧','成年邊牧','靚仔邊牧'][st];}
 
-/* 頭像 */
 function rHead(){
   var b=$('#avBtn'),a=S.profile.avatar||'👤';
   if(a.indexOf('data:')===0)b.innerHTML='<img src="'+a+'">';else b.textContent=a;
@@ -632,6 +631,7 @@ $('#forgotBtn').onclick=function(){
   auth.sendPasswordResetEmail(em).then(function(){m.textContent='✅ 已發送！請去 Email 收信';m.className='amsg ok';})
   .catch(function(e){m.textContent='失敗：'+(e.code||e.message);m.className='amsg err';});
 };
+
 if(FB)auth.onAuthStateChanged(function(u){
   if(u){
     user=u;
@@ -643,7 +643,9 @@ if(FB)auth.onAuthStateChanged(function(u){
       else{
         S.profile={displayName:u.email.split('@')[0],avatar:'👤',friendCode:gc()};
         S.currentDate=today();
-        regCode(S.profile.friendCode);renderAll();doSave();
+        regCode(S.profile.friendCode);
+        doSave();
+        renderAll();
       }
       attachU();attachR();attachPI();
       setTimeout(attachAllPairs,800);
@@ -662,7 +664,6 @@ if(FB)auth.onAuthStateChanged(function(u){
   }
 });
 
-/* 打卡 */
 function rCk(){
   var t=today(),done=false;
   for(var i=0;i<S.checkins.length;i++)if(S.checkins[i].date===t)done=true;
@@ -680,17 +681,19 @@ $('#ckBtn').onclick=function(){
     S.checkins.splice(idx,1);sSave();rCk();toast('已取消');
   }else{
     S.checkins.push({date:t,ts:Date.now()});
+    // 所有共享狗：打卡 +2 食物
     for(var j=0;j<S.friends.length;j++){
       var pid=pidFor(user.uid,S.friends[j]);
       if(pairCache[pid]){
         db.collection('pairs').doc(pid).set({
           totalCheckins:firebase.firestore.FieldValue.increment(1),
-          bone:firebase.firestore.FieldValue.increment(1)
+          bone:firebase.firestore.FieldValue.increment(1),
+          food:firebase.firestore.FieldValue.increment(2)
         },{merge:true}).catch(function(){});
       }
     }
     sSave();rCk();
-    toast('打卡成功！連續 '+streak()+' 日 🔥');
+    toast('打卡成功！連續 '+streak()+' 日 🔥 🍖+2');
     pickQ();
   }
 };
@@ -701,7 +704,6 @@ function initQ(){
   $('#qtext').textContent=S.quoteOfDay;
 }
 
-/* 分頁 */
 $$('.tb').forEach(function(t){
   t.onclick=function(){
     var p=t.getAttribute('data-p');
@@ -720,7 +722,6 @@ function openM(h){$('#mod').innerHTML=h;$('#bgo').className='bgo on';}
 function closeM(){$('#bgo').className='bgo';$('#mod').innerHTML='';}
 $('#bgo').onclick=function(e){if(e.target.id==='bgo')closeM();};
 
-/* 計時器 */
 var tcat='study',tstart=null,tint=null,telapsed=0;
 $$('#tcats .tc').forEach(function(b){
   b.onclick=function(){
@@ -760,7 +761,6 @@ $('#tStop').onclick=function(){
   toast('✅ 已記錄 '+fmtTime(mn));
 };
 
-/* 時間軸 */
 function rTL(){
   var h=$('#hrs'),tr=$('#track'),d=S.currentDate||today();
   h.style.height=TH+'px';tr.style.height=TH+'px';
@@ -881,7 +881,6 @@ $('#dPrev').onclick=function(){shiftD(-1);};
 $('#dNext').onclick=function(){shiftD(1);};
 $('#dToday').onclick=function(){S.currentDate=today();sSave();rToday();};
 
-/* 動態牆 */
 function loadFP(id){
   if(cache[id])return Promise.resolve(cache[id]);
   return pdr(id).get().then(function(s){if(s.exists){cache[id]=s.data();return cache[id];}return null;}).catch(function(){return null;});
@@ -919,8 +918,6 @@ function rFeed(){
     l.innerHTML=h||'<div class="empty">載入失敗</div>';
   });
 }
-
-/* 好友 */
 function rFriends(){
   if(!S.profile.friendCode)return;
   $('#myCode').textContent=S.profile.friendCode;
@@ -965,8 +962,6 @@ function rFriends(){
     l.innerHTML=h||'<div class="empty">載入失敗</div>';
   });
 }
-
-/* 事件委託：所有好友頁按鈕 */
 document.addEventListener('click',function(ev){
   var t=ev.target;
   while(t && t!==document){
@@ -983,7 +978,6 @@ document.addEventListener('click',function(ev){
     t=t.parentNode;
   }
 });
-
 function invitePair(fuid){
   var pid=pidFor(user.uid,fuid);
   var name=prompt('幫你哋隻狗改個名：','邊牧');
@@ -1006,16 +1000,19 @@ function feedPair(pid){
   if(!pairCache[pid]){toast('狗資料載入中',true);return;}
   var food=pairCache[pid].food||0;
   if(food<=0){
-    db.collection('pairs').doc(pid).set({food:firebase.firestore.FieldValue.increment(5)},{merge:true})
-      .then(function(){toast('🎁 冇食物啦！自動補給 🍖 +5');});
+    toast('🍖 冇食物啦！打卡可以獲得 +2 食物',true);
     return;
   }
+  var newFood=food-1;
   db.collection('pairs').doc(pid).set({
     food:firebase.firestore.FieldValue.increment(-1),
     heart:firebase.firestore.FieldValue.increment(1),
     lastFedBy:user.uid
-  },{merge:true}).then(function(){toast('🍖 狗狗食咗嘢！❤️');})
-  .catch(function(e){toast('失敗：'+(e.code||e.message),true);});
+  },{merge:true}).then(function(){
+    toast('🍖 狗狗食咗嘢！剩 '+newFood+' 個 🍖 ❤️');
+  }).catch(function(e){
+    toast('失敗：'+(e.code||e.message),true);
+  });
 }
 function showPI(inv){
   openM('<h3>🐕 一齊養狗邀請</h3>'+
@@ -1068,8 +1065,17 @@ function openFD(id){
     $('#fc').onclick=closeM;
     $('#fr').onclick=function(){
       if(!confirm('確定移除？'))return;
+      // 雙方移除
       S.friends=S.friends.filter(function(x){return x!==id;});
-      sSave();closeM();rFriends();rFeed();toast('已移除');
+      sSave();
+      db.collection('users').doc(id).get().then(function(s){
+        if(s.exists){
+          var d=s.data(),l=d.friends||[];
+          l=l.filter(function(x){return x!==user.uid;});
+          return db.collection('users').doc(id).set({friends:l},{merge:true});
+        }
+      }).catch(function(){});
+      closeM();rFriends();rFeed();toast('已移除');
     };
   });
 }
@@ -1110,18 +1116,34 @@ function rReqs(reqs){
   b.querySelectorAll('[data-y]').forEach(function(el){
     el.onclick=function(){
       var fu=el.getAttribute('data-y');
+      var btn=el;btn.disabled=true;btn.textContent='處理中...';
+      // 1. 自己加對方
       if(S.friends.indexOf(fu)<0)S.friends.push(fu);
+      // 2. 寫入自己 users doc
       sSave();
-      db.collection('friendRequests').doc(user.uid).collection('inbox').doc(fu).delete().then(function(){
+      // 3. 刪除請求
+      db.collection('friendRequests').doc(user.uid).collection('inbox').doc(fu).delete()
+      .then(function(){
+        // 4. 讀對方 users doc，將自己加入對方 friends
         return db.collection('users').doc(fu).get();
       }).then(function(s){
         if(s.exists){
           var d=s.data(),l=d.friends||[];
           if(l.indexOf(user.uid)<0)l.push(user.uid);
           return db.collection('users').doc(fu).set({friends:l},{merge:true});
+        }else{
+          // 對方 users doc 唔存在（唔應該發生），建立
+          return db.collection('users').doc(fu).set({friends:[user.uid]},{merge:true});
         }
-      }).then(function(){attachPair(fu);}).catch(function(){});
-      toast('✅ 已成為好友');rFriends();rFeed();
+      }).then(function(){
+        // 5. 監聽對方 pair
+        attachPair(fu);
+        toast('✅ 已成為好友');
+        rFriends();rFeed();
+      }).catch(function(e){
+        btn.disabled=false;btn.textContent='接受';
+        toast('失敗：'+(e.code||e.message),true);
+      });
     };
   });
   b.querySelectorAll('[data-n]').forEach(function(el){
@@ -1132,7 +1154,6 @@ function rReqs(reqs){
   });
 }
 
-/* 目標 */
 function rGoals(){rDG();rMG();rYG();}
 function rDG(){
   var g=$('#gdGrid'),days=[],b=new Date();
@@ -1241,7 +1262,6 @@ $('#addY').onclick=function(){
   };
 };
 
-/* 洞察 */
 function rStats(){
   var n=new Date(),dd=n.getDay()||7;
   var ws=new Date(n);ws.setDate(n.getDate()-(dd-1));
@@ -1291,7 +1311,6 @@ function rStats(){
   $('#mTip').textContent='💡 '+mtp;
 }
 
-/* 設定 */
 function rSet(){
   $('#setD').value=S.settings.daily;
   $('#setW').value=S.settings.weekly;
